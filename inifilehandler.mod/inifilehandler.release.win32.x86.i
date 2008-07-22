@@ -1,76 +1,8 @@
-ModuleInfo "Name: muttley.INIFileHandler"
-ModuleInfo "Version: 1.0.5"
-ModuleInfo "License: GNU Lesser General Public License"
-ModuleInfo "Author: Paul Maskelyne (Muttley)"
-ModuleInfo "Copyright: (C) 2007 Paul Maskelyne"
-ModuleInfo "E-Mail: muttley@muttleyville.org"
-ModuleInfo "Website: http://www.muttleyville.org"
-ModuleInfo "History: 1.0.5"
-ModuleInfo "History: Missing sections and parameters are now created correcty when trying to set them and CreateMissingEntries() is set to True"
-ModuleInfo "History: 1.0.4"
-ModuleInfo "History: Added support for string based Booleans as BlitzMax doesn't have a proper bool datatype"
-ModuleInfo "History: 1.0.3 (Release)"
-ModuleInfo "History: Missing parameters that are requested can now be automatically added to ini file by using CreateMissingEntries()"
-ModuleInfo "History: 1.0.2"
-ModuleInfo "History: Get* methods can now take default values which are returned if the requested parameter doesn't exist"
-ModuleInfo "History: 1.0.1"
-ModuleInfo "History: No longer writing Global and Section comments to INI file when comment is blank"
-ModuleInfo "History: 1.0.0 (Release)"
-ModuleInfo "History: Initial Release"
 import brl.blitz
 import brl.filesystem
 import brl.system
-import brl.linkedlist
 import brl.standardio
 import brl.retro
-TINISection^brl.blitz.Object{
-.Name$&
-.comment$&
-.Lparameters:brl.linkedlist.TList&
--New%()="_muttley_inifilehandler_TINISection_New"
--Delete%()="_muttley_inifilehandler_TINISection_Delete"
--AddParameter%(_name$)="_muttley_inifilehandler_TINISection_AddParameter"
--DeleteParameter%(_name$)="_muttley_inifilehandler_TINISection_DeleteParameter"
--GetComment$()="_muttley_inifilehandler_TINISection_GetComment"
--GetName$()="_muttley_inifilehandler_TINISection_GetName"
--GetParameterComment$(_name$)="_muttley_inifilehandler_TINISection_GetParameterComment"
--GetParameters$&[]()="_muttley_inifilehandler_TINISection_GetParameters"
--GetStringValue$(_name$)="_muttley_inifilehandler_TINISection_GetStringValue"
--GetStringValues$&[](_name$)="_muttley_inifilehandler_TINISection_GetStringValues"
--ParameterExists%(_parameter_name$)="_muttley_inifilehandler_TINISection_ParameterExists"
--Save%(out:brl.stream.TStream)="_muttley_inifilehandler_TINISection_Save"
--SetComment%(_comment$)="_muttley_inifilehandler_TINISection_SetComment"
--SetName%(_name$)="_muttley_inifilehandler_TINISection_SetName"
--SetParameterComment%(_name$,_comment$)="_muttley_inifilehandler_TINISection_SetParameterComment"
--SetStringValue%(_name$,_value$)="_muttley_inifilehandler_TINISection_SetStringValue"
--SetStringValues%(_name$,_values$&[])="_muttley_inifilehandler_TINISection_SetStringValues"
--SortParameters%()="_muttley_inifilehandler_TINISection_SortParameters"
-}="muttley_inifilehandler_TINISection"
-TINIParameter^brl.blitz.Object{
-.Name$&
-.Lvalues:brl.linkedlist.TList&
-.comment$&
--New%()="_muttley_inifilehandler_TINIParameter_New"
--Delete%()="_muttley_inifilehandler_TINIParameter_Delete"
-+CheckValue$(_value$)="_muttley_inifilehandler_TINIParameter_CheckValue"
-+Create:TINIParameter(_name$)="_muttley_inifilehandler_TINIParameter_Create"
--GetComment$()="_muttley_inifilehandler_TINIParameter_GetComment"
--GetName$()="_muttley_inifilehandler_TINIParameter_GetName"
--GetStringValue$()="_muttley_inifilehandler_TINIParameter_GetStringValue"
--GetStringValues$&[]()="_muttley_inifilehandler_TINIParameter_GetStringValues"
--Save%(out:brl.stream.TStream)="_muttley_inifilehandler_TINIParameter_Save"
--SetComment%(_comment$)="_muttley_inifilehandler_TINIParameter_SetComment"
--SetName%(_name$)="_muttley_inifilehandler_TINIParameter_SetName"
--SetStringValue%(_value$)="_muttley_inifilehandler_TINIParameter_SetStringValue"
--SetStringValues%(_values$&[])="_muttley_inifilehandler_TINIParameter_SetStringValues"
-}="muttley_inifilehandler_TINIParameter"
-TINIValue^brl.blitz.Object{
-.value$&
--New%()="_muttley_inifilehandler_TINIValue_New"
--Delete%()="_muttley_inifilehandler_TINIValue_Delete"
--GetStringValue$()="_muttley_inifilehandler_TINIValue_GetStringValue"
--SetStringValue%(_value$)="_muttley_inifilehandler_TINIValue_SetStringValue"
-}="muttley_inifilehandler_TINIValue"
 TINIFile^brl.blitz.Object{
 .Filename$&
 .comment$&
@@ -134,3 +66,51 @@ TINIFile^brl.blitz.Object{
 -SortParameters%(_section_name$)="_muttley_inifilehandler_TINIFile_SortParameters"
 -SortSections%()="_muttley_inifilehandler_TINIFile_SortSections"
 }="muttley_inifilehandler_TINIFile"
+TINIParameter^brl.blitz.Object{
+.Name$&
+.Lvalues:brl.linkedlist.TList&
+.comment$&
+-New%()="_muttley_inifilehandler_TINIParameter_New"
+-Delete%()="_muttley_inifilehandler_TINIParameter_Delete"
++CheckValue$(_value$)="_muttley_inifilehandler_TINIParameter_CheckValue"
++Create:TINIParameter(_name$)="_muttley_inifilehandler_TINIParameter_Create"
+-GetComment$()="_muttley_inifilehandler_TINIParameter_GetComment"
+-GetName$()="_muttley_inifilehandler_TINIParameter_GetName"
+-GetStringValue$()="_muttley_inifilehandler_TINIParameter_GetStringValue"
+-GetStringValues$&[]()="_muttley_inifilehandler_TINIParameter_GetStringValues"
+-Save%(out:brl.stream.TStream)="_muttley_inifilehandler_TINIParameter_Save"
+-SetComment%(_comment$)="_muttley_inifilehandler_TINIParameter_SetComment"
+-SetName%(_name$)="_muttley_inifilehandler_TINIParameter_SetName"
+-SetStringValue%(_value$)="_muttley_inifilehandler_TINIParameter_SetStringValue"
+-SetStringValues%(_values$&[])="_muttley_inifilehandler_TINIParameter_SetStringValues"
+}="muttley_inifilehandler_TINIParameter"
+TINISection^brl.blitz.Object{
+.Name$&
+.comment$&
+.Lparameters:brl.linkedlist.TList&
+-New%()="_muttley_inifilehandler_TINISection_New"
+-Delete%()="_muttley_inifilehandler_TINISection_Delete"
+-AddParameter%(_name$)="_muttley_inifilehandler_TINISection_AddParameter"
+-DeleteParameter%(_name$)="_muttley_inifilehandler_TINISection_DeleteParameter"
+-GetComment$()="_muttley_inifilehandler_TINISection_GetComment"
+-GetName$()="_muttley_inifilehandler_TINISection_GetName"
+-GetParameterComment$(_name$)="_muttley_inifilehandler_TINISection_GetParameterComment"
+-GetParameters$&[]()="_muttley_inifilehandler_TINISection_GetParameters"
+-GetStringValue$(_name$)="_muttley_inifilehandler_TINISection_GetStringValue"
+-GetStringValues$&[](_name$)="_muttley_inifilehandler_TINISection_GetStringValues"
+-ParameterExists%(_parameter_name$)="_muttley_inifilehandler_TINISection_ParameterExists"
+-Save%(out:brl.stream.TStream)="_muttley_inifilehandler_TINISection_Save"
+-SetComment%(_comment$)="_muttley_inifilehandler_TINISection_SetComment"
+-SetName%(_name$)="_muttley_inifilehandler_TINISection_SetName"
+-SetParameterComment%(_name$,_comment$)="_muttley_inifilehandler_TINISection_SetParameterComment"
+-SetStringValue%(_name$,_value$)="_muttley_inifilehandler_TINISection_SetStringValue"
+-SetStringValues%(_name$,_values$&[])="_muttley_inifilehandler_TINISection_SetStringValues"
+-SortParameters%()="_muttley_inifilehandler_TINISection_SortParameters"
+}="muttley_inifilehandler_TINISection"
+TINIValue^brl.blitz.Object{
+.value$&
+-New%()="_muttley_inifilehandler_TINIValue_New"
+-Delete%()="_muttley_inifilehandler_TINIValue_Delete"
+-GetStringValue$()="_muttley_inifilehandler_TINIValue_GetStringValue"
+-SetStringValue%(_value$)="_muttley_inifilehandler_TINIValue_SetStringValue"
+}="muttley_inifilehandler_TINIValue"

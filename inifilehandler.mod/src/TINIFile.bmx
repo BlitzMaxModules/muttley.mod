@@ -13,18 +13,17 @@ Rem
 	
 EndRem
 
-SuperStrict
-
-Module muttley.inifilehandler
-
+rem
 ModuleInfo "Name: muttley.INIFileHandler"
-ModuleInfo "Version: 1.0.6"
+ModuleInfo "Version: 1.0.7"
 ModuleInfo "License: Artistic License 2.0"
 ModuleInfo "Author: Paul Maskelyne (Muttley)"
 ModuleInfo "Copyright: (C) 2007 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
 
+ModuleInfo "History: 1.0.7"
+ModuleInfo "History: Fixed problem with docmods not generating documentation correctly"
 ModuleInfo "History: 1.0.6"
 ModuleInfo "History: Re-released under the Artistic License 2.0"
 ModuleInfo "History: 1.0.5"
@@ -39,22 +38,11 @@ ModuleInfo "History: 1.0.1"
 ModuleInfo "History: No longer writing Global and Section comments to INI file when comment is blank"
 ModuleInfo "History: 1.0.0"
 ModuleInfo "History: Initial Release"
+endrem
 
-Import brl.filesystem
-Import brl.system
-Import brl.data
-Import brl.linkedlist
-Import brl.standardio
-Import brl.retro
-
-Include "TINISection.bmx"
-Include "TINIParameter.bmx"
-Include "TINIValue.bmx"
-
-' BlitzMax INI File Handler
 
 Rem
-BBDoc: INI File Type
+bbdoc: INI File Type
 EndRem
 Type TINIFile
 	
@@ -64,7 +52,7 @@ Type TINIFile
 	Field createWhenMissing:Int = False
 
 	Rem 
-	BBDoc: Create a new INI File
+	bbdoc: Create a new INI File
 	Returns: An INI File object
 	About:
 	Creates a new INI File object.
@@ -80,7 +68,7 @@ Type TINIFile
 	EndFunction
 
 	Rem
-	BBDoc: Adds a new Parameter to a specified Section in the #TINIFILE Object
+	bbdoc: Adds a new Parameter to a specified Section in the #TINIFILE Object
 	Returns: True if the parameter as been added
 	EndRem	
 	Method AddParameter:Int( _section_name:String, _parameter:String )
@@ -93,7 +81,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Add a new section to the #TINIFile Object. Section names must be unique.
+	bbdoc: Add a new section to the #TINIFile Object. Section names must be unique.
 	Returns: True if the section has been added
 	EndRem
 	Method AddSection:Int( _name:String, _comment:String = "" )
@@ -113,7 +101,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Tells the INI file whether to create missing parameters/settings when requested or not, this is off my default
+	bbdoc: Tells the INI file whether to create missing parameters/settings when requested or not, this is off my default
 	Returns:
 	EndRem
 	Method CreateMissingEntries( bool:Int = True )
@@ -121,7 +109,7 @@ Type TINIFile
 	End Method
 
 	Rem
-	BBDoc: Deletes a Parameter
+	bbdoc: Deletes a Parameter
 	Returns: True if the Parameter has been deleted
 	EndRem		
 	Method DeleteParameter:Int( _section_name:String, _parameter:String )
@@ -134,7 +122,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Delete a Section (and all contained parameters) if it exists in the #TINIFile Object
+	bbdoc: Delete a Section (and all contained parameters) if it exists in the #TINIFile Object
 	Returns: True if the section has been deleted
 	EndRem	
 	Method DeleteSection:Int( _name:String )
@@ -150,7 +138,7 @@ Type TINIFile
 
 	
 	Rem
-	BBDoc: Get a Boolean value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Boolean value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: int
 	EndRem
 	Method GetBoolValue:Int( _section_name:String, _parameter_name:String, defaultValue:String = Null )
@@ -180,7 +168,7 @@ Type TINIFile
 
 	
 	Rem
-	BBDoc: Get an Int array of all Boolean values from a parameter
+	bbdoc: Get an Int array of all Boolean values from a parameter
 	Returns: Byte[]
 	EndRem
 	Method GetBoolValues:Int[]( _section_name:String, _parameter_name:String, defaultValues:String[] = Null )
@@ -215,7 +203,7 @@ Type TINIFile
 		
 	
 	Rem
-	BBDoc: Get a Byte value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Byte value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Byte
 	EndRem
 	Method GetByteValue:Byte( _section_name:String, _parameter_name:String, defaultValue:Byte = Null )
@@ -233,7 +221,7 @@ Type TINIFile
 	EndMethod
 	
 	Rem
-	BBDoc: Get a Byte array of all values from a parameter
+	bbdoc: Get a Byte array of all values from a parameter
 	Returns: Byte[]
 	EndRem
 	Method GetByteValues:Byte[]( _section_name:String, _parameter_name:String, defaultValues:Byte[] = Null )
@@ -255,7 +243,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get the INI file comment line
+	bbdoc: Get the INI file comment line
 	Returns: String containing the comment
 	About:
 	EndRem
@@ -264,7 +252,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Double value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Double value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Double
 	EndRem
 	Method GetDoubleValue:Double( _section_name:String, _parameter_name:String, defaultValue:Double = Null )
@@ -282,7 +270,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Double array of all values from a parameter
+	bbdoc: Get a Double array of all values from a parameter
 	Returns: Double[]
 	EndRem	
 	Method GetDoubleValues:Double[]( _section_name:String, _parameter_name:String, defaultValues:Double[] = Null )
@@ -304,7 +292,7 @@ Type TINIFile
 	EndMethod
 		
 	Rem
-	BBDoc: Returns the filename of the INI File Object
+	bbdoc: Returns the filename of the INI File Object
 	Returns: String containing the current filename
 	EndRem
 	Method GetFilename:String()
@@ -312,7 +300,7 @@ Type TINIFile
 	End Method
 
 	Rem
-	BBDoc: Get a Float value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Float value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Float
 	EndRem
 	Method GetFloatValue:Float( _section_name:String, _parameter_name:String, defaultValue:Float = Null )
@@ -330,7 +318,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Float array of all values from a parameter
+	bbdoc: Get a Float array of all values from a parameter
 	Returns: Float[]
 	EndRem		
 	Method GetFloatValues:Float[]( _section_name:String, _parameter_name:String, defaultValues:Float[] = Null )
@@ -352,7 +340,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get an Int value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get an Int value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Int
 	EndRem
 	Method GetIntValue:Int( _section_name:String, _parameter_name:String, defaultValue:Int = Null )
@@ -370,7 +358,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get an Int array of all values from a parameter
+	bbdoc: Get an Int array of all values from a parameter
 	Returns: Int[]
 	EndRem		
 	Method GetIntValues:Int[]( _section_name:String, _parameter_name:String, defaultValues:Int[] = Null )
@@ -392,7 +380,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Long value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Long value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Long
 	EndRem
 	Method GetLongValue:Long( _section_name:String, _parameter_name:String, defaultValue:Long = Null )
@@ -410,7 +398,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Long array of all values from a parameter
+	bbdoc: Get a Long array of all values from a parameter
 	Returns: Long[]
 	EndRem		
 	Method GetLongValues:Long[]( _section_name:String, _parameter_name:String, defaultValues:Long[] = Null )
@@ -432,7 +420,7 @@ Type TINIFile
 	EndMethod
 	
 	Rem
-	BBDoc: Gets the comment field for a Parameter
+	bbdoc: Gets the comment field for a Parameter
 	Returns: A string containing the comment
 	EndRem		
 	Method GetParameterComment:String( _section_name:String, _parameter:String )
@@ -445,7 +433,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a list of all Parameters in a Section of the #TINIFile Object
+	bbdoc: Get a list of all Parameters in a Section of the #TINIFile Object
 	Returns: An array of #String
 	EndRem		
 	Method GetParameters:String[]( _name:String )
@@ -457,7 +445,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get the comment field associated with a Section in the #TINIFile Object
+	bbdoc: Get the comment field associated with a Section in the #TINIFile Object
 	Returns: #String
 	EndRem	
 	Method GetSectionComment:String( _section_name:String )
@@ -470,7 +458,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get the names of all sections in the #TINIFile Object
+	bbdoc: Get the names of all sections in the #TINIFile Object
 	Returns: An Array of Strings
 	About:
 	Returns an Array containing the names of all sections in the #TINIFile Object
@@ -487,7 +475,7 @@ Type TINIFile
 	EndMethod	
 
 	Rem
-	BBDoc: Get a Short value from a parameter.  If a parameter has multiple values only the first is returned.
+	bbdoc: Get a Short value from a parameter.  If a parameter has multiple values only the first is returned.
 	Returns: Short
 	EndRem
 	Method GetShortValue:Short( _section_name:String, _parameter_name:String, defaultValue:Short = Null )
@@ -505,7 +493,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Get a Short array of all values from a parameter
+	bbdoc: Get a Short array of all values from a parameter
 	Returns: Short[]
 	EndRem		
 	Method GetShortValues:Short[]( _section_name:String, _parameter_name:String, defaultValues:Short[] = Null )
@@ -527,7 +515,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Gets the value (or first value if there is more than one) belonging to a parameter
+	bbdoc: Gets the value (or first value if there is more than one) belonging to a parameter
 	Returns: String containing the value
 	EndRem		
 	Method GetStringValue:String( _section_name:String, _parameter_name:String, defaultValue:String = Null )
@@ -555,7 +543,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Gets all the values belonging to a parameter
+	bbdoc: Gets all the values belonging to a parameter
 	Returns: String Array containing the values
 	EndRem	
 	Method GetStringValues:String[]( _section_name:String, _parameter_name:String, defaultValues:String[] = Null )
@@ -583,7 +571,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Loads data from a file into the #TINIFile Object
+	bbdoc: Loads data from a file into the #TINIFile Object
 	Returns:
 	About:
 	Saves the INI file 
@@ -691,7 +679,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Check if a parameter exists in a specified Section in the #TINIFile Object
+	bbdoc: Check if a parameter exists in a specified Section in the #TINIFile Object
 	Returns: True if the parameter exists
 	EndRem		
 	Method ParameterExists:Int( _section_name:String, _parameter_name:String )
@@ -704,7 +692,7 @@ Type TINIFile
 	EndMethod
 	
 	Rem
-	BBDoc: Saves the #TINIFile object to a file
+	bbdoc: Saves the #TINIFile object to a file
 	Returns: True if the INI file has been saved correctly
 	About:
 	Saves the #TINIFile object to the filename configured by either the #SetFilename Method
@@ -730,7 +718,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Check if a Section exists in the #TINIFile Object
+	bbdoc: Check if a Section exists in the #TINIFile Object
 	Returns: True if the section exists
 	EndRem
 	Method SectionExists:Int( _name:String )
@@ -741,7 +729,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's value to a Boolean value. 
+	bbdoc: Set a parameter's value to a Boolean value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetBoolValue:Int( _section_name:String, _parameter:String, _value:String )
@@ -753,7 +741,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Boolean values
+	bbdoc: Set a parameter's values to an array of Boolean values
 	Returns: True if the values have been set
 	EndRem	
 	Method SetBoolValues:Int( _section_name:String, _parameter:String, _values:String[] )
@@ -770,7 +758,7 @@ Type TINIFile
 	
 		
 	Rem
-	BBDoc: Set a parameter's value to a Byte value. 
+	bbdoc: Set a parameter's value to a Byte value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetByteValue:Int( _section_name:String, _parameter:String, _value:Byte )
@@ -778,7 +766,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Bytes
+	bbdoc: Set a parameter's values to an array of Bytes
 	Returns: True if the values have been set
 	EndRem	
 	Method SetByteValues:Int( _section_name:String, _parameter:String, _values:Byte[] )
@@ -790,7 +778,7 @@ Type TINIFile
 	EndMethod	
 
 	Rem
-	BBDoc: Set the INI file comment line
+	bbdoc: Set the INI file comment line
 	Returns:
 	About:
 	EndRem
@@ -799,7 +787,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's value to a Double value. 
+	bbdoc: Set a parameter's value to a Double value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetDoubleValue:Int( _section_name:String, _parameter:String, _value:Double )
@@ -807,7 +795,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Doubles
+	bbdoc: Set a parameter's values to an array of Doubles
 	Returns: True if the values have been set
 	EndRem		
 	Method SetDoubleValues:Int( _section_name:String, _parameter:String, _values:Double[] )
@@ -819,7 +807,7 @@ Type TINIFile
 	EndMethod		
 			
 	Rem
-	BBDoc: Sets the filename of the INI File Object
+	bbdoc: Sets the filename of the INI File Object
 	Returns:
 	About:
 	Sets the filename of the INI File, this is used by both #LoadConfig and #Save
@@ -829,7 +817,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's value to a Float value. 
+	bbdoc: Set a parameter's value to a Float value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetFloatValue:Int( _section_name:String, _parameter:String, _value:Float )
@@ -837,7 +825,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Floats
+	bbdoc: Set a parameter's values to an array of Floats
 	Returns: True if the values have been set
 	EndRem		
 	Method SetFloatValues:Int( _section_name:String, _parameter:String, _values:Float[] )
@@ -849,7 +837,7 @@ Type TINIFile
 	EndMethod	
 	
 	Rem
-	BBDoc: Set a parameter's value to an Int value. 
+	bbdoc: Set a parameter's value to an Int value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetIntValue:Int( _section_name:String, _parameter:String, _value:Int )
@@ -857,7 +845,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Ints
+	bbdoc: Set a parameter's values to an array of Ints
 	Returns: True if the values have been set
 	EndRem		
 	Method SetIntValues:Int( _section_name:String, _parameter:String, _values:Int[] )
@@ -869,7 +857,7 @@ Type TINIFile
 	EndMethod	
 
 	Rem
-	BBDoc: Set a parameter's value to a Long value. 
+	bbdoc: Set a parameter's value to a Long value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetLongValue:Int( _section_name:String, _parameter:String, _value:Long )
@@ -877,7 +865,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Longs
+	bbdoc: Set a parameter's values to an array of Longs
 	Returns: True if the values have been set
 	EndRem		
 	Method SetLongValues:Int( _section_name:String, _parameter:String, _values:Long[] )
@@ -889,7 +877,7 @@ Type TINIFile
 	EndMethod	
 
 	Rem
-	BBDoc: Sets the comment field for a Parameter
+	bbdoc: Sets the comment field for a Parameter
 	Returns: True if the comment as been added
 	EndRem		
 	Method SetParameterComment:Int( _section_name:String, _parameter:String, _value:String )
@@ -902,7 +890,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set the comment field associated with a Section in the #TINIFile Object
+	bbdoc: Set the comment field associated with a Section in the #TINIFile Object
 	Returns: True if the comment has been added
 	EndRem	
 	Method SetSectionComment:Int( _section_name:String, _section_comment:String )
@@ -916,7 +904,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's value to a Short value. 
+	bbdoc: Set a parameter's value to a Short value. 
 	Returns: True if the value has been set
 	EndRem
 	Method SetShortValue:Int( _section_name:String, _parameter:String, _value:Short )
@@ -924,7 +912,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set a parameter's values to an array of Shorts
+	bbdoc: Set a parameter's values to an array of Shorts
 	Returns: True if the values have been set
 	EndRem		
 	Method SetShortValues:Int( _section_name:String, _parameter:String, _values:Short[] )
@@ -936,7 +924,7 @@ Type TINIFile
 	EndMethod	
 
 	Rem
-	BBDoc: Set the value for a specific parameter.  This overwrites any values already assigned
+	bbdoc: Set the value for a specific parameter.  This overwrites any values already assigned
 	Return: True if the value has been set
 	EndRem		
 	Method SetStringValue:Int( _section_name:String, _parameter:String, _value:String )
@@ -959,7 +947,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Set the values for a specific parameter to the contents of a String array.  This overwrites any values already assigned
+	bbdoc: Set the values for a specific parameter to the contents of a String array.  This overwrites any values already assigned
 	Return: True if the values have been set
 	EndRem	
 	Method SetStringValues:Int( _section_name:String, _parameter:String, _values:String[] )
@@ -982,7 +970,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Sorts all sections and parameters alphabetically
+	bbdoc: Sorts all sections and parameters alphabetically
 	Returns:
 	EndRem
 	Method Sort()
@@ -993,7 +981,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Sorts all parameters alphabetically
+	bbdoc: Sorts all parameters alphabetically
 	Returns:
 	EndRem		
 	Method SortParameters( _section_name:String )
@@ -1006,7 +994,7 @@ Type TINIFile
 	EndMethod
 
 	Rem
-	BBDoc: Sorts all sections alphabetically
+	bbdoc: Sorts all sections alphabetically
 	Returns:
 	EndRem	
 	Method SortSections()
