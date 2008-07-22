@@ -15,13 +15,17 @@ EndRem
 
 SuperStrict
 
+Rem
+	bbdoc: mutttley\logfilehandler
+	about: Create and write to simple log files
+EndRem
 Module muttley.logfilehandler
 
 ModuleInfo "Name: muttley.LogFileHandler"
 ModuleInfo "Version: 1.0.1"
 ModuleInfo "License: Artistic License 2.0"
 ModuleInfo "Author: Paul Maskelyne (Muttley)"
-ModuleInfo "Copyright: (C) 2007 Paul Maskelyne"
+ModuleInfo "Copyright: (c) 2007 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
 
@@ -43,14 +47,15 @@ Const LOG_TIME:Int = 1		'Show only Time in messages
 Const LOG_DATETIME:Int = 2	'Show Date & Time in messages
 
 Rem
-BBDoc: Log File Type
+	bbdoc: TLogFile
+	about: The TLogFile Type
 EndRem
 Type TLogFile
 
 	Field handle:TStream      'Handle to the log file stream
-	Field Filename:String     'Logfile filename
+	Field filename:String     'Logfile filename
 	Field description:String  'description for log file header/footer
-	Field Overwrite:Int       'overwrite existing log? False = Append
+	Field overwrite:Int       'overwrite existing log? False = Append
 	Field MaxLogFileSize:Int  'Max log size allowed, if exceeded log is rotated to a .bak file
 	Field LogLevel:Int        'Current log level of the logfile
 								'LOG_ERROR = Error messages only.  Lowest Log setting
@@ -59,22 +64,22 @@ Type TLogFile
 	Field timestampFormat:Int		'Date/Timestamping format for messages
 	
 	Rem
-	BBDoc: Creates a new log file.
-	Returns: TLogFile
-	About: Creates, Opens and Initialises a new TLogFile object.
+		bbdoc: Create a new log file.
+		returns: #TLogFile
+		about: Creates, Opens and Initialises a new TLogFile object.
 	EndRem
-	Function Create:TLogFile(	Filename:String = "logfile.log",..
+	Function Create:TLogFile(	filename:String = "logfile.log",..
 								description:String="Log File",..
 								LogLevel:Int = LOG_ERROR,..
 								timestampFormat:Int = LOG_TIME,..
-								Overwrite:Int = True,..
+								overwrite:Int = True,..
 								MaxLogFileSize:Int = 104857600 )
 	
 		Local newlogfile:TLogFile = New TLogFile
 	
-		newlogfile.Filename = Filename
+		newlogfile.filename = filename
 		newlogfile.description = description
-		newlogfile.Overwrite = Overwrite
+		newlogfile.overwrite = overwrite
 		newlogfile.MaxLogFileSize = MaxLogFileSize
 		newlogfile.LogLevel = LogLevel
 		
@@ -87,7 +92,17 @@ Type TLogFile
 			
 	End Function	
 
-
+	Rem
+		bbdoc: Sets the timestamp format
+		returns:
+		about: The timestamp formats available are as follows:
+		<table>
+		<tr><th>Format</th><th>Description</th></tr>
+		<tr><td>LOG_DATE</td><td>Log the date in <em>DD MMM YYYY</em> format</td></tr>
+		<tr><td>LOG_TIME</td><td>Log the time in <en>HH:MM:SS</em> format</td></tr>
+		<tr><td>LOG_DATETIME</td><td>Log both the date and time in <em>DD MMM YYYY, HH:MM:SS</em> format</td></tr>				
+		</table>
+	EndRem
 	Method SetTimestampFormat( tFormat:Int )
 		timestampFormat = tFormat
 		Return
@@ -119,7 +134,7 @@ Type TLogFile
 			'Log file doesn't already exist so start a new one
 			handle = WriteStream( Filename )
 		Else
-			If Overwrite = True
+			If overwrite = True
 				'Just open file and overwrite it
 				handle = WriteStream( Filename )
 			Else
@@ -212,7 +227,8 @@ Type TLogFile
 
 
 	Rem
-	BBDoc: Close the Log File
+		bbdoc: Close the Log File
+		returns:
 	EndRem
 	'Close Log File.  This Method writes a footer To the Log file, And Then closes it
 	Method Close()
@@ -250,6 +266,9 @@ Type TLogFile
 		
 	End Method
 
+	Method LogGlobal( entry:String )
+		
+	EndMethod
 
 	Rem
 	BBDoc: Change the log file level of the log file
