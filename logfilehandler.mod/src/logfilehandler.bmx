@@ -13,14 +13,6 @@ Rem
 	
 EndRem
 
-SuperStrict
-
-Rem
-	bbdoc: mutttley\logfilehandler
-	about: Create and write to simple log files
-EndRem
-Module muttley.logfilehandler
-
 ModuleInfo "Name: muttley.LogFileHandler"
 ModuleInfo "Version: 1.0.1"
 ModuleInfo "License: Artistic License 2.0"
@@ -33,9 +25,6 @@ ModuleInfo "History: 1.0.1"
 ModuleInfo "History: Re-released under the Artistic License 2.0"
 ModuleInfo "History: 1.0.0"
 ModuleInfo "History: Initial Release"
-
-Import brl.filesystem
-Import brl.system
 
 Const LOG_GLOBAL:Int = 0	'Global message are seen no matter what log level is set
 Const LOG_ERROR:Int = 1		'Error messages are seen in Error, Warn and Info log levels
