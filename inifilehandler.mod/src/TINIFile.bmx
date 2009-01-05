@@ -366,7 +366,7 @@ Type TINIFile
 		If values <> Null
 			Local intValues:Int[values.length]
 			For Local i:Int = 0 To values.length -1
-				intValues[i] = Byte(values[i])
+				intValues[i] = Int(values[i])
 			Next
 			Return intValues
 		Else
