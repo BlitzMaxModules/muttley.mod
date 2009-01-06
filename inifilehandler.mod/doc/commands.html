@@ -27,7 +27,7 @@ Adds a new Parameter to a specified Section in the <a href=#TINIFILE>TINIFILE</a
 Add a new section to the <a href=#TINIFile>TINIFile</a> Object. Section names must be unique.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#CreateMissingEntries>CreateMissingEntries</a></td><td class=docright>
-Tells the INI file whether to create missing parameters/settings when requested or not, this is off my default.
+Tells the INI file whether to create missing parameters/settings when requested or not, this is off by default.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#DeleteParameter>DeleteParameter</a></td><td class=docright>
 Deletes a Parameter.
@@ -80,11 +80,11 @@ Get a Long array of all values from a parameter.
 <tr><td class=docleft width=1%><a href=#GetParameterComment>GetParameterComment</a></td><td class=docright>
 Gets the comment field for a Parameter.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#GetParameters>GetParameters</a></td><td class=docright>
-Get a list of all Parameters in a Section of the <a href=#TINIFile>TINIFile</a> Object.
-</td></tr>
 <tr><td class=docleft width=1%><a href=#GetSectionComment>GetSectionComment</a></td><td class=docright>
 Get the comment field associated with a Section in the <a href=#TINIFile>TINIFile</a> Object.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#GetSectionParameters>GetSectionParameters</a></td><td class=docright>
+Get a list of all Parameters in a Section of the <a href=#TINIFile>TINIFile</a> Object.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#GetSections>GetSections</a></td><td class=docright>
 Get the names of all sections in the <a href=#TINIFile>TINIFile</a> Object.
@@ -174,13 +174,13 @@ Set the value for a specific parameter.  This overwrites any values already assi
 Set the values for a specific parameter to the contents of a String array.  This overwrites any values already assigned.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#Sort>Sort</a></td><td class=docright>
-Sorts all sections and parameters alphabetically.
+Sorts all Sections and Parameters alphabetically.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#SortParameters>SortParameters</a></td><td class=docright>
-Sorts all parameters alphabetically.
+Sorts all Parameters in a Section alphabetically.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#SortSections>SortSections</a></td><td class=docright>
-Sorts all sections alphabetically.
+Sorts all Sections alphabetically.
 </td></tr>
 </table>
 <table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TINIFile_functions></a>Functions Summary</th></tr>
@@ -189,39 +189,39 @@ Create a new INI File.
 </td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=AddParameter>
-<tr><td class=doctop colspan=2>Method AddParameter:Int( _section_name:String, _parameter:String )</td></tr>
+<tr><td class=doctop colspan=2>Method AddParameter:Int(sectionName:String, paramaterName:String, comment:String = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Adds a new Parameter to a specified Section in the <a href=#TINIFILE>TINIFILE</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=AddSection>
-<tr><td class=doctop colspan=2>Method AddSection:Int( _name:String, _comment:String = "" )</td></tr>
+<tr><td class=doctop colspan=2>Method AddSection:Int(name:String, comment:String = "")</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Add a new section to the <a href=#TINIFile>TINIFile</a> Object. Section names must be unique.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=CreateMissingEntries>
-<tr><td class=doctop colspan=2>Method CreateMissingEntries( bool:Int = True )</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Tells the INI file whether to create missing parameters/settings when requested or not, this is off my default.</td></tr>
+<tr><td class=doctop colspan=2>Method CreateMissingEntries(bool:Int = True)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Tells the INI file whether to create missing parameters/settings when requested or not, this is off by default.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=DeleteParameter>
-<tr><td class=doctop colspan=2>Method DeleteParameter:Int( _section_name:String, _parameter:String )</td></tr>
+<tr><td class=doctop colspan=2>Method DeleteParameter:Int(sectionName:String, parameterName:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Deletes a Parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=DeleteSection>
-<tr><td class=doctop colspan=2>Method DeleteSection:Int( _name:String )</td></tr>
+<tr><td class=doctop colspan=2>Method DeleteSection:Int(name:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Delete a Section (and all contained parameters) if it exists in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetBoolValue>
-<tr><td class=doctop colspan=2>Method GetBoolValue:Int( _section_name:String, _parameter_name:String, defaultValue:String = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetBoolValue:Int(sectionName:String, parameterName:String, defaultValue:String = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Boolean value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetBoolValues>
-<tr><td class=doctop colspan=2>Method GetBoolValues:Int[]( _section_name:String, _parameter_name:String, defaultValues:String[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetBoolValues:Int[] (sectionName:String, parameterName:String, defaultValues:String[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get an Int array of all Boolean values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetByteValue>
-<tr><td class=doctop colspan=2>Method GetByteValue:Byte( _section_name:String, _parameter_name:String, defaultValue:Byte = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetByteValue:Byte(sectionName:String, parameterName:String, defaultValue:Byte = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Byte value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetByteValues>
-<tr><td class=doctop colspan=2>Method GetByteValues:Byte[]( _section_name:String, _parameter_name:String, defaultValues:Byte[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetByteValues:Byte[] (sectionName:String, parameterName:String, defaultValues:Byte[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Byte array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetComment>
@@ -229,11 +229,11 @@ Create a new INI File.
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get the INI file comment line.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetDoubleValue>
-<tr><td class=doctop colspan=2>Method GetDoubleValue:Double( _section_name:String, _parameter_name:String, defaultValue:Double = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetDoubleValue:Double(sectionName:String, parameterName:String, defaultValue:Double = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Double value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetDoubleValues>
-<tr><td class=doctop colspan=2>Method GetDoubleValues:Double[]( _section_name:String, _parameter_name:String, defaultValues:Double[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetDoubleValues:Double[] (sectionName:String, parameterName:String, defaultValues:Double[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Double array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetFilename>
@@ -241,59 +241,59 @@ Create a new INI File.
 <tr><td class=docleft width=1%>Description</td><td class=docright>Returns the filename of the INI File Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetFloatValue>
-<tr><td class=doctop colspan=2>Method GetFloatValue:Float( _section_name:String, _parameter_name:String, defaultValue:Float = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetFloatValue:Float(sectionName:String, parameterName:String, defaultValue:Float = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Float value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetFloatValues>
-<tr><td class=doctop colspan=2>Method GetFloatValues:Float[]( _section_name:String, _parameter_name:String, defaultValues:Float[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetFloatValues:Float[] (sectionName:String, parameterName:String, defaultValues:Float[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Float array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetIntValue>
-<tr><td class=doctop colspan=2>Method GetIntValue:Int( _section_name:String, _parameter_name:String, defaultValue:Int = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetIntValue:Int(sectionName:String, parameterName:String, defaultValue:Int = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get an Int value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetIntValues>
-<tr><td class=doctop colspan=2>Method GetIntValues:Int[]( _section_name:String, _parameter_name:String, defaultValues:Int[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetIntValues:Int[] (sectionName:String, parameterName:String, defaultValues:Int[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get an Int array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetLongValue>
-<tr><td class=doctop colspan=2>Method GetLongValue:Long( _section_name:String, _parameter_name:String, defaultValue:Long = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetLongValue:Long(sectionName:String, parameterName:String, defaultValue:Long = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Long value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetLongValues>
-<tr><td class=doctop colspan=2>Method GetLongValues:Long[]( _section_name:String, _parameter_name:String, defaultValues:Long[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetLongValues:Long[] (sectionName:String, parameterName:String, defaultValues:Long[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Long array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetParameterComment>
-<tr><td class=doctop colspan=2>Method GetParameterComment:String( _section_name:String, _parameter:String )</td></tr>
+<tr><td class=doctop colspan=2>Method GetParameterComment:String(sectionName:String, parameterName:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Gets the comment field for a Parameter.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=GetParameters>
-<tr><td class=doctop colspan=2>Method GetParameters:String[]( _name:String )</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Get a list of all Parameters in a Section of the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
-</table>
 <table class=doc width=100% cellspacing=3 id=GetSectionComment>
-<tr><td class=doctop colspan=2>Method GetSectionComment:String( _section_name:String )</td></tr>
+<tr><td class=doctop colspan=2>Method GetSectionComment:String(name:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get the comment field associated with a Section in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
+<table class=doc width=100% cellspacing=3 id=GetSectionParameters>
+<tr><td class=doctop colspan=2>Method GetSectionParameters:String[] (name:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Get a list of all Parameters in a Section of the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
+</table>
 <table class=doc width=100% cellspacing=3 id=GetSections>
-<tr><td class=doctop colspan=2>Method GetSections:String[]()</td></tr>
+<tr><td class=doctop colspan=2>Method GetSections:String[] ()</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get the names of all sections in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetShortValue>
-<tr><td class=doctop colspan=2>Method GetShortValue:Short( _section_name:String, _parameter_name:String, defaultValue:Short = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetShortValue:Short(sectionName:String, parameterName:String, defaultValue:Short = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Short value from a parameter.  If a parameter has multiple values only the first is returned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetShortValues>
-<tr><td class=doctop colspan=2>Method GetShortValues:Short[]( _section_name:String, _parameter_name:String, defaultValues:Short[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetShortValues:Short[] (sectionName:String, parameterName:String, defaultValues:Short[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Get a Short array of all values from a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetStringValue>
-<tr><td class=doctop colspan=2>Method GetStringValue:String( _section_name:String, _parameter_name:String, defaultValue:String = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetStringValue:String(sectionName:String, parameterName:String, defaultValue:String = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Gets the value (or first value if there is more than one) belonging to a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=GetStringValues>
-<tr><td class=doctop colspan=2>Method GetStringValues:String[]( _section_name:String, _parameter_name:String, defaultValues:String[] = Null )</td></tr>
+<tr><td class=doctop colspan=2>Method GetStringValues:String[] (sectionName:String, parameterName:String, defaultValues:String[] = Null)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Gets all the values belonging to a parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=Load>
@@ -301,111 +301,111 @@ Create a new INI File.
 <tr><td class=docleft width=1%>Description</td><td class=docright>Loads data from a file into the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=ParameterExists>
-<tr><td class=doctop colspan=2>Method ParameterExists:Int( _section_name:String, _parameter_name:String )</td></tr>
+<tr><td class=doctop colspan=2>Method ParameterExists:Int(sectionName:String, parameterName:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Check if a parameter exists in a specified Section in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=Save>
-<tr><td class=doctop colspan=2>Method Save:Int( sortBeforeSave:Int = True )</td></tr>
+<tr><td class=doctop colspan=2>Method Save:Int(sortBeforeSave:Int = True)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Saves the <a href=#TINIFile>TINIFile</a> object to a file.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SectionExists>
-<tr><td class=doctop colspan=2>Method SectionExists:Int( _name:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SectionExists:Int(name:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Check if a Section exists in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetBoolValue>
-<tr><td class=doctop colspan=2>Method SetBoolValue:Int( _section_name:String, _parameter:String, _value:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetBoolValue:Int(sectionName:String, parameterName:String, value:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Boolean value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetBoolValues>
-<tr><td class=doctop colspan=2>Method SetBoolValues:Int( _section_name:String, _parameter:String, _values:String[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetBoolValues:Int(sectionName:String, parameterName:String, values:String[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Boolean values.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetByteValue>
-<tr><td class=doctop colspan=2>Method SetByteValue:Int( _section_name:String, _parameter:String, _value:Byte )</td></tr>
+<tr><td class=doctop colspan=2>Method SetByteValue:Int(sectionName:String, parameterName:String, value:Byte)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Byte value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetByteValues>
-<tr><td class=doctop colspan=2>Method SetByteValues:Int( _section_name:String, _parameter:String, _values:Byte[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetByteValues:Int(sectionName:String, parameterName:String, values:Byte[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Bytes.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetComment>
-<tr><td class=doctop colspan=2>Method SetComment( _comment:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetComment(comment:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set the INI file comment line.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetDoubleValue>
-<tr><td class=doctop colspan=2>Method SetDoubleValue:Int( _section_name:String, _parameter:String, _value:Double )</td></tr>
+<tr><td class=doctop colspan=2>Method SetDoubleValue:Int(sectionName:String, parameterName:String, value:Double)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Double value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetDoubleValues>
-<tr><td class=doctop colspan=2>Method SetDoubleValues:Int( _section_name:String, _parameter:String, _values:Double[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetDoubleValues:Int(sectionName:String, parameterName:String, values:Double[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Doubles.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetFilename>
-<tr><td class=doctop colspan=2>Method SetFilename( _filename:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetFilename(filename:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Sets the filename of the INI File Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetFloatValue>
-<tr><td class=doctop colspan=2>Method SetFloatValue:Int( _section_name:String, _parameter:String, _value:Float )</td></tr>
+<tr><td class=doctop colspan=2>Method SetFloatValue:Int(sectionName:String, parameterName:String, value:Float)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Float value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetFloatValues>
-<tr><td class=doctop colspan=2>Method SetFloatValues:Int( _section_name:String, _parameter:String, _values:Float[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetFloatValues:Int(sectionName:String, parameterName:String, values:Float[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Floats.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetIntValue>
-<tr><td class=doctop colspan=2>Method SetIntValue:Int( _section_name:String, _parameter:String, _value:Int )</td></tr>
+<tr><td class=doctop colspan=2>Method SetIntValue:Int(sectionName:String, parameterName:String, value:Int)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to an Int value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetIntValues>
-<tr><td class=doctop colspan=2>Method SetIntValues:Int( _section_name:String, _parameter:String, _values:Int[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetIntValues:Int(sectionName:String, parameterName:String, values:Int[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Ints.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetLongValue>
-<tr><td class=doctop colspan=2>Method SetLongValue:Int( _section_name:String, _parameter:String, _value:Long )</td></tr>
+<tr><td class=doctop colspan=2>Method SetLongValue:Int(sectionName:String, parameterName:String, value:Long)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Long value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetLongValues>
-<tr><td class=doctop colspan=2>Method SetLongValues:Int( _section_name:String, _parameter:String, _values:Long[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetLongValues:Int(sectionName:String, parameterName:String, values:Long[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Longs.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetParameterComment>
-<tr><td class=doctop colspan=2>Method SetParameterComment:Int( _section_name:String, _parameter:String, _value:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetParameterComment:Int(sectionName:String, parameterName:String, comment:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Sets the comment field for a Parameter.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetSectionComment>
-<tr><td class=doctop colspan=2>Method SetSectionComment:Int( _section_name:String, _section_comment:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetSectionComment:Int(name:String, comment:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set the comment field associated with a Section in the <a href=#TINIFile>TINIFile</a> Object.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetShortValue>
-<tr><td class=doctop colspan=2>Method SetShortValue:Int( _section_name:String, _parameter:String, _value:Short )</td></tr>
+<tr><td class=doctop colspan=2>Method SetShortValue:Int(sectionName:String, parameterName:String, value:Short)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's value to a Short value.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetShortValues>
-<tr><td class=doctop colspan=2>Method SetShortValues:Int( _section_name:String, _parameter:String, _values:Short[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetShortValues:Int(sectionName:String, parameterName:String, values:Short[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set a parameter's values to an array of Shorts.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetStringValue>
-<tr><td class=doctop colspan=2>Method SetStringValue:Int( _section_name:String, _parameter:String, _value:String )</td></tr>
+<tr><td class=doctop colspan=2>Method SetStringValue:Int(sectionName:String, parameterName:String, value:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set the value for a specific parameter.  This overwrites any values already assigned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SetStringValues>
-<tr><td class=doctop colspan=2>Method SetStringValues:Int( _section_name:String, _parameter:String, _values:String[] )</td></tr>
+<tr><td class=doctop colspan=2>Method SetStringValues:Int(sectionName:String, parameterName:String, values:String[])</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set the values for a specific parameter to the contents of a String array.  This overwrites any values already assigned.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=Sort>
 <tr><td class=doctop colspan=2>Method Sort()</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all sections and parameters alphabetically.</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all Sections and Parameters alphabetically.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SortParameters>
-<tr><td class=doctop colspan=2>Method SortParameters( _section_name:String )</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all parameters alphabetically.</td></tr>
+<tr><td class=doctop colspan=2>Method SortParameters(sectionName:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all Parameters in a Section alphabetically.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=SortSections>
 <tr><td class=doctop colspan=2>Method SortSections()</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all sections alphabetically.</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Sorts all Sections alphabetically.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=Create>
-<tr><td class=doctop colspan=2>Function Create:TINIFile( _filename:String = "config.ini" )</td></tr>
+<tr><td class=doctop colspan=2>Function Create:TINIFile(filename:String = "config.ini")</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Create a new INI File.</td></tr>
 </table>
 <br>
