@@ -15,15 +15,15 @@ EndRem
 
 rem
 ModuleInfo "Name: muttley.INIFileHandler"
-ModuleInfo "Version: 2.0.0"
+ModuleInfo "Version: 1.1.0"
 ModuleInfo "License: Artistic License 2.0"
 ModuleInfo "Author: Paul Maskelyne (Muttley)"
 ModuleInfo "Copyright: (C) 2007 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
 
-ModuleInfo "History: 2.0.0"
-ModuleInfo "History: Major code overhaul to correct issues with incorrectly returning default values"
+ModuleInfo "History: 1.1.0"
+ModuleInfo "History: Code overhauled to correct issues with incorrectly returning default values.  Also added Unit Tests using bah.maxunit"
 ModuleInfo "History: 1.0.7"
 ModuleInfo "History: Fixed problem with docmods not generating documentation correctly"
 ModuleInfo "History: 1.0.6"
@@ -51,7 +51,7 @@ Type TINIFile
 	Field filename_:String
 	Field comment_:String
 	Field LSections_:TList = CreateList()
-	Field createWhenMissing_:Int = False
+	Field createMissingEntries_:Int = False
 
 	Rem
 	bbdoc: Create a new INI File
@@ -102,7 +102,7 @@ Type TINIFile
 	Returns:
 	EndRem
 	Method CreateMissingEntries(bool:Int = True)
-		createWhenMissing_ = bool
+		createMissingEntries_ = bool
 	End Method
 
 	Rem
@@ -152,7 +152,7 @@ Type TINIFile
 					If defaultValue.ToLower() = "false" Then boolValue = False
 			EndSelect
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				If defaultValue.tolower() = "false" Or defaultValue.tolower() = "true"
 					AddSection(sectionName)
 					AddParameter(sectionName, parameterName)
@@ -191,7 +191,7 @@ Type TINIFile
 				EndSelect
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetBoolValues(sectionName, parameterName, defaultValues)
@@ -225,7 +225,7 @@ Type TINIFile
 		If value <> Null
 			byteValue = Byte(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetByteValue(sectionName, parameterName, defaultValue)
@@ -248,7 +248,7 @@ Type TINIFile
 				byteValues[i] = Byte(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetByteValues(sectionName, parameterName, defaultValues)
@@ -277,7 +277,7 @@ Type TINIFile
 		If value <> Null
 			doubleValue = Double(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetDoubleValue(sectionName, parameterName, defaultValue)
@@ -300,7 +300,7 @@ Type TINIFile
 				doubleValues[i] = Double(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetDoubleValues(sectionName, parameterName, defaultValues)
@@ -328,7 +328,7 @@ Type TINIFile
 		If value <> Null
 			floatValue = Float(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetFloatValue(sectionName, parameterName, defaultValue)
@@ -351,7 +351,7 @@ Type TINIFile
 				floatValues[i] = Float(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetFloatValues(sectionName, parameterName, defaultValues)
@@ -371,7 +371,7 @@ Type TINIFile
 		If value <> Null
 			intValue = Int(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				addsection(sectionName)
 				addParameter(sectionName, parameterName)
 				SetIntValue(sectionName, parameterName, defaultValue)
@@ -394,7 +394,7 @@ Type TINIFile
 				intValues[i] = Int(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				addsection(sectionName)
 				addParameter(sectionName, parameterName)
 				SetIntValues(sectionName, parameterName, defaultValues)
@@ -414,7 +414,7 @@ Type TINIFile
 		If value <> Null
 			longValue = Long(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetLongValue(sectionName, parameterName, defaultValue)
@@ -437,7 +437,7 @@ Type TINIFile
 				longValues[i] = Long(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetLongValues(sectionName, parameterName, defaultValues)
@@ -515,7 +515,7 @@ Type TINIFile
 		If value <> Null
 			shortValue = Short(value.GetValue())
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetShortValue(sectionName, parameterName, defaultValue)
@@ -538,7 +538,7 @@ Type TINIFile
 				shortValues[i] = Short(values[i].GetValue())
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetShortValues(sectionName, parameterName, defaultValues)
@@ -558,7 +558,7 @@ Type TINIFile
 		If value <> Null
 			stringValue = value.GetValue()
 		Else
-			If createWhenMissing_ And defaultValue <> Null
+			If createMissingEntries_ And defaultValue <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetStringValue(sectionName, parameterName, defaultValue)
@@ -581,7 +581,7 @@ Type TINIFile
 				stringValues[i] = values[i].GetValue()
 			Next
 		Else
-			If createWhenMissing_ And defaultValues <> Null
+			If createMissingEntries_ And defaultValues <> Null
 				AddSection(sectionName)
 				AddParameter(sectionName, parameterName)
 				SetStringValues(sectionName, parameterName, defaultValues)
@@ -781,7 +781,7 @@ Type TINIFile
 		If value.ToLower() = "true" Or value.ToLower() = "false"
 			Return SetStringValue(sectionName, parameterName, value.ToLower())
 		Else
-			Return False
+			RuntimeError "Attempting to set bad bool value: ~q" + value + "~q.  Valid values are TRUE and FALSE"
 		EndIf
 	EndMethod
 
@@ -790,18 +790,14 @@ Type TINIFile
 	Returns: True if the values have been set
 	EndRem	
 	Method SetBoolValues:Int(sectionName:String, parameterName:String, values:String[])
+		Local castValues:String[] = New String[values.Length]
 		For Local i:Int = 0 To values.length - 1
-			Select values[i]
-				Case values[i].ToLower() = "true"
-					values[i] = "true"
-				Case values[i].ToLower() = "false"
-					values[i] = "false"
-				Default
-					RuntimeError "Attempting to set bad bool value: ~q" + values[i] + ..
-									"~q.  Valid values are TRUE and FALSE"
-			End Select
+			castValues[i] = values[i].ToLower()
+			If castValues[i] <> "true" And castValues[i] <> "false"
+				RuntimeError "Attempting to set bad bool value: ~q" + castValues[i] + "~q.  Valid values are TRUE and FALSE"
+			End If
 		Next
-		Return SetStringValues(sectionName, parameterName, values)
+		Return SetStringValues(sectionName, parameterName, castValues)
 	EndMethod
 	
 		
@@ -977,7 +973,7 @@ Type TINIFile
 	EndRem		
 	Method SetStringValue:Int(sectionName:String, parameterName:String, value:String)
 		'make sure the section and parameters exist if createWhenMissing is set
-		If createWhenMissing_
+		If createMissingEntries_
 			If Not SectionExists(sectionName)
 				AddSection(sectionName)
 			EndIf
@@ -1000,7 +996,7 @@ Type TINIFile
 	EndRem	
 	Method SetStringValues:Int(sectionName:String, parameterName:String, values:String[])
 		'make sure the section and parameters exist if createWhenMissing is set
-		If createWhenMissing_
+		If createMissingEntries_
 			If Not SectionExists(sectionName)
 				AddSection(sectionName)
 			EndIf
