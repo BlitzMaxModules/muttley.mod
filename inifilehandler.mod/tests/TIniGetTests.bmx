@@ -1,9 +1,9 @@
 Type TIniGetTests Extends TTest
 	
-	Field iniFile:TINIFile
+	Field iniFile_:TINIFile
 	
 	Method SetUp() {before}
-		iniFile = TINIFile.Create(INI_READ_FILE)
+		iniFile_ = TINIFile.Create(INI_READ_FILE)
 	End Method
 	
 	Method TearDown() {after}
@@ -14,15 +14,15 @@ Type TIniGetTests Extends TTest
 	End Method
 
 	Method TestIniFileLoad() {test}
-		assertTrue(iniFile.Load() = True, "Failed to load INI file ~q" + INI_READ_FILE + "~q")
+		assertTrue(iniFile_.Load() = True, "Failed to load INI file ~q" + INI_READ_FILE + "~q")
 	End Method
 	
 	Method TestGetBoolValue() {test}
 		Local section:String = "Section-01"
 		Local parameter:String = "Section-01-Bool"
 		Local expected:Int = True
-		iniFile.Load()
-		Local actual:Int = iniFile.GetBoolValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetBoolValue(section, parameter)
 		assertEqualsI(expected, actual)
 	End Method
 
@@ -30,8 +30,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-02"
 		Local parameter:String = "Section-02-Bools"
 		Local expected:Int[] = [True, True, False, True, True, False, True, False, True]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetBoolValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetBoolValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Bool values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -44,8 +44,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-03"
 		Local parameter:String = "Section-03-Byte"
 		Local expected:Byte = 239:Byte
-		iniFile.Load()
-		Local actual:Byte = iniFile.GetByteValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Byte = iniFile_.GetByteValue(section, parameter)
 		assertEqualsB(expected, actual)
 	End Method
 
@@ -53,8 +53,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-04"
 		Local parameter:String = "Section-04-Bytes"
 		Local expected:Byte[] = [10:Byte, 247:Byte, 127:Byte, 232:Byte, 52:Byte, 141:Byte]
-		iniFile.Load()
-		Local actual:Byte[] = iniFile.GetByteValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Byte[] = iniFile_.GetByteValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Byte values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -67,8 +67,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-05"
 		Local parameter:String = "Section-05-Double"
 		Local expected:Double = 0.79262287690402766:Double
-		iniFile.Load()
-		Local actual:Double = iniFile.GetDoubleValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Double = iniFile_.GetDoubleValue(section, parameter)
 		assertEqualsD(expected, actual)
 	End Method	
 
@@ -79,8 +79,8 @@ Type TIniGetTests Extends TTest
 									0.73988173776230703:Double, 0.37740347268439434:Double,  ..
 									0.71044799711992468:Double, 0.81224240923952995:Double,  ..
 									0.20916371450992632:Double, 0.78518314343206441:Double]
-		iniFile.Load()
-		Local actual:Double[] = iniFile.GetDoubleValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Double[] = iniFile_.GetDoubleValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Double values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -93,8 +93,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-07"
 		Local parameter:String = "Section-07-Float"
 		Local expected:Float = 0.749703646:Float
-		iniFile.Load()
-		Local actual:Float = iniFile.GetFloatValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Float = iniFile_.GetFloatValue(section, parameter)
 		assertEqualsD(expected, actual)
 	End Method	
 
@@ -102,8 +102,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-08"
 		Local parameter:String = "Section-08-Floats"
 		Local expected:Float[] = [0.365954638:Float, 0.999058604:Float]
-		iniFile.Load()
-		Local actual:Float[] = iniFile.GetFloatValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Float[] = iniFile_.GetFloatValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Float values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -116,8 +116,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-09"
 		Local parameter:String = "Section-09-Int"
 		Local expected:Int = -736213825:Int
-		iniFile.Load()
-		Local actual:Int = iniFile.GetIntValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetIntValue(section, parameter)
 		assertEqualsI(expected, actual)
 	End Method	
 
@@ -125,8 +125,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-10"
 		Local parameter:String = "Section-10-Ints"
 		Local expected:Int[] = [- 900559619:Int, - 201698820:Int, 406441207:Int]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetIntValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetIntValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Int values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -139,8 +139,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-11"
 		Local parameter:String = "Section-11-Long"
 		Local expected:Long = -400966326:Long
-		iniFile.Load()
-		Local actual:Long = iniFile.GetLongValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Long = iniFile_.GetLongValue(section, parameter)
 		assertEqualsL(expected, actual)
 	End Method	
 
@@ -150,8 +150,8 @@ Type TIniGetTests Extends TTest
 		Local expected:Long[] = [- 604666866:Long, - 890225166:Long, 834013734:Long,  ..
 									652774232:Long, 1035802483:Long, - 523964866:Long,  ..
 									- 459476265:Long, 689839146:Long, 282939222:Long]
-		iniFile.Load()
-		Local actual:Long[] = iniFile.GetLongValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Long[] = iniFile_.GetLongValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Long values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -164,8 +164,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-13"
 		Local parameter:String = "Section-13-Short"
 		Local expected:Short = 30657:Short
-		iniFile.Load()
-		Local actual:Short = iniFile.GetShortValue(section, parameter)
+		iniFile_.Load()
+		Local actual:Short = iniFile_.GetShortValue(section, parameter)
 		assertEqualsS(expected, actual)
 	End Method	
 
@@ -174,8 +174,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Section-14-Shorts"
 		Local expected:Short[] = [24327:Short, 16161:Short, 3319:Short, 36423:Short,  ..
 									56156:Short, 42010:Short, 44939:Short, 8977:Short]
-		iniFile.Load()
-		Local actual:Short[] = iniFile.GetShortValues(section, parameter)
+		iniFile_.Load()
+		Local actual:Short[] = iniFile_.GetShortValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " Short values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -188,8 +188,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-15"
 		Local parameter:String = "Section-15-String"
 		Local expected:String = "TSL AQGJAHNM CZAAMNH RGPHYLSI GOOMY"
-		iniFile.Load()
-		Local actual:String = iniFile.GetStringValue(section, parameter)
+		iniFile_.Load()
+		Local actual:String = iniFile_.GetStringValue(section, parameter)
 		assertEquals(expected, actual)
 	End Method	
 
@@ -199,8 +199,8 @@ Type TIniGetTests Extends TTest
 		Local expected:String[] = ["RXGT O YBTZIL WMSYRSNV NQOHS", "DAEM L WMKOAHN KZST H",  ..
 									"HIS DSIUBDUN B GBRFB E", "GOH GCB DEX IANABGBH XE",  ..
 									"K RT TCATMC BEXQC XA"]
-		iniFile.Load()
-		Local actual:String[] = iniFile.GetStringValues(section, parameter)
+		iniFile_.Load()
+		Local actual:String[] = iniFile_.GetStringValues(section, parameter)
 		assertTrue(expected.length = actual.length, actual.length + " String values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -208,14 +208,13 @@ Type TIniGetTests Extends TTest
 			Next
 		End If
 	End Method	
-	
-	
+
 	Method TestGetDefaultBoolValue() {test}
 		Local section:String = "Missing-Section-01"
 		Local parameter:String = "Missing-Section-01-Bool"
 		Local expected:Int = True
-		iniFile.Load()
-		Local actual:Int = iniFile.GetBoolValue(section, parameter, "True")
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetBoolValue(section, parameter, "True")
 		assertEqualsI(expected, actual)
 	End Method
 
@@ -224,8 +223,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Missing-Section-02-Bools"
 		Local expected:Int[] = [True, True, False, True, True, False, True, False, True]
 		Local expectedString:String[] = ["True", "True", "False", "True", "True", "False", "True", "False", "True"]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetBoolValues(section, parameter, expectedString)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetBoolValues(section, parameter, expectedString)
 		assertTrue(expected.length = actual.length, actual.length + " Bool values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -238,8 +237,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-03"
 		Local parameter:String = "Missing-Section-03-Byte"
 		Local expected:Byte = 239:Byte
-		iniFile.Load()
-		Local actual:Byte = iniFile.GetByteValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Byte = iniFile_.GetByteValue(section, parameter, expected)
 		assertEqualsB(expected, actual)
 	End Method
 
@@ -247,8 +246,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-04"
 		Local parameter:String = "Missing-Section-04-Bytes"
 		Local expected:Byte[] = [10:Byte, 247:Byte, 127:Byte, 232:Byte, 52:Byte, 141:Byte]
-		iniFile.Load()
-		Local actual:Byte[] = iniFile.GetByteValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Byte[] = iniFile_.GetByteValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Byte values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -261,8 +260,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-05"
 		Local parameter:String = "Missing-Section-05-Double"
 		Local expected:Double = 0.79262287690402766:Double
-		iniFile.Load()
-		Local actual:Double = iniFile.GetDoubleValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Double = iniFile_.GetDoubleValue(section, parameter, expected)
 		assertEqualsD(expected, actual)
 	End Method	
 
@@ -273,8 +272,8 @@ Type TIniGetTests Extends TTest
 									0.73988173776230703:Double, 0.37740347268439434:Double,  ..
 									0.71044799711992468:Double, 0.81224240923952995:Double,  ..
 									0.20916371450992632:Double, 0.78518314343206441:Double]
-		iniFile.Load()
-		Local actual:Double[] = iniFile.GetDoubleValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Double[] = iniFile_.GetDoubleValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Double values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -287,8 +286,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-07"
 		Local parameter:String = "Missing-Section-07-Float"
 		Local expected:Float = 0.749703646:Float
-		iniFile.Load()
-		Local actual:Float = iniFile.GetFloatValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Float = iniFile_.GetFloatValue(section, parameter, expected)
 		assertEqualsD(expected, actual)
 	End Method	
 
@@ -296,8 +295,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-08"
 		Local parameter:String = "Missing-Section-08-Floats"
 		Local expected:Float[] = [0.365954638:Float, 0.999058604:Float]
-		iniFile.Load()
-		Local actual:Float[] = iniFile.GetFloatValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Float[] = iniFile_.GetFloatValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Float values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -310,8 +309,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-09"
 		Local parameter:String = "Missing-Section-09-Int"
 		Local expected:Int = -736213825:Int
-		iniFile.Load()
-		Local actual:Int = iniFile.GetIntValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetIntValue(section, parameter, expected)
 		assertEqualsI(expected, actual)
 	End Method	
 
@@ -319,8 +318,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-10"
 		Local parameter:String = "Missing-Section-10-Ints"
 		Local expected:Int[] = [- 900559619:Int, - 201698820:Int, 406441207:Int]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetIntValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetIntValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Int values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -333,8 +332,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-11"
 		Local parameter:String = "Missing-Section-11-Long"
 		Local expected:Long = -400966326:Long
-		iniFile.Load()
-		Local actual:Long = iniFile.GetLongValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Long = iniFile_.GetLongValue(section, parameter, expected)
 		assertEqualsL(expected, actual)
 	End Method	
 
@@ -344,8 +343,8 @@ Type TIniGetTests Extends TTest
 		Local expected:Long[] = [- 604666866:Long, - 890225166:Long, 834013734:Long,  ..
 									652774232:Long, 1035802483:Long, - 523964866:Long,  ..
 									- 459476265:Long, 689839146:Long, 282939222:Long]
-		iniFile.Load()
-		Local actual:Long[] = iniFile.GetLongValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Long[] = iniFile_.GetLongValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Long values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -358,8 +357,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-13"
 		Local parameter:String = "Missing-Section-13-Short"
 		Local expected:Short = 30657:Short
-		iniFile.Load()
-		Local actual:Short = iniFile.GetShortValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Short = iniFile_.GetShortValue(section, parameter, expected)
 		assertEqualsS(expected, actual)
 	End Method	
 
@@ -368,8 +367,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Missing-Section-14-Shorts"
 		Local expected:Short[] = [24327:Short, 16161:Short, 3319:Short, 36423:Short,  ..
 									56156:Short, 42010:Short, 44939:Short, 8977:Short]
-		iniFile.Load()
-		Local actual:Short[] = iniFile.GetShortValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:Short[] = iniFile_.GetShortValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " Short values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -382,8 +381,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Missing-Section-13"
 		Local parameter:String = "Missing-Section-13-String"
 		Local expected:String = "This should be the missing string"
-		iniFile.Load()
-		Local actual:String = iniFile.GetStringValue(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:String = iniFile_.GetStringValue(section, parameter, expected)
 		assertEquals(expected, actual)
 	End Method	
 
@@ -394,8 +393,8 @@ Type TIniGetTests Extends TTest
 									"This should be the missing string 2",  ..
 									"This should be the missing string 3",  ..
 									"This should be the missing string 4"]
-		iniFile.Load()
-		Local actual:String[] = iniFile.GetStringValues(section, parameter, expected)
+		iniFile_.Load()
+		Local actual:String[] = iniFile_.GetStringValues(section, parameter, expected)
 		assertTrue(expected.length = actual.length, actual.length + " String values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -408,8 +407,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Bool"
 		Local expected:Int = True
-		iniFile.Load()
-		Local actual:Int = iniFile.GetBoolValue(section, parameter, "true")
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetBoolValue(section, parameter, "true")
 		assertEqualsI(expected, actual)
 	End Method
 
@@ -418,8 +417,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Section-17-Bools"
 		Local expected:Int[] = [True, True, False, True, True, False, True, False, True]
 		Local defaultValues:String[] = ["True", "True", "False", "True", "True", "False", "True", "False", "True"]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetBoolValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetBoolValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Bool values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -432,8 +431,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Byte"
 		Local expected:Byte = 0:Byte
-		iniFile.Load()
-		Local actual:Byte = iniFile.GetByteValue(section, parameter, 239:Byte)
+		iniFile_.Load()
+		Local actual:Byte = iniFile_.GetByteValue(section, parameter, 239:Byte)
 		assertEqualsB(expected, actual)
 	End Method
 
@@ -442,8 +441,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Section-17-Bytes"
 		Local defaultValues:Byte[] = [10:Byte, 247:Byte, 127:Byte, 232:Byte, 52:Byte, 141:Byte]
 		Local expected:Byte[] = [0:Byte, 0:Byte]
-		iniFile.Load()
-		Local actual:Byte[] = iniFile.GetByteValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Byte[] = iniFile_.GetByteValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Byte values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -456,8 +455,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Double"
 		Local expected:Double = 0.0:Double
-		iniFile.Load()
-		Local actual:Double = iniFile.GetDoubleValue(section, parameter, 0.79262287690402766:Double)
+		iniFile_.Load()
+		Local actual:Double = iniFile_.GetDoubleValue(section, parameter, 0.79262287690402766:Double)
 		assertEqualsD(expected, actual)
 	End Method
 
@@ -469,8 +468,8 @@ Type TIniGetTests Extends TTest
 									0.71044799711992468:Double, 0.81224240923952995:Double,  ..
 									0.20916371450992632:Double, 0.78518314343206441:Double]
 		Local expected:Double[] = [0.0:Double, 0.0:Double, 0.0:Double, 0.0:Double, 0.0:Double, 0.0:Double, 0.0:Double]
-		iniFile.Load()
-		Local actual:Double[] = iniFile.GetDoubleValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Double[] = iniFile_.GetDoubleValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Double values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -483,8 +482,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Float"
 		Local expected:Float = 0.0:Float
-		iniFile.Load()
-		Local actual:Float = iniFile.GetFloatValue(section, parameter, 0.749703646:Float)
+		iniFile_.Load()
+		Local actual:Float = iniFile_.GetFloatValue(section, parameter, 0.749703646:Float)
 		assertEqualsD(expected, actual)
 	End Method	
 
@@ -493,8 +492,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Section-17-Floats"
 		Local defaultValues:Float[] = [0.365954638:Float, 0.999058604:Float]
 		Local expected:Float[] = [0.0:Float, 0.0:Float, 0.0:Float, 0.0:Float, 0.0:Float, 0.0:Float]
-		iniFile.Load()
-		Local actual:Float[] = iniFile.GetFloatValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Float[] = iniFile_.GetFloatValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Float values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -507,8 +506,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Int"
 		Local expected:Int = 0:Int
-		iniFile.Load()
-		Local actual:Int = iniFile.GetIntValue(section, parameter, - 736213825:Int)
+		iniFile_.Load()
+		Local actual:Int = iniFile_.GetIntValue(section, parameter, - 736213825:Int)
 		assertEqualsI(expected, actual)
 	End Method	
 
@@ -517,8 +516,8 @@ Type TIniGetTests Extends TTest
 		Local parameter:String = "Section-17-Ints"
 		Local defaultValues:Int[] = [- 900559619:Int, - 201698820:Int, 406441207:Int]
 		Local expected:Int[] = [0:Int, 0:Int]
-		iniFile.Load()
-		Local actual:Int[] = iniFile.GetIntValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Int[] = iniFile_.GetIntValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Int values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -531,8 +530,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Long"
 		Local expected:Long = 0:Long
-		iniFile.Load()
-		Local actual:Long = iniFile.GetLongValue(section, parameter, - 400966326:Long)
+		iniFile_.Load()
+		Local actual:Long = iniFile_.GetLongValue(section, parameter, - 400966326:Long)
 		assertEqualsL(expected, actual)
 	End Method	
 
@@ -543,8 +542,8 @@ Type TIniGetTests Extends TTest
 									652774232:Long, 1035802483:Long, - 523964866:Long,  ..
 									- 459476265:Long, 689839146:Long, 282939222:Long]
 		Local expected:Long[] = [0:Long, 0:Long, 0:Long, 0:Long, 0:Long, 0:Long, 0:Long]
-		iniFile.Load()
-		Local actual:Long[] = iniFile.GetLongValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Long[] = iniFile_.GetLongValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Long values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -557,8 +556,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-Short"
 		Local expected:Short = 0:Short
-		iniFile.Load()
-		Local actual:Short = iniFile.GetShortValue(section, parameter, 30657:Short)
+		iniFile_.Load()
+		Local actual:Short = iniFile_.GetShortValue(section, parameter, 30657:Short)
 		assertEqualsS(expected, actual)
 	End Method	
 
@@ -568,8 +567,8 @@ Type TIniGetTests Extends TTest
 		Local defaultValues:Short[] = [24327:Short, 16161:Short, 3319:Short, 36423:Short,  ..
 									56156:Short, 42010:Short, 44939:Short, 8977:Short]
 		Local expected:Short[] = [0:Short, 0:Short, 0:Short]
-		iniFile.Load()
-		Local actual:Short[] = iniFile.GetShortValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:Short[] = iniFile_.GetShortValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " Short values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1
@@ -582,8 +581,8 @@ Type TIniGetTests Extends TTest
 		Local section:String = "Section-17"
 		Local parameter:String = "Section-17-String"
 		Local expected:String = ""
-		iniFile.Load()
-		Local actual:String = iniFile.GetStringValue(section, parameter, "No Default Please")
+		iniFile_.Load()
+		Local actual:String = iniFile_.GetStringValue(section, parameter, "No Default Please")
 		assertEquals(expected, actual)
 	End Method	
 
@@ -593,8 +592,8 @@ Type TIniGetTests Extends TTest
 		Local defaultValues:String[] = ["No Default Please 1", "No Default Please 2",  ..
 										"No Default Please 3"]
 		Local expected:String[] = ["", "", "", ""]
-		iniFile.Load()
-		Local actual:String[] = iniFile.GetStringValues(section, parameter, defaultValues)
+		iniFile_.Load()
+		Local actual:String[] = iniFile_.GetStringValues(section, parameter, defaultValues)
 		assertTrue(expected.length = actual.length, actual.length + " String values returned, should be " + expected.length)
 		If expected.length = actual.length
 			For Local i:Int = 0 To expected.length - 1

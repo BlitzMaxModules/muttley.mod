@@ -90,6 +90,8 @@ Include "Main.bmx"
 Include "TIniGetTests.bmx"
 Include "TIniSetTests.bmx"
 Include "TIniAddTests.bmx"
+Include "TIniCreateMissingTests.bmx"
+Include "TIniNoCreateMissingTests.bmx"
  
 '#EndRegion &H03
 

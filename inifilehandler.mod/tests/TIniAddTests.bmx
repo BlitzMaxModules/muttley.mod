@@ -4,12 +4,14 @@ Rem
 End Rem
 Type TIniAddTests Extends TTest
 
-	Field iniFile:TINIFile
+	Field iniFile_:TINIFile
+	Field section_:String = "Test Section"
+	Field sectionComment_:String = "This is a test section"
 	
 	Method SetUp() {before}
 		CopyFile(INI_READ_FILE, INI_WRITE_FILE)
-		iniFile = TINIFile.Create(INI_WRITE_FILE)
-		iniFile.Load()
+		iniFile_ = TINIFile.Create(INI_WRITE_FILE)
+		iniFile_.Load()
 	End Method
 	
 	Method TearDown() {after}
@@ -17,43 +19,51 @@ Type TIniAddTests Extends TTest
 	End Method
 	
 	Method SaveAndReload()
-		iniFile.Save()
-		iniFile = Null
-		iniFile = TINIFile.Create(INI_WRITE_FILE)
-		iniFile.Load()
+		iniFile_.Save()
+		iniFile_ = Null
+		iniFile_ = TINIFile.Create(INI_WRITE_FILE)
+		iniFile_.Load()
+	End Method
+	
+	Method AddTestSection()
+		iniFile_.AddSection(section_, sectionComment_)
 	End Method
 
 	Method TestIniReadFileExists() {test}
 		assertTrue(FileType(INI_READ_FILE) = 1, "Test file ~q" + INI_READ_FILE + "~q does not exist")
 	End Method
 	
-	Method TestIniFileExists() {test}
+	Method TestiniFile_Exists() {test}
 		assertTrue(FileType(INI_WRITE_FILE) = 1, "Test file ~q" + INI_WRITE_FILE + "~q does not exist")
 	End Method
 		
 	Method TestAddSection() {test}
-		iniFile.AddSection("Test Section", "This is a test section")
+		assertTrue(iniFile_.AddSection(section_, sectionComment_))
 		SaveAndReload()
-		assertTrue(iniFile.SectionExists("Test Section"), "Failed to create Section")
-		Local sectionComment:String = iniFile.GetSectionComment("Test Section")
-		assertTrue(sectionComment = "This is a test section", "Failed to add Section Comment")
+		assertTrue(iniFile_.SectionExists(section_), "Failed to create Section")
+		Local sectionComment:String = iniFile_.GetSectionComment(section_)
+		assertTrue(sectionComment = sectionComment_, "Failed to add Section Comment")
 	End Method	
 
 	Method TestAddDuplicateSection() {test}
-		assertFalse(iniFile.AddSection("Section-01", "This is a duplicate Section"))
+		assertFalse(iniFile_.AddSection("Section-01", "This is a duplicate Section"))
 		SaveAndReload()
-		Local sectionComment:String = iniFile.GetSectionComment("Section-01")
+		Local sectionComment:String = iniFile_.GetSectionComment("Section-01")
 		assertFalse(sectionComment = "This is a duplicate Section", "Duplicate Section has overwritten original")
 	End Method	
 		
 	Method TestAddParameter() {test}
-		iniFile.AddSection("Test Section", "This is a test section")
-		iniFile.AddParameter("Test Section", "Test Parameter")
+		assertTrue(iniFile_.AddSection(section_, sectionComment_))
+		assertTrue(iniFile_.AddParameter(section_, "Test Parameter", "This is a test parameter"))
 		SaveAndReload()
-		assertTrue(iniFile.ParameterExists("Test Section", "Test Parameter"), "Failed to create Parameter")
+		assertTrue(iniFile_.ParameterExists(section_, "Test Parameter"), "Failed to create Parameter")
+		assertTrue(iniFile_.GetParameterComment(section_, "Test Parameter") = "This is a test parameter")
 	End Method
 	
 	Method TestAddDuplicateParameter() {test}
-		assertFalse(iniFile.AddParameter("Section-01", "Section-01-Bool"))
-	End Method	
+		assertFalse(iniFile_.AddParameter("Section-01", "Section-01-Bool", "Duplicate parameter"))
+		SaveAndReload()
+		assertFalse(iniFile_.GetParameterComment("Section-01", "Section-01-Bool") = "Duplicate parameter")
+	End Method
+	
 End Type
