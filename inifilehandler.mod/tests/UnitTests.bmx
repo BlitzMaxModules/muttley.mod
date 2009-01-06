@@ -3,7 +3,7 @@ This file was created by the BLIde solution explorer and should not be modified 
 EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &HFF Program Info
-'Program: INI File Handler Unit Tests
+'Program: muttley.inifilehandler Unit Tests
 'Version: 0
 'Subversion: 0
 'Revision: 1
@@ -35,7 +35,7 @@ Import muttley.inifilehandler
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H04 MyNamespace
-'GUI
+'CONSOLE
 'guid:dadda672_5607_47f9_8ba5_a143e7be02ef
 Private
 TYPE z_dadda672_5607_47f9_8ba5_a143e7be02ef_3_0 abstract  'Resource folder
@@ -43,7 +43,7 @@ End Type
 
 
 TYPE z_blide_bgdadda672_5607_47f9_8ba5_a143e7be02ef Abstract
-    Const Name:string = "INI File Handler Unit Tests" 'This string contains the name of the program
+    Const Name:string = "muttley.inifilehandler Unit Tests" 'This string contains the name of the program
     Const MajorVersion:Int = 0  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
     Const Revision:Int =  1  'This Const contains the revision number of the current program version
@@ -87,8 +87,9 @@ Public
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H03 Includes
 Include "Main.bmx"
-Include "TIniReadTests.bmx"
-Include "TIniWriteTests.bmx"
+Include "TIniGetTests.bmx"
+Include "TIniSetTests.bmx"
+Include "TIniAddTests.bmx"
  
 '#EndRegion &H03
 
