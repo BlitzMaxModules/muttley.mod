@@ -14,95 +14,103 @@ Rem
 EndRem
 
 Type TINIParameter
-	Field Name:String
-	Field Lvalues:TList = CreateList()
-	Field comment:String
+	Field name_:String
+	Field LValues_:TList = New TList
+	Field comment_:String
 	
-	Function CheckValue:String(_value:String) 
-		If _value.find( "," ) = 0 And _value.find( " " ) = 0
-			Return _value
+	Method CheckValue:String(value:String)
+		If value.find(",") = 0 And value.find(" ") = 0
+			Return value
 		Else
-			Return "~q" + _value + "~q"
+			Return "~q" + value + "~q"
 		EndIf
-	End Function
+	EndMethod
 		
-	Function Create:TINIParameter( _name:String )
-		Local _new_parameter:TINIParameter = New TINIParameter
-		If _new_parameter
-			_new_parameter.SetName( _name )
-			Return _new_parameter
-		EndIf
+	Function Create:TINIParameter(name:String, comment:String = Null)
+		Local this:TINIParameter = New TINIParameter
+		this.SetName(name)
+		this.SetComment(comment)
+		Return this
 	EndFunction
 
 	Method GetComment:String()
-		Return comment
+		Return comment_
 	EndMethod
 	
 	Method GetName:String()
-		Return Name
-	EndMethod
-
-	Method GetStringValue:String()
-		Local _value:String
-		For Local _values:TINIValue = EachIn Lvalues
-			Return _values.GetStringValue()
-		Next
+		Return name_
 	EndMethod
 	
-	Method GetStringValues:String[]()
-		Local _values:String[CountList(Lvalues)]
+	Method GetValue:TINIValue()
+		If LValues_.Count() = 0 Then Return Null
+		Return TINIValue(LValues_.First())
+	EndMethod
+	
+	Method GetValues:TINIValue[] ()
+		If LValues_.Count() = 0 Then Return Null
+		Local values:TINIValue[LValues_.Count()]
 		Local i:Int = 0
-		For Local _value:TINIValue = EachIn Lvalues
-			_values[i] = _value.GetStringValue()
-			i :+ 1
+		For Local value:TINIValue = EachIn LValues_
+			values[i] = value
+			i:+1
 		Next
-		Return _values
+		Return values
+	End Method
+	
+	Method ValuesToString:String[] ()
+		Local values:String[CountList(LValues_)]
+		Local i:Int = 0
+		For Local value:TINIValue = EachIn LValues_
+			values[i] = value.GetValue()
+			i:+1
+		Next
+		Return values
 	EndMethod
 	
-	Method Save( out:TStream )
+	Method Save(out:TStream)
 		If out
-			Local _all_values:String = ""
-			Local _values_array:String[] = GetStringValues()
+			Local output:String = ""
+			Local values:String[] = ValuesToString()
 			Local i:Int = 0
-			For Local _value:String = EachIn _values_array
-				_all_values :+ CheckValue ( _values_array[i] )
-				If i < _values_array.length - 1
-					_all_values :+ ", "
+			For Local value:String = EachIn values
+				output:+CheckValue (value)
+				If i < values.length - 1
+					output:+", "
 				EndIf
-				i :+ 1
+				i:+1
 			Next
-			If comment <> ""
-				WriteLine( out, Name + "=" + _all_values + "~t;" + comment )
+			If comment_ <> ""
+				WriteLine(out, name_ + "=" + output + "~t;" + comment_)
 			Else
-				WriteLine( out, Name + "=" + _all_values )
+				WriteLine(out, name_ + "=" + output)
 			EndIf
 		EndIf
 	EndMethod
 
-	Method SetComment( _comment:String )
-		comment = _comment
+	Method SetComment(comment:String)
+		comment_ = comment
 	EndMethod
 		
-	Method SetName( _name:String )
-		Name = _name
+	Method SetName(name:String)
+		name_ = name
 	EndMethod
 
-	Method SetStringValue( _value:String )
-		ClearList(Lvalues)
-		Local _new_value:TINIValue = New TINIValue
-		_new_value.SetStringValue( _value )
-		ListAddLast( Lvalues, _new_value )
-		Return		
+	Method SetStringValue:Int(value:String)
+		ClearList(LValues_)
+		Local newValue:TINIValue = New TINIValue
+		newValue.SetValue(value)
+		ListAddLast(LValues_, newValue)
+		Return True
 	EndMethod
 		
-	Method SetStringValues( _values:String[] )
-		ClearList(Lvalues)
-		For Local _value:String = EachIn _values
-			Local _new_value:TINIValue = New TINIValue
-			_new_value.SetStringValue( _value )
-			ListAddLast( Lvalues, _new_value )
+	Method SetStringValues:Int(values:String[])
+		ClearList(LValues_)
+		For Local value:String = EachIn values
+			Local newValue:TINIValue = New TINIValue
+			newValue.SetValue(value)
+			ListAddLast(LValues_, newValue)
 		Next 
-		Return		
+		Return True
 	EndMethod
 
 EndType

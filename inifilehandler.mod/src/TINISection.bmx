@@ -14,154 +14,165 @@ Rem
 EndRem
 
 Type TINISection
-	Field Name:String
-	Field comment:String
-	Field Lparameters:TList = CreateList()
+	Field name_:String
+	Field comment_:String
+	Field LParameters_:TList = New TList
 
-	Method AddParameter:Int( _name:String )
-		If ParameterExists( _name ) Then Return False
-		Local _new_parameter:TINIParameter = TINIParameter.Create( _name )
-		If _new_parameter
-			ListAddLast( Lparameters, _new_parameter )
+	Function Create:TINISection(name:String, comment:String = Null)
+		Local this:TINISection = New TINISection
+		this.SetName(name)
+		this.SetComment(comment)
+		Return this		
+	End Function
+	
+	Method AddParameter:Int(name:String, comment:String = Null)
+		If ParameterExists(name) Then Return False
+		Local newParameter:TINIParameter = TINIParameter.Create(name, comment)
+		If newParameter
+			ListAddLast(LParameters_, newParameter)
 			Return True
 		Else
 			Return False
 		EndIf
 	EndMethod
 
-	Method DeleteParameter:Int( _name:String )
-		If Not ParameterExists( _name ) Then Return False
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				ListRemove( Lparameters, _parameter )
-				_parameter = Null
+	Method DeleteParameter:Int(name:String)
+		If Not ParameterExists(name) Then Return False
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				ListRemove(LParameters_, parameter)
+				parameter = Null
 				Return True
 			EndIf
 		Next
 		Return False
-	EndMethod	
+	EndMethod
 		
 	Method GetComment:String()
-		Return comment
+		Return comment_
 	EndMethod
 
 	Method GetName:String()
-		Return Name
+		Return name_
 	EndMethod
 
-	Method GetParameterComment:String( _name:String )
-		If Not ParameterExists( _name ) Then Return Null
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				Return _parameter.GetComment()
+	Method GetParameterComment:String(name:String)
+		If Not ParameterExists(name) Then Return Null
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				Return parameter.GetComment()
 			EndIf
-		Next		
+		Next
 		Return Null
 	EndMethod
 		
-	Method GetParameters:String[]()
-		Local _number_of_parameters:Int = Lparameters.count()
-		Local _all_parameters:String[ _number_of_parameters ]
+	Method GetParameterNames:String[] ()
+		Local nParameters:Int = LParameters_.count()
+		Local parameters:String[nParameters]
 		Local i:Int = 0
-			For Local _Lparameters:TINIParameter = EachIn Lparameters
-				_all_parameters[ i ] = _Lparameters.Name
-				i :+ 1
-			Next
-		Return _all_parameters		
-	EndMethod
-
-	Method GetStringValue:String( _name:String )
-		If Not ParameterExists( _name ) Then Return Null
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				Return _parameter.GetStringValue()
-			EndIf
-		Next		
-		Return Null
+		For Local parameter:TINIParameter = EachIn LParameters_
+			parameters[i] = parameter.GetName()
+			i:+1
+		Next
+		Return parameters
 	EndMethod
 	
-	Method GetStringValues:String[]( _name:String )
-		If Not ParameterExists( _name ) Then Return Null
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				Return _parameter.GetStringValues()
+	Method GetParameterValue:TINIValue(name:String)
+		Local value:TINIValue
+		If Not ParameterExists(name) Then Return Null
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				value = parameter.GetValue()
 			EndIf
-		Next		
-		Return Null
+		Next
+		Return value
 	EndMethod
 	
-	Method ParameterExists:Int( _parameter_name:String )
-		For Local _parameters:TINIParameter = EachIn Lparameters
-			If _parameters.GetName() = _parameter_name Then Return True
+	Method GetParameterValues:TINIValue[] (name:String)
+		If Not ParameterExists(name) Then Return Null
+		Local values:TINIValue[]
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				values = parameter.GetValues()
+			EndIf
+		Next
+		Return values
+	EndMethod
+	
+	Method ParameterExists:Int(name:String)
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				Return True
+			EndIf
 		Next
 		Return False
 	EndMethod
 	
-	Method Save( out:TStream )
+	Method Save(out:TStream)
 		If out
-			If comment <> ""
-				WriteLine( out, "[" + Name + "]~t;" + comment )
+			If comment_ <> ""
+				WriteLine(out, "[" + name_ + "]~t;" + comment_)
 			Else
-				WriteLine( out, "[" + Name + "]" + comment )
+				WriteLine(out, "[" + name_ + "]" + comment_)
 			EndIf
-			For Local _parameter:TINIParameter = EachIn LParameters
-				_parameter.Save( out )
+			For Local parameter:TINIParameter = EachIn LParameters_
+				parameter.Save(out)
 			Next
 		EndIf
-	EndMethod	
+	EndMethod
 
-	Method SetComment( _comment:String )
-		comment = _comment
+	Method SetComment(comment:String)
+		comment_ = comment
 	EndMethod
 			
-	Method SetName( _name:String )
-		Name = _name
+	Method SetName(name:String)
+		name_ = name
 	EndMethod
 
-	Method SetParameterComment( _name:String, _comment:String )
-		If Not ParameterExists( _name ) Then Return
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				_parameter.SetComment( _comment )
-				Return
-			EndIf
-		Next		
-		Return
-	EndMethod
-
-	Method SetStringValue:Int( _name:String, _value:String )
-		If Not ParameterExists( _name ) Then Return False
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				Return _parameter.SetStringValue( _value )
+	Method SetParameterComment:Int(name:String, comment:String)
+		If Not ParameterExists(name) Then Return False
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				parameter.SetComment(comment)
+				Return True
 			EndIf
 		Next
 		Return False
-	EndMethod	
+	EndMethod
+
+	Method SetParameterStringValue:Int(name:String, value:String)
+		If Not ParameterExists(name) Then Return False
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				Return parameter.SetStringValue(value)
+			EndIf
+		Next
+		Return False
+	EndMethod
 	
-	Method SetStringValues:Int( _name:String, _values:String[] )
-		If Not ParameterExists( _name ) Then Return False
-		For Local _parameter:TINIParameter = EachIn Lparameters
-			If _parameter.GetName() = _name
-				Return _parameter.SetStringValues( _values )
+	Method SetParameterStringValues:Int(name:String, values:String[])
+		If Not ParameterExists(name) Then Return False
+		For Local parameter:TINIParameter = EachIn LParameters_
+			If parameter.GetName() = name
+				Return parameter.SetStringValues(values)
 			EndIf
 		Next
 		Return False
-	EndMethod	
+	EndMethod
 
 	Method SortParameters()
-		Local _new_Lparameters:TList = New TList
-		Local _all_parameters:String[] = GetParameters()
-		_all_parameters.Sort
-		For Local _parameter_name:String = EachIn _all_parameters
-			For Local _parameter_link:TINIParameter = EachIn Lparameters
-				If _parameter_link.GetName() = _parameter_name
-					ListAddLast( _new_Lparameters, _parameter_link )
+		Local LSortedParameters:TList = New TList
+		Local parameters:String[] = GetParameterNames()
+		parameters.Sort
+		For Local parameterName:String = EachIn parameters
+			For Local parameter:TINIParameter = EachIn LParameters_
+				If parameter.GetName() = parameterName
+					ListAddLast(LSortedParameters, parameter)
 					Exit
 				EndIf
 			Next
 		Next
-		Lparameters = _new_Lparameters
+		LParameters_ = LSortedParameters
 	EndMethod
 		
 EndType

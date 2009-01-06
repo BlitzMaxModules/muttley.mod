@@ -3,10 +3,10 @@ This file was created by the BLIde solution explorer and should not be modified 
 EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &HFF Program Info
-'Program: Untitled
-'Version: 1
+'Program: muttley.inifilehandler
+'Version: 2
 'Subversion: 0
-'Revision: 7
+'Revision: 0
 '#EndRegion &HFF
 
 
@@ -51,10 +51,10 @@ End Type
 
 
 TYPE z_blide_bg71ed5841_fd57_45f6_a9e6_ae65840d5d47 Abstract
-    Const Name:string = "Untitled" 'This string contains the name of the program
-    Const MajorVersion:Int = 1  'This Const contains the major version number of the program
+    Const Name:string = "muttley.inifilehandler" 'This string contains the name of the program
+    Const MajorVersion:Int = 2  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  7  'This Const contains the revision number of the current program version
+    Const Revision:Int =  0  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32

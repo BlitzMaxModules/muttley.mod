@@ -14,14 +14,13 @@ Rem
 EndRem
 
 Type TINIValue
-	Field value:String
-
-	Method GetStringValue:String()
-		Return value
-	EndMethod
-		
-	Method SetStringValue( _value:String )
-		value = _value
-	EndMethod
+	Field value_:String
 	
+	Method GetValue:String()
+		Return value_
+	End Method
+	
+	Method SetValue(value:String)
+		value_ = value
+	End Method
 EndType
