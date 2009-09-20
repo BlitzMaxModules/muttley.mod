@@ -1,0 +1,385 @@
+<html><head><title>muttley\logger reference</title>
+<link rel=stylesheet Type=text/css href='../../../../doc/bmxstyle.css'>
+</head><body>
+<table width=100% cellspacing=0><tr align=center><td class=small>&nbsp;</td>
+<td class=small width=1%><b>muttley.logger:</b></td>
+<td class=small width=1%><a href=#functions class=small>Functions</a></td>
+<td class=small width=1%><a href=#types class=small>Types</a></td>
+<td class=small width=1%><a href='../../../../mod/muttley.mod/logger.mod/logger.bmx' class=small>Source</a></td>
+<td class=small>&nbsp;</td></tr></table>
+<h1>muttley\logger</h1>
+<h2><a name=functions></a>Functions Summary</h2><table class=doc width=100%>
+<tr><td class=docleft width=1%><a href=#LogAlert>LogAlert</a></td><td class=docright>
+Logs an Alert level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogCritical>LogCritical</a></td><td class=docright>
+Logs a Critical level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogDebug>LogDebug</a></td><td class=docright>
+Logs a Debug level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogEmergency>LogEmergency</a></td><td class=docright>
+Logs an Emergency level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogError>LogError</a></td><td class=docright>
+Logs an Error level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogInfo>LogInfo</a></td><td class=docright>
+Logs an Info level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogNotice>LogNotice</a></td><td class=docright>
+Logs a Notice level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#LogWarning>LogWarning</a></td><td class=docright>
+Logs a Warning level message.
+</td></tr>
+</table>
+<h2><a name=types></a>Types Summary</h2><table class=doc width=100%>
+<tr><td class=docleft width=1%><a href=#TConsoleLogWriter>TConsoleLogWriter</a></td><td class=docright>
+Undocumented type.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#TFileLogWriter>TFileLogWriter</a></td><td class=docright>
+Undocumented type.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#TLogger>TLogger</a></td><td class=docright>
+The primary interface for logging messages.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#TLoggerMessage>TLoggerMessage</a></td><td class=docright>
+This class represents and actual log message that is sent to all log writers.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#TLogWriter>TLogWriter</a></td><td class=docright>
+The base class of all log writers.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#TSyslogLogWriter>TSyslogLogWriter</a></td><td class=docright>
+Undocumented type.
+</td></tr>
+</table>
+<h2
+ id=functionsdet>Functions
+</h2>
+<table class=doc width=100% cellspacing=3 id=LogAlert>
+<tr><td class=doctop colspan=2>Function LogAlert(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Alert level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogCritical>
+<tr><td class=doctop colspan=2>Function LogCritical(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Critical level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogDebug>
+<tr><td class=doctop colspan=2>Function LogDebug(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Debug level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogEmergency>
+<tr><td class=doctop colspan=2>Function LogEmergency(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Emergency level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogError>
+<tr><td class=doctop colspan=2>Function LogError(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Error level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogInfo>
+<tr><td class=doctop colspan=2>Function LogInfo(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Info level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogNotice>
+<tr><td class=doctop colspan=2>Function LogNotice(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Notice level message.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LogWarning>
+<tr><td class=doctop colspan=2>Function LogWarning(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Warning level message.</td></tr>
+</table>
+<br>
+<h2
+ id=typesdet>Types
+</h2>
+<table class=doc width=100% cellspacing=3 id=TConsoleLogWriter>
+<tr><td class=doctop colspan=2>Type TConsoleLogWriter Extends TLogWriter</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Undocumented type.</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TConsoleLogWriter_methods></a>Methods Summary</th></tr>
+<tr><td class=docleft width=1%><a href=#showSeverity>showSeverity</a></td><td class=docright>
+Show the severity level of the message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#showTimestamp>showTimestamp</a></td><td class=docright>
+Show the timestamp of the message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#write>write</a></td><td class=docright>
+Writes the received messages to STDOUT.
+</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=showSeverity>
+<tr><td class=doctop colspan=2>Method showSeverity(value:Int)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Show the severity level of the message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=showTimestamp>
+<tr><td class=doctop colspan=2>Method showTimestamp(value:Int)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Show the timestamp of the message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=write>
+<tr><td class=doctop colspan=2>Method write(message:TLoggerMessage)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Writes the received messages to STDOUT.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=TFileLogWriter>
+<tr><td class=doctop colspan=2>Type TFileLogWriter Extends TLogWriter</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Undocumented type.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=TLogger>
+<tr><td class=doctop colspan=2>Type TLogger</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The primary interface for logging messages.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>All logging is handled by sending messages to this class. It then creates a new log message
+and passes it to any log writers that are registered.</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLogger_methods></a>Methods Summary</th></tr>
+<tr><td class=docleft width=1%><a href=#addWriter>addWriter</a></td><td class=docright>
+Registers a new log writer so it can receive log messages.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#close>close</a></td><td class=docright>
+Closes and de-registers all currently registered log writers.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#getHost>getHost</a></td><td class=docright>
+return the current host identifier used in log messages.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logAlert>logAlert</a></td><td class=docright>
+Logs an Alert level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logCritical>logCritical</a></td><td class=docright>
+Logs a Critical level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logDebug>logDebug</a></td><td class=docright>
+Logs a Debug level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logEmergency>logEmergency</a></td><td class=docright>
+Logs an Emergency level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logError>logError</a></td><td class=docright>
+Logs an Error level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logInfo>logInfo</a></td><td class=docright>
+Logs an Info level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logMessage>logMessage</a></td><td class=docright>
+Log a message at the specified severity level.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logNotice>logNotice</a></td><td class=docright>
+Logs a Notice level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#logWarning>logWarning</a></td><td class=docright>
+Logs a Warning level message.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#setHost>setHost</a></td><td class=docright>
+set the host identifier used in log messages.
+</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLogger_functions></a>Functions Summary</th></tr>
+<tr><td class=docleft width=1%><a href=#getInstance>getInstance</a></td><td class=docright>
+Returns an instance of the logger.
+</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=addWriter>
+<tr><td class=doctop colspan=2>Method addWriter(writer:TLogWriter)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Registers a new log writer so it can receive log messages.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=close>
+<tr><td class=doctop colspan=2>Method close()</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Closes and de-registers all currently registered log writers.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>This method should be called right at the end of your program.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=getHost>
+<tr><td class=doctop colspan=2>Method getHost:String()</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>return the current host identifier used in log messages.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logAlert>
+<tr><td class=doctop colspan=2>Method logAlert(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Alert level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logCritical>
+<tr><td class=doctop colspan=2>Method logCritical(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Critical level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logDebug>
+<tr><td class=doctop colspan=2>Method logDebug(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Debug level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logEmergency>
+<tr><td class=doctop colspan=2>Method logEmergency(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Emergency level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logError>
+<tr><td class=doctop colspan=2>Method logError(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Error level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logInfo>
+<tr><td class=doctop colspan=2>Method logInfo(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Info level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logMessage>
+<tr><td class=doctop colspan=2>Method logMessage(severity:Int, message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Log a message at the specified severity level.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>Severity levels are based on those defined in RFC 3164 for the BSD Syslog protocol.
+Valid severity levels are in the range 0 to 7 and are defined as being for the following message
+types:
+<table>
+<tr>
+<th> Severity </th>
+<th> Description </th>
+</tr>
+<tr>
+<td> 0 </td>
+<td> Emergency: system is unusable </td>
+</tr>
+<tr>
+<td> 1 </td>
+<td> Alert: action must be taken immediately </td>
+</tr>
+<tr>
+<td> 2 </td>
+<td> Critical: critical conditions </td>
+</tr>
+<tr>
+<td> 3 </td>
+<td> Error: error conditions </td>
+</tr>
+<tr>
+<td> 4 </td>
+<td> Warning: warning conditions </td>
+</tr>
+<tr>
+<td> 5 </td>
+<td> Notice: normal but significant condition </td>
+</tr>
+<tr>
+<td> 6 </td>
+<td> Info: informational messages </td>
+</tr>
+<tr>
+<td> 7 </td>
+<td> Debug: debug-level messages </td>
+</tr>
+</table></td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logNotice>
+<tr><td class=doctop colspan=2>Method logNotice(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Notice level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=logWarning>
+<tr><td class=doctop colspan=2>Method logWarning(message:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Warning level message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=setHost>
+<tr><td class=doctop colspan=2>Method setHost(value:String)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>set the host identifier used in log messages.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>When the logger is instantiated it attempts to get the hostname
+of the local machine, however you can override the identifier it uses
+by setting it manually.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=getInstance>
+<tr><td class=doctop colspan=2>Function getInstance:TLogger()</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Returns an instance of the logger.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>The logger class is singleton type.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=TLoggerMessage>
+<tr><td class=doctop colspan=2>Type TLoggerMessage</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>This class represents and actual log message that is sent to all log writers.</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLoggerMessage_fields></a>Fields Summary</th></tr><tr><td colspan=2>
+<a href=#host>host</a>
+, 
+<a href=#message>message</a>
+, 
+<a href=#severity>severity</a>
+, 
+<a href=#timestamp>timestamp</a>
+</table>
+<table class=doc width=100% cellspacing=3 id=host>
+<tr><td class=doctop colspan=2>Field host:String</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The identifier of the host that created this message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=message>
+<tr><td class=doctop colspan=2>Field message:String</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The message itself.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=severity>
+<tr><td class=doctop colspan=2>Field severity:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The severity of the message.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=timestamp>
+<tr><td class=doctop colspan=2>Field timestamp:String</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The timestamp of when the message was created.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>The timestamp is in RFC 3164 compatable format, for example:
+<pre>
+Sep 20 20:09:23
+Jan  1 07:23:57
+</pre></td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=TLogWriter>
+<tr><td class=doctop colspan=2>Type TLogWriter</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The base class of all log writers.</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLogWriter_fields></a>Fields Summary</th></tr><tr><td colspan=2>
+<a href=#level>level</a>
+</td></tr>
+</table>
+<table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLogWriter_methods></a>Methods Summary</th></tr>
+<tr><td class=docleft width=1%><a href=#close>close</a></td><td class=docright>
+Close the log writer.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#getLevel>getLevel</a></td><td class=docright>
+The current log level of this writer.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#setLevel>setLevel</a></td><td class=docright>
+Set the log level of this writer.
+</td></tr>
+<tr><td class=docleft width=1%><a href=#write>write</a></td><td class=docright>
+Close the log writer.
+</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=level>
+<tr><td class=doctop colspan=2>Field level:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The current log level.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>Writers should only display/output messages that have a severity
+that is equal or lower than the level set for the writer.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=close>
+<tr><td class=doctop colspan=2>Method close() Abstract</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Close the log writer.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>This abstract Method needs to be implemented by all
+log writers and should be used for tidying up before shutdown,
+for example flushing and closing streams/files, etc.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=getLevel>
+<tr><td class=doctop colspan=2>Method getLevel:Int()</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>The current log level of this writer.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=setLevel>
+<tr><td class=doctop colspan=2>Method setLevel(severity:Int)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Set the log level of this writer.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>Writers should only display/output messages that have a severity
+that is equal or lower than the level set for the writer.</td></tr>
+</table>
+<table class=doc width=100% cellspacing=3 id=write>
+<tr><td class=doctop colspan=2>Method write(message:TLoggerMessage) Abstract</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Close the log writer.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>This abstract Method needs to be implemented by all
+log writers and should handle the output of the specified
+message in a way appropriate for the type of output being
+written to.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=TSyslogLogWriter>
+<tr><td class=doctop colspan=2>Type TSyslogLogWriter Extends TLogWriter</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Undocumented type.</td></tr>
+</table>
+<br>
+</body></html>
