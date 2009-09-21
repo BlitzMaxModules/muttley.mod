@@ -53,12 +53,13 @@ Type TConsoleLogWriter Extends TLogWriter
 		EndIf
 		
 		If displaySeverity
-			line:+"" + TLogger.getInstance().severityToString(message.severity) + ": "
+			line:+"" + severityToString(message.severity) + ": "
 		End If
 		
 		line:+message.message
 		
 		Print line
+				
 	End Method
 
 End Type

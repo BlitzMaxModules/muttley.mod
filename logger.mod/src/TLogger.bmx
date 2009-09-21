@@ -13,26 +13,18 @@ Type TLogger
 	Const LOG_NOTICE:Int = 5
 	Const LOG_INFO:Int = 6
 	Const LOG_DEBUG:Int = 7
-	
-	Global instance:TLogger
-	
-	Global severityDescriptions:String[] = ["Emergency", "Alert", "Critical", "Error",  ..
-		"Warning", "Notice", "Info", "Debug"]	
 
-	Global messageCounts:Int[] = [0, 0, 0, 0, 0, 0, 0, 0]
+	Global instance:TLogger
 	
 	Field host:String
 	Field logWriters:TList
-	Field messageToSend:TLoggerMessage
-	
+	Field messageCounts:Int[] = [0, 0, 0, 0, 0, 0, 0, 0]
 	Field runningUnitTests:Int = False
 	
-		
 	
 	Method New()
 		If instance Throw "Cannot create multiple instances of Singleton Type"
 		logWriters = New TList
-		messageToSend = New TLoggerMessage
 		host = HostName(0)
 	EndMethod
 
@@ -47,13 +39,16 @@ Type TLogger
 	
 	
 	
+	
+	' Creates a timestamp in a format suitable For Syslog as defined in
+	' RFC 3164
 	Method createTimestamp:String()
 		Local time:TTime = TTime.CreateLocal()
 		Local date:TDate = TDate.fromString(time.toString())
 
 		' TODO:
 		' -----
-		' This is a work-around for http://code.google.com/p/maxmods/issues/detail?id=10
+		' Work-around for http://code.google.com/p/maxmods/issues/detail?id=10
 		' Once resolved, the format used in the timestamp
 		' assignation can changed back to "$b %e" and all
 		' reference to dayOfMonth removed.
@@ -86,8 +81,8 @@ Type TLogger
 		Else
 			Return instance
 		EndIf
-	EndFunction
-	
+	EndFunction	
+
 	
 	
 	Rem
@@ -96,67 +91,35 @@ Type TLogger
 	Valid severity levels are in the range 0 to 7 and are defined as being for the following message
 	types:
 	<table>
-		<tr>
-			<th> Severity </th>
-			<th> Description </th>
-		</tr>
-		<tr>
-			<td> 0 </td>
-			<td> Emergency: system is unusable </td>
-		</tr>
-		<tr>
-			<td> 1 </td>
-			<td> Alert: action must be taken immediately </td>
-		</tr>
-		<tr>
-			<td> 2 </td>
-			<td> Critical: critical conditions </td>
-		</tr>
-		<tr>
-			<td> 3 </td>
-			<td> Error: error conditions </td>
-		</tr>
-		<tr>
-			<td> 4 </td>
-			<td> Warning: warning conditions </td>
-		</tr>
-		<tr>
-			<td> 5 </td>
-			<td> Notice: normal but significant condition </td>
-		</tr>
-		<tr>
-			<td> 6 </td>
-			<td> Info: informational messages </td>
-		</tr>
-		<tr>
-			<td> 7 </td>
-			<td> Debug: debug-level messages </td>
-		</tr>
+		<tr> <th> Severity </th> <th> Description </th> </tr>
+		<tr> <td> 0 </td> <td> Emergency: system is unusable </td> </tr>
+		<tr> <td> 1 </td> <td> Alert: action must be taken immediately </td> </tr>
+		<tr> <td> 2 </td> <td> Critical: critical conditions </td> </tr>
+		<tr> <td> 3 </td> <td> Error: error conditions </td> </tr>
+		<tr> <td> 4 </td> <td> Warning: warning conditions </td> </tr>
+		<tr> <td> 5 </td> <td> Notice: normal but significant condition </td> </tr>
+		<tr> <td> 6 </td> <td> Info: informational messages </td> </tr>
+		<tr> <td> 7 </td> <td> Debug: debug-level messages </td> </tr>
 	</table>
 	EndRem
 	Method logMessage(severity:Int, message:String)
 		If (severity >= 0) And (severity <= 7)
-		
-			' TODO:
-			' -----
-			' Currently we use the same, pre-allocated message object
-			' for each message we send. We may eventually want to
-			' buffer and queue/batch messages.
-			'
-			messageToSend.timestamp = createTimestamp()
-			messageToSend.severity = severity
-			messageToSend.message = message
-			messageToSend.host = host
+			Local newMessage:TLoggerMessage = New TLoggerMessage
+	
+			newMessage.timestamp = createTimestamp()
+			newMessage.severity = severity
+			newMessage.message = message
+			newMessage.host = host
 			
 			' Just to ensure when running unit tests that we always 
 			' get the same timestamps and host name.
 			If runningUnitTests
-				messageToSend.timestamp = "Jan  1 00:00:00"
-				messageToSend.host = "unitTest"
+				newMessage.timestamp = "Jan  1 00:00:00"
+				newMessage.host = "unitTest"
 			End If
 			
 			For Local writer:TLogWriter = EachIn logWriters
-				writer.write(messageToSend)
+				writer.write(newMessage)
 			Next
 			
 			messageCounts[severity]:+1
@@ -238,6 +201,17 @@ Type TLogger
 	
 	
 	Rem
+	bbdoc: Reset the statistics count
+	about: The logger keeps a count of how many of each severity of message
+	it has handled, you can use this method to reset that cound to zero
+	EndRem
+	Method resetStatistics()
+		messageCounts = [0, 0, 0, 0, 0, 0, 0, 0]
+	End Method
+	
+	
+	
+	Rem
 	bbdoc: set the host identifier used in log messages
 	about: When the logger is instantiated it attempts to get the hostname
 	of the local machine, however you can override the identifier it uses
@@ -249,16 +223,6 @@ Type TLogger
 	
 	
 	
-	Method severityToString:String(severity:Int)
-		If severity + 1 <= severityDescriptions.length
-			Return severityDescriptions[severity]
-		Else
-			Return Null
-		End If
-	End Method
-	
-	
-		
 	Rem
 	bbdoc: Closes and de-registers all currently registered log writers
 	about: This method should be called right at the end of your program
@@ -266,7 +230,7 @@ Type TLogger
 	Method close()
 		Local statistics:String
 		For Local i:Int = 0 To 7
-			statistics:+severityDescriptions[i] + ":" + messageCounts[i]
+			statistics:+TLogWriter.severityDescriptions[i] + ":" + messageCounts[i]
 			If i < 7
 				statistics:+"  "
 			End If
@@ -276,6 +240,7 @@ Type TLogger
 			writer.close()
 			logWriters.Remove(writer)
 		Next
+		resetStatistics()
 	End Method
 
 EndType

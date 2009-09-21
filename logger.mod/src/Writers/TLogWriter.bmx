@@ -1,7 +1,11 @@
+
 Rem
 bbdoc: The base class of all log writers
 End Rem
 Type TLogWriter
+
+	Global severityDescriptions:String[] = ["Emergency", "Alert", "Critical", "Error",  ..
+		"Warning", "Notice", "Info", "Debug"]
 
 	Rem
 	bbdoc: The current log level
@@ -44,6 +48,19 @@ Type TLogWriter
 	
 	
 	
+	Rem
+	bbdoc: Returns a string representation of the specified severity level	
+	EndRem
+	Method severityToString:String(severity:Int)
+		If severity + 1 <= severityDescriptions.length
+			Return severityDescriptions[severity]
+		Else
+			Return Null
+		End If
+	End Method
+	
+	
+		
 	Rem
 	bbdoc: Close the log writer
 	about: This abstract Method needs to be implemented by all

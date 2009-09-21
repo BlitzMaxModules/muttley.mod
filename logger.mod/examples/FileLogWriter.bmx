@@ -2,13 +2,11 @@ SuperStrict
 
 Framework muttley.logger
 
-Local consoleWriter:TConsoleLogWriter = New TConsoleLogWriter
-consoleWriter.setLevel(TLogger.LOG_DEBUG)
-consoleWriter.showTimestamp(True)
-consoleWriter.showSeverity(true)
+Local fileWriter:TFileLogWriter = New TFileLogWriter
+fileWriter.setLevel(TLogger.LOG_DEBUG)
 
 Local logger:TLogger = Tlogger.getInstance()
-logger.addWriter(consoleWriter)
+logger.addWriter(fileWriter)
 
 logger.logInfo("[ConsoleLogWriter] An example Info log message")
 logger.logError("[ConsoleLogWriter] An example Error log message")

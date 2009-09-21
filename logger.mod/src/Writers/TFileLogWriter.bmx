@@ -4,42 +4,21 @@ Rem
 End Rem
 Type TFileLogWriter Extends TLogWriter
 
-	Const DEFAULT_DESCRIPTION:String = "Log File"
 	Const DEFAULT_FILENAME:String = "logfile.log"
-	
-	?Debug
-		Const DEFAULT_LEVEL:Int = TLogger.LOG_INFO
-	?Not Debug
-		Const DEFAULT_LEVEL:Int = TLogger.LOG_ERROR
-	?
-	
-	Const DEFAULT_MAX_FILESIZE:Int = 104857600
+?Debug
+	Const DEFAULT_LEVEL:Int = TLogger.LOG_INFO
+?Not Debug
+	Const DEFAULT_LEVEL:Int = TLogger.LOG_ERROR
+?
 	Const DEFAULT_OVERWRITE:Int = True
-
-	Global severityDescriptions:String[] = [" emerg", " alert", "  crit", " error",  ..
-		"  warn", "notice", "  info", " debug"]
+		
 			
-	Field description:String
+	Field displaySeverity:Int
 	Field filename:String
-	Field maxFileSize:Int
 	Field overwrite:Int
 	Field stream:TStream
-	Field displaySeverity:Int = true
 	
-	Function Create:TFileLogWriter(filename:String = DEFAULT_FILENAME, description:String = DEFAULT_DESCRIPTION,  ..
-		level:Int = DEFAULT_LEVEL, overwrite:Int = DEFAULT_OVERWRITE, maxFileSize:Int = DEFAULT_MAX_FILESIZE)
-		
-		Local newLogfile:TFileLogWriter = New TFileLogWriter
-
-		newLogfile.description = description
-		newLogfile.filename = filename
-		newLogfile.level = level
-		newLogfile.overwrite = overwrite
-		newLogfile.maxFileSize = maxFileSize
-		
-		Return newLogFile
-	End Function
-
+	
 	Method close()
 		if stream
 			stream.Flush()
@@ -47,13 +26,16 @@ Type TFileLogWriter Extends TLogWriter
 		End If
 	End Method
 	
+	
+	
 	Method New()
-		description = DEFAULT_DESCRIPTION
+		displaySeverity = True
 		filename = DEFAULT_FILENAME
 		level = DEFAULT_LEVEL
 		overwrite = DEFAULT_OVERWRITE
-		maxFileSize = DEFAULT_MAX_FILESIZE
 	End Method
+	
+	
 	
 	Method openLogFile()
 		Assert filename <> "", "No filename specified for log file."
@@ -70,6 +52,35 @@ Type TFileLogWriter Extends TLogWriter
 		End If
 	End Method
 	
+	
+	
+	Rem
+	bbdoc: Sets the path/filename that will be written to
+	EndRem
+	Method setFilename(value:String)
+		filename = value
+	End Method
+	
+	
+	
+	Rem
+	bbdoc: Sets whether to overwrite an existing file or not
+	EndRem
+	Method setOverwrite(value:Int)
+		overwrite = value
+	End Method
+
+	
+	
+	Rem
+	bbdoc: Specify whether to show the severity level in the log file or not
+	EndRem
+	Method showSeverity(value:Int)
+		displaySeverity = value
+	End Method
+		
+	
+	
 	Method write(message:TLoggerMessage)
 		If message.severity > level Then Return
 		
@@ -79,12 +90,7 @@ Type TFileLogWriter Extends TLogWriter
 		line:+message.host + " "
 		
 		If displaySeverity
-			Local severityDisplay:String
-		
-			If message.severity + 1 <= severityDescriptions.Length
-				severityDisplay = severityDescriptions[message.severity]
-				line:+severityDisplay + ": "
-			endif
+			line:+severityToString(message.severity) + ": "
 		End If
 		
 		line:+message.message

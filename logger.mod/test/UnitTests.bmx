@@ -88,8 +88,9 @@ Public
 '#Region &H03 Includes
 Include "src\Main.bmx"
 Include "src\LoggerTests.bmx"
-Include "src\LogWriterTests.bmx"
+Include "src\UnitTestLogWriterTests.bmx"
 Include "src\TUnitTestLogWriter.bmx"
+Include "src\FileLogWriterTests.bmx"
  
 '#EndRegion &H03
 

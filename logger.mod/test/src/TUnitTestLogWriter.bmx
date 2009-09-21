@@ -1,23 +1,22 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
-Rem
-	bbdoc:Undocumented type
-End Rem
+
+' Dummy log writer implementation for use with unit tests
+'
 Type TUnitTestLogWriter Extends TLogWriter
 
-	Field received:TList
+	Field nMessagesReceived:Int
 	
 	Method close()
 		Return
 	End Method
 
 	Method New()
-		received = New TList
+		nMessagesReceived = 0
 	End Method
 	
 	Method write(message:TLoggerMessage)
 		If message.severity > level Then Return
 		
-		received.AddLast(message)
+		nMessagesReceived:+1
 	End Method
 	
 End Type
