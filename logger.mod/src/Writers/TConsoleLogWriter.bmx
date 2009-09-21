@@ -59,7 +59,6 @@ Type TConsoleLogWriter Extends TLogWriter
 		line:+message.message
 		
 		Print line
-				
 	End Method
 
 End Type

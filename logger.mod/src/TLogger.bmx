@@ -13,16 +13,17 @@ Type TLogger
 	Const LOG_NOTICE:Int = 5
 	Const LOG_INFO:Int = 6
 	Const LOG_DEBUG:Int = 7
-
+	
 	Global instance:TLogger
 	
 	Global severityDescriptions:String[] = ["Emergency", "Alert", "Critical", "Error",  ..
 		"Warning", "Notice", "Info", "Debug"]	
 
 	Global messageCounts:Int[] = [0, 0, 0, 0, 0, 0, 0, 0]
-			
+	
 	Field host:String
 	Field logWriters:TList
+	Field messageToSend:TLoggerMessage
 	
 	Field runningUnitTests:Int = False
 	
@@ -30,7 +31,9 @@ Type TLogger
 	
 	Method New()
 		If instance Throw "Cannot create multiple instances of Singleton Type"
-		Self.initialise()
+		logWriters = New TList
+		messageToSend = New TLoggerMessage
+		host = HostName(0)
 	EndMethod
 
 	
@@ -50,7 +53,7 @@ Type TLogger
 
 		' TODO:
 		' -----
-		' Work-around for http://code.google.com/p/maxmods/issues/detail?id=10
+		' This is a work-around for http://code.google.com/p/maxmods/issues/detail?id=10
 		' Once resolved, the format used in the timestamp
 		' assignation can changed back to "$b %e" and all
 		' reference to dayOfMonth removed.
@@ -83,14 +86,7 @@ Type TLogger
 		Else
 			Return instance
 		EndIf
-	EndFunction	
-	
-	
-	
-	Method initialise()
-		logWriters = New TList
-		host = HostName(0)
-	End Method
+	EndFunction
 	
 	
 	
@@ -140,22 +136,27 @@ Type TLogger
 	EndRem
 	Method logMessage(severity:Int, message:String)
 		If (severity >= 0) And (severity <= 7)
-			Local newMessage:TLoggerMessage = New TLoggerMessage
-	
-			newMessage.timestamp = createTimestamp()
-			newMessage.severity = severity
-			newMessage.message = message
-			newMessage.host = host
+		
+			' TODO:
+			' -----
+			' Currently we use the same, pre-allocated message object
+			' for each message we send. We may eventually want to
+			' buffer and queue/batch messages.
+			'
+			messageToSend.timestamp = createTimestamp()
+			messageToSend.severity = severity
+			messageToSend.message = message
+			messageToSend.host = host
 			
 			' Just to ensure when running unit tests that we always 
 			' get the same timestamps and host name.
 			If runningUnitTests
-				newMessage.timestamp = "Jan  1 00:00:00"
-				newMessage.host = "unitTest"
+				messageToSend.timestamp = "Jan  1 00:00:00"
+				messageToSend.host = "unitTest"
 			End If
 			
 			For Local writer:TLogWriter = EachIn logWriters
-				writer.write(newMessage)
+				writer.write(messageToSend)
 			Next
 			
 			messageCounts[severity]:+1
