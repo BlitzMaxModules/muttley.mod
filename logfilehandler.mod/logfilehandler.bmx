@@ -40,28 +40,50 @@ Import brl.system
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H04 MyNamespace
 'LIB
+'guid:e7882b32_2e20_4c35_abc4_6640bf0f45fc
 Private
-TYPE z_bd460470_2500_4c9a_bab4_50c634f5a682 abstract  'Resource folder
+TYPE z_e7882b32_2e20_4c35_abc4_6640bf0f45fc_3_0 abstract  'Resource folder
 End Type
 
 
-TYPE z_blide_bg2335d4db_2a70_4ed4_8a51_28020167c5ff Abstract
+TYPE z_blide_bge7882b32_2e20_4c35_abc4_6640bf0f45fc Abstract
     Const Name:string = "Log File Handler" 'This string contains the name of the program
     Const MajorVersion:Int = 1  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
     Const Revision:Int =  2  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
+    ?win32
+    Const Platform:String = "Win32" 'This constant contains "Win32", "MacOs" or "Linux" depending on the current running platoform for your game or application.
+    ?
+    ?MacOs
+    Const Platform:String = "MacOs"
+    ?
+    ?Linux
+    Const Platform:String = "Linux"
+    ?
+    ?PPC
+    Const Architecture:String = "PPC" 'This const contains "x86" or "Ppc" depending on the running architecture of the running computer. x64 should return also a x86 value
+    ?
+    ?x86
+    Const Architecture:String = "x86" 
+    ?
+    ?debug
+    Const DebugOn : Int = True    'This const will have the integer value of TRUE if the application was build on debug mode, or false if it was build on release mode
+    ?
+    ?not debug
+    Const DebugOn : Int = False
+    ?
 EndType
 
 
-Type z_My_2335d4db_2a70_4ed4_8a51_28020167c5ff Abstract 'This type has all the run-tima binary information of your assembly
-    Global Application:z_blide_bg2335d4db_2a70_4ed4_8a51_28020167c5ff  'This item has all the currently available assembly version information.
-    Global Resources:z_bd460470_2500_4c9a_bab4_50c634f5a682  'This item has all the currently available incbined files names and relative location.
+Type z_My_e7882b32_2e20_4c35_abc4_6640bf0f45fc Abstract 'This type has all the run-tima binary information of your assembly
+    Global Application:z_blide_bge7882b32_2e20_4c35_abc4_6640bf0f45fc  'This item has all the currently available assembly version information.
+    Global Resources:z_e7882b32_2e20_4c35_abc4_6640bf0f45fc_3_0  'This item has all the currently available incbined files names and relative location.
 End Type
 
 
-Global My:z_My_2335d4db_2a70_4ed4_8a51_28020167c5ff 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
+Global My:z_My_e7882b32_2e20_4c35_abc4_6640bf0f45fc 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
 Public
 '#EndRegion &H04 MyNamespace
 

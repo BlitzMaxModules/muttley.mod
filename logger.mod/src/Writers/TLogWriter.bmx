@@ -1,3 +1,16 @@
+Rem
+'
+' muttley.logger - BlitzMax Logging Module
+' Copyright (C) 2009 Paul Maskelyne
+'
+' This software is licensed under the terms of the Artistic
+' License version 2.0.
+'
+' For full license details, please read the file 'artistic-2_0.txt' 
+' included with this distribution, or see
+' http://www.perlfoundation.org/legal/licenses/artistic-2_0.html
+'	
+EndRem
 
 Rem
 bbdoc: The base class of all log writers
@@ -62,7 +75,7 @@ Type TLogWriter
 	
 		
 	Rem
-	bbdoc: Close the log writer
+	bbdoc: Writer a message to the log writer's output
 	about: This abstract Method needs to be implemented by all
 	log writers and should handle the output of the specified
 	message in a way appropriate for the type of output being

@@ -3,11 +3,60 @@
 </head><body>
 <table width=100% cellspacing=0><tr align=center><td class=small>&nbsp;</td>
 <td class=small width=1%><b>muttley.logger:</b></td>
+<td class=small width=1%><a href=#consts class=small>Constants</a></td>
 <td class=small width=1%><a href=#functions class=small>Functions</a></td>
 <td class=small width=1%><a href=#types class=small>Types</a></td>
+<td class=small width=1%><a href=#modinfo class=small>Modinfo</a></td>
 <td class=small width=1%><a href='../../../../mod/muttley.mod/logger.mod/logger.bmx' class=small>Source</a></td>
 <td class=small>&nbsp;</td></tr></table>
 <h1>muttley\logger</h1>
+<p>
+This BlitzMax Logger module allows you to log messages with varying levels of severity to one or more log writers
+</p>
+<p>
+Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 3164 for the BSD Syslog protocol.
+</p>
+<p>
+You can also create custom log writers by deriving a new one from the TLogWriter base class.
+</p>
+<p>
+You can specify the level of logging you wish a log writer to receive and only messages that fit within that level of logging will be written.  Therefore you can have enhanced logging whilst in Debug mode, etc.
+</p>
+<p>
+See the example program showings how to use this module in the <b>logger.mod/examples</b> directory.
+</p>
+<h3>Requirements</h3>
+<p>
+The Logger module requires the following additional modules: <b>bah.boost</b> and <b>bah.datetime</b>
+</p>
+<p>
+Additionally, if you wish to be able to run the unit tests provided in the <a href="../test"><b>logger.mod/test</b></a> directory you will also need the <b>bah.maxunit</b> module.
+</p>
+<p>
+These modules are available from Brucey's maxmods project page here: <a href="http://code.google.com/p/maxmods/">http://code.google.com/p/maxmods/</a>
+</p>
+<h3>Additional Credits</h3>
+<p>
+Many thanks to Brucey for the his bah modules.
+</p>
+<h2><a name=consts></a>Constants Summary</h2><table class=doc width=100%><tr><td colspan=2>
+<a href=#LOGGER_ALERT>LOGGER_ALERT</a>
+, 
+<a href=#LOGGER_CRITICAL>LOGGER_CRITICAL</a>
+, 
+<a href=#LOGGER_DEBUG>LOGGER_DEBUG</a>
+, 
+<a href=#LOGGER_EMERGENCY>LOGGER_EMERGENCY</a>
+, 
+<a href=#LOGGER_ERROR>LOGGER_ERROR</a>
+, 
+<a href=#LOGGER_INFO>LOGGER_INFO</a>
+, 
+<a href=#LOGGER_NOTICE>LOGGER_NOTICE</a>
+, 
+<a href=#LOGGER_WARNING>LOGGER_WARNING</a>
+</td></tr>
+</table>
 <h2><a name=functions></a>Functions Summary</h2><table class=doc width=100%>
 <tr><td class=docleft width=1%><a href=#LogAlert>LogAlert</a></td><td class=docright>
 Logs an Alert level message.
@@ -54,6 +103,49 @@ The base class of all log writers.
 Undocumented type.
 </td></tr>
 </table>
+<h2
+ id=constsdet>Constants
+</h2>
+<table class=doc width=100% cellspacing=3 id=LOGGER_ALERT>
+<tr><td class=doctop colspan=2>Const LOGGER_ALERT:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 1: Alert.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_CRITICAL>
+<tr><td class=doctop colspan=2>Const LOGGER_CRITICAL:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 2: Critical.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_DEBUG>
+<tr><td class=doctop colspan=2>Const LOGGER_DEBUG:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 7: Debug.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_EMERGENCY>
+<tr><td class=doctop colspan=2>Const LOGGER_EMERGENCY:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 0: Emergency.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_ERROR>
+<tr><td class=doctop colspan=2>Const LOGGER_ERROR:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 3: Error.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_INFO>
+<tr><td class=doctop colspan=2>Const LOGGER_INFO:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 6: Info.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_NOTICE>
+<tr><td class=doctop colspan=2>Const LOGGER_NOTICE:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 5: Notice.</td></tr>
+</table>
+<br>
+<table class=doc width=100% cellspacing=3 id=LOGGER_WARNING>
+<tr><td class=doctop colspan=2>Const LOGGER_WARNING:Int</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Severity level 4: Warning.</td></tr>
+</table>
+<br>
 <h2
  id=functionsdet>Functions
 </h2>
@@ -111,9 +203,6 @@ Show the severity level of the message.
 <tr><td class=docleft width=1%><a href=#showTimestamp>showTimestamp</a></td><td class=docright>
 Show the timestamp of the message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#write>write</a></td><td class=docright>
-Writes the received messages to STDOUT.
-</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=showSeverity>
 <tr><td class=doctop colspan=2>Method showSeverity(value:Int)</td></tr>
@@ -122,10 +211,6 @@ Writes the received messages to STDOUT.
 <table class=doc width=100% cellspacing=3 id=showTimestamp>
 <tr><td class=doctop colspan=2>Method showTimestamp(value:Int)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Show the timestamp of the message.</td></tr>
-</table>
-<table class=doc width=100% cellspacing=3 id=write>
-<tr><td class=doctop colspan=2>Method write(message:TLoggerMessage)</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Writes the received messages to STDOUT.</td></tr>
 </table>
 <br>
 <table class=doc width=100% cellspacing=3 id=TFileLogWriter>
@@ -346,8 +431,11 @@ The current log level of this writer.
 <tr><td class=docleft width=1%><a href=#setLevel>setLevel</a></td><td class=docright>
 Set the log level of this writer.
 </td></tr>
+<tr><td class=docleft width=1%><a href=#severityToString>severityToString</a></td><td class=docright>
+Returns a string representation of the specified severity level.
+</td></tr>
 <tr><td class=docleft width=1%><a href=#write>write</a></td><td class=docright>
-Close the log writer.
+Writer a message to the log writer's output.
 </td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=level>
@@ -373,9 +461,13 @@ for example flushing and closing streams/files, etc.</td></tr>
 <tr><td class=docleft width=1%>Information</td><td class=docright>Writers should only display/output messages that have a severity
 that is equal or lower than the level set for the writer.</td></tr>
 </table>
+<table class=doc width=100% cellspacing=3 id=severityToString>
+<tr><td class=doctop colspan=2>Method severityToString:String(severity:Int)</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Returns a string representation of the specified severity level.</td></tr>
+</table>
 <table class=doc width=100% cellspacing=3 id=write>
 <tr><td class=doctop colspan=2>Method write(message:TLoggerMessage) Abstract</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Close the log writer.</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Writer a message to the log writer's output.</td></tr>
 <tr><td class=docleft width=1%>Information</td><td class=docright>This abstract Method needs to be implemented by all
 log writers and should handle the output of the specified
 message in a way appropriate for the type of output being
@@ -442,4 +534,14 @@ types. By default facility value 16 (local0) is used:
 <tr><td class=docleft width=1%>Information</td><td class=docright>The default is 514. You shouldn't need to change this.</td></tr>
 </table>
 <br>
+<h2 id=modinfo>Module Information</h2>
+<table width=100%>
+<tr><th width=1%>Version</th><td>1.0.0</td></tr>
+<tr><th width=1%>License</th><td>Artistic License 2.0</td></tr>
+<tr><th width=1%>Author</th><td>Paul Maskelyne (Muttley)</td></tr>
+<tr><th width=1%>Copyright</th><td>(c) 2009 Paul Maskelyne</td></tr>
+<tr><th width=1%>E-Mail</th><td>muttley@muttleyville.org</td></tr>
+<tr><th width=1%>Website</th><td>http://www.muttleyville.org</td></tr>
+<tr><th width=1%>History</th><td>1.0.0</td></tr>
+<tr><th width=1%>History</th><td>Initial Release</td></tr>
 </body></html>

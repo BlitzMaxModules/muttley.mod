@@ -1,18 +1,58 @@
 Rem
+'
+' muttley.logger - BlitzMax Logging Module
+' Copyright (C) 2009 Paul Maskelyne
+'
+' This software is licensed under the terms of the Artistic
+' License version 2.0.
+'
+' For full license details, please read the file 'artistic-2_0.txt' 
+' included with this distribution, or see
+' http://www.perlfoundation.org/legal/licenses/artistic-2_0.html
+'	
+EndRem
+
+Rem
+bbdoc: Severity level 0: Emergency
+EndRem
+Const LOGGER_EMERGENCY:Int = 0
+Rem
+bbdoc: Severity level 1: Alert
+EndRem
+Const LOGGER_ALERT:Int = 1
+Rem
+bbdoc: Severity level 2: Critical
+EndRem
+Const LOGGER_CRITICAL:Int = 2
+Rem
+bbdoc: Severity level 3: Error
+EndRem
+Const LOGGER_ERROR:Int = 3
+Rem
+bbdoc: Severity level 4: Warning
+EndRem
+Const LOGGER_WARNING:Int = 4
+Rem
+bbdoc: Severity level 5: Notice
+EndRem
+Const LOGGER_NOTICE:Int = 5
+Rem
+bbdoc: Severity level 6: Info
+EndRem
+Const LOGGER_INFO:Int = 6
+Rem
+bbdoc: Severity level 7: Debug
+EndRem
+Const LOGGER_DEBUG:Int = 7
+	
+
+
+Rem
 bbdoc: The primary interface for logging messages
 about: All logging is handled by sending messages to this class. It then creates a new log message
 and passes it to any log writers that are registered.
 End Rem
 Type TLogger
-
-	Const LOG_EMERGENCY:Int = 0
-	Const LOG_ALERT:Int = 1
-	Const LOG_CRITICAL:Int = 2
-	Const LOG_ERROR:Int = 3
-	Const LOG_WARNING:Int = 4
-	Const LOG_NOTICE:Int = 5
-	Const LOG_INFO:Int = 6
-	Const LOG_DEBUG:Int = 7
 
 	Global instance:TLogger
 	
@@ -132,7 +172,7 @@ Type TLogger
 	bbdoc: Logs an Alert level message
 	EndRem
 	Method logAlert(message:String)
-		LogMessage(LOG_ALERT, message)
+		LogMessage(LOGGER_ALERT, message)
 	End Method
 	
 	
@@ -141,7 +181,7 @@ Type TLogger
 	bbdoc: Logs a Critical level message
 	EndRem	
 	Method logCritical(message:String)
-		LogMessage(LOG_CRITICAL, message)
+		LogMessage(LOGGER_CRITICAL, message)
 	End Method
 	
 	
@@ -150,7 +190,7 @@ Type TLogger
 	bbdoc: Logs a Debug level message
 	EndRem	
 	Method logDebug(message:String)
-		LogMessage(LOG_DEBUG, message)
+		LogMessage(LOGGER_DEBUG, message)
 	End Method
 	
 	
@@ -159,7 +199,7 @@ Type TLogger
 	bbdoc: Logs an Emergency level message
 	EndRem	
 	Method logEmergency(message:String)
-		LogMessage(LOG_EMERGENCY, message)
+		LogMessage(LOGGER_EMERGENCY, message)
 	End Method
 	
 	
@@ -168,7 +208,7 @@ Type TLogger
 	bbdoc: Logs an Error level message
 	EndRem	
 	Method logError(message:String)
-		LogMessage(LOG_ERROR, message)
+		LogMessage(LOGGER_ERROR, message)
 	End Method
 	
 	
@@ -177,7 +217,7 @@ Type TLogger
 	bbdoc: Logs an Info level message
 	EndRem	
 	Method logInfo(message:String)
-		LogMessage(LOG_INFO, message)
+		LogMessage(LOGGER_INFO, message)
 	End Method
 	
 	
@@ -186,7 +226,7 @@ Type TLogger
 	bbdoc: Logs a Notice level message
 	EndRem	
 	Method logNotice(message:String)
-		LogMessage(LOG_NOTICE, message)
+		LogMessage(LOGGER_NOTICE, message)
 	End Method
 	
 	
@@ -195,7 +235,7 @@ Type TLogger
 	bbdoc: Logs a Warning level message
 	EndRem	
 	Method logWarning(message:String)
-		LogMessage(LOG_WARNING, message)
+		LogMessage(LOGGER_WARNING, message)
 	End Method
 
 	

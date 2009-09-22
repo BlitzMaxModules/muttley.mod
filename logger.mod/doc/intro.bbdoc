@@ -1,0 +1,30 @@
+<h3>Introduction</h3>
+<p>
+This BlitzMax Logger module allows you to log messages with varying levels of severity to one or more log writers
+</p>
+<p>
+Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 3164 for the BSD Syslog protocol.
+</p>
+<p>
+You can also create custom log writers by deriving a new one from the TLogWriter base class.
+</p>
+<p>
+You can specify the level of logging you wish a log writer to receive and only messages that fit within that level of logging will be written.  Therefore you can have enhanced logging whilst in Debug mode, etc.
+</p>
+<p>
+See the example program showings how to use this module in the <a href="../examples">logger.mod/examples</a> directory.
+</p>
+<h3>Requirements</h3>
+<p>
+The Logger module requires the following additional modules: <b>bah.boost</b> and <b>bah.datetime</b>
+</p>
+<p>
+Additionally, if you wish to be able to run the unit tests provided in the <a href="../test">logger.mod/test</a> directory you will also need the <b>bah.maxunit</b> module.
+</p>
+<p>
+These modules are available from Brucey's maxmods project page here: <a href="http://code.google.com/p/maxmods/">http://code.google.com/p/maxmods/</a>
+</p>
+<h3>Additional Credits</h3>
+<p>
+Many thanks to Brucey for the his bah modules.
+</p>

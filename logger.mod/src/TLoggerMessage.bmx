@@ -1,5 +1,19 @@
 Rem
-bbdoc: This class represents and actual log message that is sent to all log writers
+'
+' muttley.logger - BlitzMax Logging Module
+' Copyright (C) 2009 Paul Maskelyne
+'
+' This software is licensed under the terms of the Artistic
+' License version 2.0.
+'
+' For full license details, please read the file 'artistic-2_0.txt' 
+' included with this distribution, or see
+' http://www.perlfoundation.org/legal/licenses/artistic-2_0.html
+'	
+EndRem
+
+Rem
+bbdoc: This class represents an actual log message that is sent to all log writers
 End Rem
 Type TLoggerMessage
 	

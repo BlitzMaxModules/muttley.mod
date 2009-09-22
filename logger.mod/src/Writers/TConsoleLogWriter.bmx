@@ -1,7 +1,20 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
 Rem
-	bbdoc:Undocumented type
-End Rem
+'
+' muttley.logger - BlitzMax Logging Module
+' Copyright (C) 2009 Paul Maskelyne
+'
+' This software is licensed under the terms of the Artistic
+' License version 2.0.
+'
+' For full license details, please read the file 'artistic-2_0.txt' 
+' included with this distribution, or see
+' http://www.perlfoundation.org/legal/licenses/artistic-2_0.html
+'	
+EndRem
+
+Rem
+bbdoc: A log writer that outputs to the console
+EndRem
 Type TConsoleLogWriter Extends TLogWriter
 
 	Field displayTimestamp:Int
@@ -40,9 +53,6 @@ Type TConsoleLogWriter Extends TLogWriter
 	
 	
 	
-	Rem
-	bbdoc: Writes the received messages to STDOUT
-	EndRem
 	Method write(message:TLoggerMessage)
 		If message.severity > level Then Return
 		

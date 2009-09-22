@@ -1,14 +1,27 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
 Rem
-	bbdoc:Undocumented type
-End Rem
+'
+' muttley.logger - BlitzMax Logging Module
+' Copyright (C) 2009 Paul Maskelyne
+'
+' This software is licensed under the terms of the Artistic
+' License version 2.0.
+'
+' For full license details, please read the file 'artistic-2_0.txt' 
+' included with this distribution, or see
+' http://www.perlfoundation.org/legal/licenses/artistic-2_0.html
+'	
+EndRem
+
+Rem
+bbdoc: A log writer that outputs to a file
+EndRem
 Type TFileLogWriter Extends TLogWriter
 
 	Const DEFAULT_FILENAME:String = "logfile.log"
 ?Debug
-	Const DEFAULT_LEVEL:Int = TLogger.LOG_INFO
+	Const DEFAULT_LEVEL:Int = LOGGER_INFO
 ?Not Debug
-	Const DEFAULT_LEVEL:Int = TLogger.LOG_ERROR
+	Const DEFAULT_LEVEL:Int = LOGGER_ERROR
 ?
 	Const DEFAULT_OVERWRITE:Int = True
 		

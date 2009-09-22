@@ -1,3 +1,11 @@
+'Version: 1.0.0
+'License: Artistic License 2.0
+'Author: Paul Maskelyne (Muttley)
+'Copyright: (c) 2009 Paul Maskelyne
+'E-Mail: muttley@muttleyville.org
+'Website: http://www.muttleyville.org
+'History: 1.0.0
+'History: Initial Release
 REM
 This file was created by the BLIde solution explorer and should not be modified from outside BLIde
 EndRem
@@ -6,7 +14,7 @@ EndRem
 'Program: logger.mod
 'Version: 1
 'Subversion: 0
-'Revision: 1
+'Revision: 0
 '#EndRegion &HFF
 
 
@@ -18,6 +26,15 @@ Rem
     bbdoc:muttley\logger
 End Rem
 Module muttley.logger
+ModuleInfo "Version: 1.0.0"
+ModuleInfo "License: Artistic License 2.0"
+ModuleInfo "Author: Paul Maskelyne (Muttley)"
+ModuleInfo "Copyright: (c) 2009 Paul Maskelyne"
+ModuleInfo "E-Mail: muttley@muttleyville.org"
+ModuleInfo "Website: http://www.muttleyville.org"
+ModuleInfo "History: 1.0.0"
+ModuleInfo "History: Initial Release"
+ModuleInfo ""
 '#EndRegion &H01
 
 
@@ -55,7 +72,7 @@ TYPE z_blide_bg2c35c95c_dae3_4abd_9ee2_87d07ca0d7cc Abstract
     Const Name:string = "logger.mod" 'This string contains the name of the program
     Const MajorVersion:Int = 1  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  1  'This Const contains the revision number of the current program version
+    Const Revision:Int =  0  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32
