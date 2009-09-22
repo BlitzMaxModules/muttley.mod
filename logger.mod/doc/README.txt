@@ -7,6 +7,6 @@ License: Artistic License 2.0
 
 INSTALLATION
 ------------
-To install this module, extract the contents of the archive into your BlitzMax\mod directory.
+To install this module, extract the contents of the archive into a muttley.mod directory in your BlitzMax\mod directory.
 
 For more information please see the online documentation.

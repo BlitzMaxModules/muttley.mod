@@ -14,7 +14,7 @@ EndRem
 'Program: logger.mod
 'Version: 1
 'Subversion: 0
-'Revision: 0
+'Revision: 1
 '#EndRegion &HFF
 
 
@@ -72,7 +72,7 @@ TYPE z_blide_bg2c35c95c_dae3_4abd_9ee2_87d07ca0d7cc Abstract
     Const Name:string = "logger.mod" 'This string contains the name of the program
     Const MajorVersion:Int = 1  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  0  'This Const contains the revision number of the current program version
+    Const Revision:Int =  1  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32
