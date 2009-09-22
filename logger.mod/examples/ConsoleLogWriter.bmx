@@ -3,7 +3,7 @@ SuperStrict
 Framework muttley.logger
 
 Local consoleWriter:TConsoleLogWriter = New TConsoleLogWriter
-consoleWriter.setLevel(TLogger.LOG_DEBUG)
+consoleWriter.setLevel(LOGGER_DEBUG)
 consoleWriter.showTimestamp(True)
 consoleWriter.showSeverity(true)
 

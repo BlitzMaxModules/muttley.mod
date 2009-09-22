@@ -3,7 +3,8 @@ SuperStrict
 Framework muttley.logger
 
 Local fileWriter:TFileLogWriter = New TFileLogWriter
-fileWriter.setLevel(TLogger.LOG_DEBUG)
+fileWriter.setLevel(LOGGER_DEBUG)
+fileWriter.setFilename("data/FileLogWriter.log")
 
 Local logger:TLogger = Tlogger.getInstance()
 logger.addWriter(fileWriter)
