@@ -1,11 +1,16 @@
-ModuleInfo "Version: 1.0.0"
+ModuleInfo "Version: 1.1.0"
 ModuleInfo "License: Artistic License 2.0"
 ModuleInfo "Author: Paul Maskelyne (Muttley)"
 ModuleInfo "Copyright: (c) 2009 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
+ModuleInfo "History: 1.1.0"
+ModuleInfo "History: Updated Syslog support to RFC5424"
+ModuleInfo "History: 1.0.1"
+ModuleInfo "History: Minor documentation fixes"
 ModuleInfo "History: 1.0.0"
 ModuleInfo "History: Initial Release"
+ModuleInfo ""
 ModuleInfo ""
 import brl.blitz
 import bah.boost
@@ -36,14 +41,14 @@ instance:TLogger&=mem:p("_muttley_logger_TLogger_instance")
 -getHost$()="_muttley_logger_TLogger_getHost"
 +getInstance:TLogger()="_muttley_logger_TLogger_getInstance"
 -logMessage%(severity%,message$)="_muttley_logger_TLogger_logMessage"
--logAlert%(message$)="_muttley_logger_TLogger_logAlert"
--logCritical%(message$)="_muttley_logger_TLogger_logCritical"
--logDebug%(message$)="_muttley_logger_TLogger_logDebug"
--logEmergency%(message$)="_muttley_logger_TLogger_logEmergency"
--logError%(message$)="_muttley_logger_TLogger_logError"
--logInfo%(message$)="_muttley_logger_TLogger_logInfo"
--logNotice%(message$)="_muttley_logger_TLogger_logNotice"
--logWarning%(message$)="_muttley_logger_TLogger_logWarning"
+-LogAlert%(message$)="_muttley_logger_TLogger_LogAlert"
+-LogCritical%(message$)="_muttley_logger_TLogger_LogCritical"
+-LogDebug%(message$)="_muttley_logger_TLogger_LogDebug"
+-LogEmergency%(message$)="_muttley_logger_TLogger_LogEmergency"
+-LogError%(message$)="_muttley_logger_TLogger_LogError"
+-LogInfo%(message$)="_muttley_logger_TLogger_LogInfo"
+-LogNotice%(message$)="_muttley_logger_TLogger_LogNotice"
+-LogWarning%(message$)="_muttley_logger_TLogger_LogWarning"
 -resetStatistics%()="_muttley_logger_TLogger_resetStatistics"
 -setHost%(value$)="_muttley_logger_TLogger_setHost"
 -close%()="_muttley_logger_TLogger_close"
@@ -106,6 +111,8 @@ TSyslogLogWriter^TLogWriter{
 DEFAULT_FACILITY%=16
 DEFAULT_SERVER$=$"127.0.0.1"
 DEFAULT_UDP_PORT%=514
+SYSLOG_VERSION%=1
+.appName$&
 .facility%&
 .server$&
 .stream:brl.socketstream.TSocketStream&
@@ -113,6 +120,7 @@ DEFAULT_UDP_PORT%=514
 -New%()="_muttley_logger_TSyslogLogWriter_New"
 -Delete%()="_muttley_logger_TSyslogLogWriter_Delete"
 -close%()="_muttley_logger_TSyslogLogWriter_close"
+-formatAppName%()="_muttley_logger_TSyslogLogWriter_formatAppName"
 -openSyslogStream%()="_muttley_logger_TSyslogLogWriter_openSyslogStream"
 -setFacility%(value%)="_muttley_logger_TSyslogLogWriter_setFacility"
 -setServer%(value$)="_muttley_logger_TSyslogLogWriter_setServer"

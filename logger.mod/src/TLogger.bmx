@@ -81,22 +81,39 @@ Type TLogger
 	
 	
 	' Creates a timestamp in a format suitable For Syslog as defined in
-	' RFC 3164
+	' RFC 5424
 	Method createTimestamp:String()
-		Local time:TTime = TTime.CreateLocal()
-		Local date:TDate = TDate.fromString(time.toString())
+		Local uTime:TTime = TTime.CreateUniversal()
+		Local lTime:TTime = TTime.CreateLocal()
 
-		' TODO:
-		' -----
-		' Work-around for http://code.google.com/p/maxmods/issues/detail?id=10
-		' Once resolved, the format used in the timestamp
-		' assignation can changed back to "$b %e" and all
-		' reference to dayOfMonth removed.
-		'
-		Local dayOfMonth:String = date.format("%d")
-		If dayOfMonth[0] = "0" Then dayOfMonth = " " + dayOfMonth[1]
+		Local diff:TTimeDuration = lTime.subtract(uTime)
+
+		Local diffHours:Int = diff.hours()
+		Local diffMins:Int = diff.minutes()
+
+		Local tzAdjust:String = "+"
+		If diffHours < 0
+			tzAdjust = "-"
+		End If
+
+		If Abs(diffHours) < 10
+			tzAdjust:+"0" + Abs(diffHours)
+		Else
+			tzAdjust:+Abs(diffHours)
+		End If
+
+		tzAdjust:+":"
+
+		If diffMins < 10
+			tzAdjust:+"0" + diffMins
+		Else
+			tzAdjust:+diffMins
+		End If
+
+		Local date:TDate = TDate.fromString(TTime.CreateLocal().toString())
+		Local resultTime:String = lTime.toISOExtendedString().Split("T")[1]
 		
-		Return date.format("%b") + " " + dayOfMonth + " " + time.toString().Split(" ")[1]
+		Return date.format("%Y-%m-%d") + "T" + resultTime + tzAdjust
 	End Method
 	
 	
@@ -121,25 +138,25 @@ Type TLogger
 		Else
 			Return instance
 		EndIf
-	EndFunction	
+	EndFunction
 
 	
 	
 	Rem
 	bbdoc: Log a message at the specified severity level
-	about: Severity levels are based on those defined in RFC 3164 for the BSD Syslog protocol.
+	about: Severity levels are based on those defined in RFC 5424 for the BSD Syslog protocol.
 	Valid severity levels are in the range 0 to 7 and are defined as being for the following message
 	types:
 	<table>
-		<tr> <th> Severity </th> <th> Description </th> </tr>
-		<tr> <td> 0 </td> <td> Emergency: system is unusable </td> </tr>
-		<tr> <td> 1 </td> <td> Alert: action must be taken immediately </td> </tr>
-		<tr> <td> 2 </td> <td> Critical: critical conditions </td> </tr>
-		<tr> <td> 3 </td> <td> Error: error conditions </td> </tr>
-		<tr> <td> 4 </td> <td> Warning: warning conditions </td> </tr>
-		<tr> <td> 5 </td> <td> Notice: normal but significant condition </td> </tr>
-		<tr> <td> 6 </td> <td> Info: informational messages </td> </tr>
-		<tr> <td> 7 </td> <td> Debug: debug-level messages </td> </tr>
+	<tr> <th> Severity </th> <th> Description </th> </tr>
+	<tr> <td> 0 </td> <td> Emergency: system is unusable </td> </tr>
+	<tr> <td> 1 </td> <td> Alert: action must be taken immediately </td> </tr>
+	<tr> <td> 2 </td> <td> Critical: critical conditions </td> </tr>
+	<tr> <td> 3 </td> <td> Error: error conditions </td> </tr>
+	<tr> <td> 4 </td> <td> Warning: warning conditions </td> </tr>
+	<tr> <td> 5 </td> <td> Notice: normal but significant condition </td> </tr>
+	<tr> <td> 6 </td> <td> Info: informational messages </td> </tr>
+	<tr> <td> 7 </td> <td> Debug: debug-level messages </td> </tr>
 	</table>
 	EndRem
 	Method logMessage(severity:Int, message:String)
@@ -154,7 +171,7 @@ Type TLogger
 			' Just to ensure when running unit tests that we always 
 			' get the same timestamps and host name.
 			If runningUnitTests
-				newMessage.timestamp = "Jan  1 00:00:00"
+				newMessage.timestamp = "1970-01-01T12:00:00+00:00"
 				newMessage.host = "unitTest"
 			End If
 			
@@ -171,7 +188,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs an Alert level message
 	EndRem
-	Method logAlert(message:String)
+	Method LogAlert(message:String)
 		LogMessage(LOGGER_ALERT, message)
 	End Method
 	
@@ -180,7 +197,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs a Critical level message
 	EndRem	
-	Method logCritical(message:String)
+	Method LogCritical(message:String)
 		LogMessage(LOGGER_CRITICAL, message)
 	End Method
 	
@@ -189,7 +206,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs a Debug level message
 	EndRem	
-	Method logDebug(message:String)
+	Method LogDebug(message:String)
 		LogMessage(LOGGER_DEBUG, message)
 	End Method
 	
@@ -198,7 +215,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs an Emergency level message
 	EndRem	
-	Method logEmergency(message:String)
+	Method LogEmergency(message:String)
 		LogMessage(LOGGER_EMERGENCY, message)
 	End Method
 	
@@ -207,7 +224,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs an Error level message
 	EndRem	
-	Method logError(message:String)
+	Method LogError(message:String)
 		LogMessage(LOGGER_ERROR, message)
 	End Method
 	
@@ -216,7 +233,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs an Info level message
 	EndRem	
-	Method logInfo(message:String)
+	Method LogInfo(message:String)
 		LogMessage(LOGGER_INFO, message)
 	End Method
 	
@@ -225,7 +242,7 @@ Type TLogger
 	Rem
 	bbdoc: Logs a Notice level message
 	EndRem	
-	Method logNotice(message:String)
+	Method LogNotice(message:String)
 		LogMessage(LOGGER_NOTICE, message)
 	End Method
 	
@@ -233,17 +250,17 @@ Type TLogger
 	
 	Rem
 	bbdoc: Logs a Warning level message
-	EndRem	
-	Method logWarning(message:String)
+	EndRem
+	Method LogWarning(message:String)
 		LogMessage(LOGGER_WARNING, message)
 	End Method
 
 	
 	
 	Rem
-	bbdoc: Reset the statistics count
-	about: The logger keeps a count of how many of each severity of message
-	it has handled, you can use this method to reset that cound to zero
+	bbdoc:Reset the statistics count
+	about:The logger keeps a count of how many of each severity of message
+	it has handled, you can use this Method To reset that cound To zero
 	EndRem
 	Method resetStatistics()
 		messageCounts = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -252,9 +269,9 @@ Type TLogger
 	
 	
 	Rem
-	bbdoc: set the host identifier used in log messages
-	about: When the logger is instantiated it attempts to get the hostname
-	of the local machine, however you can override the identifier it uses
+	bbdoc:set the host identifier used in Log messages
+	about:When the logger is instantiated it attempts To get the HostName
+	of the Local machine, however you can override the identifier it uses
 	by setting it manually
 	End Rem
 	Method setHost(value:String)
@@ -264,9 +281,9 @@ Type TLogger
 	
 	
 	Rem
-	bbdoc: Closes and de-registers all currently registered log writers
-	about: This method should be called right at the end of your program
-	EndRem		
+	bbdoc:Closes And de - registers all currently registered Log writers
+	about:This Method should be called Right at the End of your program
+	EndRem
 	Method close()
 		Local statistics:String
 		For Local i:Int = 0 To 7
@@ -288,7 +305,7 @@ EndType
 
 
 Rem
-bbdoc: Logs an Alert level message
+bbdoc:Logs an Alert level message
 EndRem
 Function LogAlert(message:String)
 	TLogger.getInstance().LogAlert(message)
@@ -297,7 +314,7 @@ End Function
 
 
 Rem
-bbdoc: Logs a Critical level message
+bbdoc:Logs a Critical level message
 EndRem
 Function LogCritical(message:String)
 	TLogger.getInstance().LogCritical(message)
@@ -306,7 +323,7 @@ End Function
 
 
 Rem
-bbdoc: Logs a Debug level message
+bbdoc:Logs a Debug level message
 EndRem
 Function LogDebug(message:String)
 	TLogger.getInstance().LogDebug(message)
@@ -315,7 +332,7 @@ End Function
 
 
 Rem
-bbdoc: Logs an Emergency level message
+bbdoc:Logs an Emergency level message
 EndRem
 Function LogEmergency(message:String)
 	TLogger.getInstance().LogEmergency(message)
@@ -324,7 +341,7 @@ End Function
 
 
 Rem
-bbdoc: Logs an Error level message
+bbdoc:Logs an Error level message
 EndRem
 Function LogError(message:String)
 	TLogger.getInstance().LogError(message)
@@ -333,7 +350,7 @@ End Function
 
 
 Rem
-bbdoc: Logs an Info level message
+bbdoc:Logs an Info level message
 EndRem
 Function LogInfo(message:String)
 	TLogger.getInstance().LogInfo(message)
@@ -342,7 +359,7 @@ End Function
 
 
 Rem
-bbdoc: Logs a Notice level message
+bbdoc:Logs a Notice level message
 EndRem
 Function LogNotice(message:String)
 	TLogger.getInstance().LogNotice(message)
@@ -351,7 +368,7 @@ End Function
 
 
 Rem
-bbdoc: Logs a Warning level message
+bbdoc:Logs a Warning level message
 EndRem
 Function LogWarning(message:String)
 	TLogger.getInstance().LogWarning(message)

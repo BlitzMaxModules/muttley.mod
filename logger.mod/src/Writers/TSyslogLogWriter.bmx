@@ -17,11 +17,13 @@ bbdoc: A log writer that outputs to a Syslog server via UDP
 EndRem
 Type TSyslogLogWriter Extends TLogWriter
 
-	Const DEFAULT_FACILITY:Int = 16	'local0
+	Const DEFAULT_FACILITY:Int = 16	' local0
 	Const DEFAULT_SERVER:String = "127.0.0.1"
 	Const DEFAULT_UDP_PORT:Int = 514
 
+	Const SYSLOG_VERSION:Int = 1 ' defined in RFC5424
 	
+	Field appName:String
 	Field facility:Int
 	Field server:String
 	Field stream:TSocketStream
@@ -35,6 +37,22 @@ Type TSyslogLogWriter Extends TLogWriter
 		EndIf
 	EndMethod
 		
+	
+	
+	Method formatAppName()
+		Local app:String = AppTitle
+		
+		For Local i:Int = 0 To app.Length - 1
+			If (Asc(app[i..i + 1]) >= 33) And (Asc(app[i..i + 1]) <= 126)
+				appName:+app[i..i + 1]
+			Else
+				appName:+"_"
+			EndIf
+		Next
+		
+		If appName.Length > 48 Then appName = appName[..48]
+	End Method
+	
 	
 	
 	Method New()
@@ -56,7 +74,7 @@ Type TSyslogLogWriter Extends TLogWriter
 	
 	Rem
 	bbdoc: Set the facility to use in the messages sent to the syslog server
-	about: Facilities are based on those defined in RFC 3164 for the BSD Syslog protocol.
+	about: Facilities are based on those defined in RFC 5424 for the BSD Syslog protocol.
 	Valid facility values are in the range 0 to 23 and are defined as being for the following message
 	types. By default facility value 16 (local0) is used:
 	<table>
@@ -120,11 +138,32 @@ Type TSyslogLogWriter Extends TLogWriter
 		
 		If Not stream Then openSyslogStream()
 		
+		If Not appName Then formatAppName()
+		
 		Local priority:Int = (facility * 8) + message.severity
+		
+		' Make sure we don't let any duff priority values through
+		If priority < 0 Or priority > 191
+			priority = 0
+		End If
 		
 		Local line:String
 		
-		line:+"<" + priority + ">" + message.timestamp + " " + message.host + ": " + message.message
+		' Start header
+		line:+"<" + priority + ">"
+		line:+SYSLOG_VERSION
+		line:+" "
+		line:+message.timestamp
+		line:+" "
+		line:+message.host
+		line:+" "
+		line:+appName
+		line:+" - -"	' contains empty PROCID and MSGID fields
+		' End header
+		
+		line:+" - " ' no structured data at this time
+		
+		line:+message.message
 		
 		' Syslog messages have a maximum length of 1024 chars
 		If line.length > 1024 Then line = line[..1024]

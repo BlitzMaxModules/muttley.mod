@@ -1,71 +1,71 @@
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 1/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 2/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 3/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 4/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 5/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 6/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 7/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 8/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 9/10
-Jan  1 00:00:00 unitTest Emergency: Severity 0 level message 10/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 1/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 2/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 3/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 4/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 5/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 6/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 7/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 8/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 9/10
-Jan  1 00:00:00 unitTest Alert: Severity 1 level message 10/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 1/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 2/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 3/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 4/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 5/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 6/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 7/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 8/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 9/10
-Jan  1 00:00:00 unitTest Critical: Severity 2 level message 10/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 1/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 2/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 3/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 4/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 5/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 6/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 7/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 8/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 9/10
-Jan  1 00:00:00 unitTest Error: Severity 3 level message 10/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 1/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 2/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 3/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 4/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 5/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 6/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 7/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 8/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 9/10
-Jan  1 00:00:00 unitTest Warning: Severity 4 level message 10/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 1/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 2/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 3/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 4/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 5/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 6/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 7/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 8/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 9/10
-Jan  1 00:00:00 unitTest Notice: Severity 5 level message 10/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 1/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 2/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 3/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 4/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 5/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 6/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 7/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 8/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 9/10
-Jan  1 00:00:00 unitTest Info: Severity 6 level message 10/10
-Jan  1 00:00:00 unitTest Info: [Logger] Statistics:  Emergency:10  Alert:10  Critical:10  Error:10  Warning:10  Notice:10  Info:10  Debug:10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Emergency: Severity 0 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Alert: Severity 1 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Critical: Severity 2 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Error: Severity 3 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Warning: Severity 4 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Notice: Severity 5 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 1/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 2/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 3/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 4/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 5/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 6/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 7/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 8/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 9/10
+1970-01-01T12:00:00+00:00 unitTest Info: Severity 6 level message 10/10
+1970-01-01T12:00:00+00:00 unitTest Info: [Logger] Statistics:  Emergency:10  Alert:10  Critical:10  Error:10  Warning:10  Notice:10  Info:10  Debug:10

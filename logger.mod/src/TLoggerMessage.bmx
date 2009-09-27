@@ -34,10 +34,10 @@ Type TLoggerMessage
 	
 	Rem
 	bbdoc: The timestamp of when the message was created
-	about: The timestamp is in RFC 3164 compatible format, for example:
+	about: The timestamp is in RFC 5424 compatible format, for example:
 	<pre>
-	Sep 20 20:09:23
-	Jan  1 07:23:57
+	2009-09-27T12:21:57+01:00
+	2007-02-13T08:09:10-05:00
 	</pre>
 	EndRem
 	Field timestamp:String

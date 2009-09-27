@@ -15,7 +15,7 @@
 This BlitzMax Logger module allows you to log messages with varying levels of severity to one or more log writers
 </p>
 <p>
-Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 3164 for the BSD Syslog protocol.
+Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 5424 for the BSD Syslog protocol.
 </p>
 <p>
 You can also create custom log writers by deriving a new one from the TLogWriter base class.
@@ -38,7 +38,7 @@ These modules are available from Brucey's maxmods project page here: <a href="ht
 </p>
 <h3>Additional Credits</h3>
 <p>
-Many thanks to Brucey for the his bah modules.
+Many thanks to Brucey for his bah modules.
 </p>
 <h2><a name=consts></a>Constants Summary</h2><table class=doc width=100%><tr><td colspan=2>
 <a href=#LOGGER_ALERT>LOGGER_ALERT</a>
@@ -253,43 +253,43 @@ and passes it to any log writers that are registered.</td></tr>
 Registers a new log writer so it can receive log messages.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#close>close</a></td><td class=docright>
-Closes and de-registers all currently registered log writers.
+Closes And de - registers all currently registered Log writers.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#getHost>getHost</a></td><td class=docright>
 return the current host identifier used in log messages.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logAlert>logAlert</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogAlert>LogAlert</a></td><td class=docright>
 Logs an Alert level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logCritical>logCritical</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogCritical>LogCritical</a></td><td class=docright>
 Logs a Critical level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logDebug>logDebug</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogDebug>LogDebug</a></td><td class=docright>
 Logs a Debug level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logEmergency>logEmergency</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogEmergency>LogEmergency</a></td><td class=docright>
 Logs an Emergency level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logError>logError</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogError>LogError</a></td><td class=docright>
 Logs an Error level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logInfo>logInfo</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogInfo>LogInfo</a></td><td class=docright>
 Logs an Info level message.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#logMessage>logMessage</a></td><td class=docright>
 Log a message at the specified severity level.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logNotice>logNotice</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogNotice>LogNotice</a></td><td class=docright>
 Logs a Notice level message.
 </td></tr>
-<tr><td class=docleft width=1%><a href=#logWarning>logWarning</a></td><td class=docright>
+<tr><td class=docleft width=1%><a href=#LogWarning>LogWarning</a></td><td class=docright>
 Logs a Warning level message.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#resetStatistics>resetStatistics</a></td><td class=docright>
 Reset the statistics count.
 </td></tr>
 <tr><td class=docleft width=1%><a href=#setHost>setHost</a></td><td class=docright>
-set the host identifier used in log messages.
+set the host identifier used in Log messages.
 </td></tr>
 </table>
 <table class=doc width=90% align=center><tr ><th class=doctop colspan=2 align=left><a name=TLogger_functions></a>Functions Summary</th></tr>
@@ -303,41 +303,41 @@ Returns an instance of the logger.
 </table>
 <table class=doc width=100% cellspacing=3 id=close>
 <tr><td class=doctop colspan=2>Method close()</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>Closes and de-registers all currently registered log writers.</td></tr>
-<tr><td class=docleft width=1%>Information</td><td class=docright>This method should be called right at the end of your program.</td></tr>
+<tr><td class=docleft width=1%>Description</td><td class=docright>Closes And de - registers all currently registered Log writers.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>This Method should be called Right at the End of your program.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=getHost>
 <tr><td class=doctop colspan=2>Method getHost:String()</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>return the current host identifier used in log messages.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logAlert>
-<tr><td class=doctop colspan=2>Method logAlert(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogAlert>
+<tr><td class=doctop colspan=2>Method LogAlert(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Alert level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logCritical>
-<tr><td class=doctop colspan=2>Method logCritical(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogCritical>
+<tr><td class=doctop colspan=2>Method LogCritical(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Critical level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logDebug>
-<tr><td class=doctop colspan=2>Method logDebug(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogDebug>
+<tr><td class=doctop colspan=2>Method LogDebug(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Debug level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logEmergency>
-<tr><td class=doctop colspan=2>Method logEmergency(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogEmergency>
+<tr><td class=doctop colspan=2>Method LogEmergency(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Emergency level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logError>
-<tr><td class=doctop colspan=2>Method logError(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogError>
+<tr><td class=doctop colspan=2>Method LogError(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Error level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logInfo>
-<tr><td class=doctop colspan=2>Method logInfo(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogInfo>
+<tr><td class=doctop colspan=2>Method LogInfo(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs an Info level message.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=logMessage>
 <tr><td class=doctop colspan=2>Method logMessage(severity:Int, message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Log a message at the specified severity level.</td></tr>
-<tr><td class=docleft width=1%>Information</td><td class=docright>Severity levels are based on those defined in RFC 3164 for the BSD Syslog protocol.
+<tr><td class=docleft width=1%>Information</td><td class=docright>Severity levels are based on those defined in RFC 5424 for the BSD Syslog protocol.
 Valid severity levels are in the range 0 to 7 and are defined as being for the following message
 types:
 <table>
@@ -352,25 +352,25 @@ types:
 <tr> <td> 7 </td> <td> Debug: debug-level messages </td> </tr>
 </table></td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logNotice>
-<tr><td class=doctop colspan=2>Method logNotice(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogNotice>
+<tr><td class=doctop colspan=2>Method LogNotice(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Notice level message.</td></tr>
 </table>
-<table class=doc width=100% cellspacing=3 id=logWarning>
-<tr><td class=doctop colspan=2>Method logWarning(message:String)</td></tr>
+<table class=doc width=100% cellspacing=3 id=LogWarning>
+<tr><td class=doctop colspan=2>Method LogWarning(message:String)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Logs a Warning level message.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=resetStatistics>
 <tr><td class=doctop colspan=2>Method resetStatistics()</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Reset the statistics count.</td></tr>
 <tr><td class=docleft width=1%>Information</td><td class=docright>The logger keeps a count of how many of each severity of message
-it has handled, you can use this method to reset that cound to zero.</td></tr>
+it has handled, you can use this Method To reset that cound To zero.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=setHost>
 <tr><td class=doctop colspan=2>Method setHost(value:String)</td></tr>
-<tr><td class=docleft width=1%>Description</td><td class=docright>set the host identifier used in log messages.</td></tr>
-<tr><td class=docleft width=1%>Information</td><td class=docright>When the logger is instantiated it attempts to get the hostname
-of the local machine, however you can override the identifier it uses
+<tr><td class=docleft width=1%>Description</td><td class=docright>set the host identifier used in Log messages.</td></tr>
+<tr><td class=docleft width=1%>Information</td><td class=docright>When the logger is instantiated it attempts To get the HostName
+of the Local machine, however you can override the identifier it uses
 by setting it manually.</td></tr>
 </table>
 <table class=doc width=100% cellspacing=3 id=getInstance>
@@ -407,10 +407,10 @@ by setting it manually.</td></tr>
 <table class=doc width=100% cellspacing=3 id=timestamp>
 <tr><td class=doctop colspan=2>Field timestamp:String</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>The timestamp of when the message was created.</td></tr>
-<tr><td class=docleft width=1%>Information</td><td class=docright>The timestamp is in RFC 3164 compatible format, for example:
+<tr><td class=docleft width=1%>Information</td><td class=docright>The timestamp is in RFC 5424 compatible format, for example:
 <pre>
-Sep 20 20:09:23
-Jan  1 07:23:57
+2009-09-27T12:21:57+01:00
+2007-02-13T08:09:10-05:00
 </pre></td></tr>
 </table>
 <br>
@@ -493,7 +493,7 @@ Set the UDP port to use to talk with the Syslog server.
 <table class=doc width=100% cellspacing=3 id=setFacility>
 <tr><td class=doctop colspan=2>Method setFacility(value:Int)</td></tr>
 <tr><td class=docleft width=1%>Description</td><td class=docright>Set the facility to use in the messages sent to the syslog server.</td></tr>
-<tr><td class=docleft width=1%>Information</td><td class=docright>Facilities are based on those defined in RFC 3164 for the BSD Syslog protocol.
+<tr><td class=docleft width=1%>Information</td><td class=docright>Facilities are based on those defined in RFC 5424 for the BSD Syslog protocol.
 Valid facility values are in the range 0 to 23 and are defined as being for the following message
 types. By default facility value 16 (local0) is used:
 <table>
@@ -537,12 +537,16 @@ types. By default facility value 16 (local0) is used:
 <br>
 <h2 id=modinfo>Module Information</h2>
 <table width=100%>
-<tr><th width=1%>Version</th><td>1.0.0</td></tr>
+<tr><th width=1%>Version</th><td>1.1.0</td></tr>
 <tr><th width=1%>License</th><td>Artistic License 2.0</td></tr>
 <tr><th width=1%>Author</th><td>Paul Maskelyne (Muttley)</td></tr>
 <tr><th width=1%>Copyright</th><td>(c) 2009 Paul Maskelyne</td></tr>
 <tr><th width=1%>E-Mail</th><td>muttley@muttleyville.org</td></tr>
 <tr><th width=1%>Website</th><td>http://www.muttleyville.org</td></tr>
+<tr><th width=1%>History</th><td>1.1.0</td></tr>
+<tr><th width=1%>History</th><td>Updated Syslog support to RFC5424</td></tr>
+<tr><th width=1%>History</th><td>1.0.1</td></tr>
+<tr><th width=1%>History</th><td>Minor documentation fixes</td></tr>
 <tr><th width=1%>History</th><td>1.0.0</td></tr>
 <tr><th width=1%>History</th><td>Initial Release</td></tr>
 </body></html>

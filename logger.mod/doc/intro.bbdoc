@@ -3,7 +3,7 @@
 This BlitzMax Logger module allows you to log messages with varying levels of severity to one or more log writers
 </p>
 <p>
-Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 3164 for the BSD Syslog protocol.
+Log writers are included which write messages to the console, to files and via UDP to Syslog servers. Logging severity levels are based on RFC 5424 for the BSD Syslog protocol.
 </p>
 <p>
 You can also create custom log writers by deriving a new one from the TLogWriter base class.
