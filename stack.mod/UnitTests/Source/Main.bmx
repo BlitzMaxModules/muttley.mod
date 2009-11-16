@@ -33,13 +33,7 @@ Type TStackTests Extends TTest
 	
 	
 	Method StackIsCreatedWithCorrectSize() {test}
-		assertEqualsI(_stack._size, INITIAL_STACK_SIZE)
-	End Method
-	
-	
-	
-	Method StackArrayIsCreatedWithCorrectSize() {test}
-		assertEqualsI(_stack._array.Length, INITIAL_STACK_SIZE)
+		assertEqualsI(_stack.GetSize(), INITIAL_STACK_SIZE)
 	End Method
 	
 	
@@ -94,7 +88,7 @@ Type TStackTests Extends TTest
 	
 	Method CannotOverfillStack() {test}
 		Local o:Object
-		For Local i:Int = 0 To _stack._size + 10
+		For Local i:Int = 0 To _stack.GetSize() + 10
 			o = New TStack
 			_stack.Push(o)
 		Next
@@ -105,45 +99,23 @@ Type TStackTests Extends TTest
 	
 	Method StackGrowsWhenNeeded() {test}
 		Local o:Object
-		For Local i:Int = 0 To _stack._size + 1
+		For Local i:Int = 0 To _stack.GetSize() + 1
 			o = New TStack
 			_stack.Push(o)
 		Next
-		assertTrue(INITIAL_STACK_SIZE < _stack._size)
-	End Method
-	
-	
-	
-	Method StackArrayGrowsWhenNeeded() {test}
-		Local o:Object
-		For Local i:Int = 0 To _stack._size + 1
-			o = New TStack
-			_stack.Push(o)
-		Next
-		assertTrue(INITIAL_STACK_SIZE < _stack._array.Length)
+		assertTrue(INITIAL_STACK_SIZE < _stack.GetSize())
 	End Method
 	
 	
 	
 	Method StackGrowsByTheCorrectAmount() {test}
 		Local o:Object
-		For Local i:Int = 0 To _stack._size + 1
+		For Local i:Int = 0 To _stack.GetSize() + 1
 			o = New TStack
 			_stack.Push(o)
 		Next
-		assertEqualsI(INITIAL_STACK_SIZE + INITIAL_GROW_SIZE, _stack._size)
+		assertEqualsI(INITIAL_STACK_SIZE + INITIAL_GROW_SIZE, _stack.GetSize())
 	End Method
-	
-	
-	
-	Method StackArrayGrowsByTheCorrectAmount() {test}
-		Local o:Object
-		For Local i:Int = 0 To _stack._size + 1
-			o = New TStack
-			_stack.Push(o)
-		Next
-		assertEqualsI(INITIAL_STACK_SIZE + INITIAL_GROW_SIZE, _stack._array.Length)
-	End Method	
 	
 	
 	
@@ -179,6 +151,18 @@ Type TStackTests Extends TTest
 		Local o:Object = New TStack
 		myStack.Push(o)
 		assertEquals(o, myStack.Pop())
+	End Method
+	
+	
+	
+	Method CanClearStack() {test}
+		For Local i:Int = 0 To INITIAL_STACK_SIZE - 1
+			_stack.Push(New TStack)
+		Next
+		_stack.Clear()
+		For Local i:Int = 0 To INITIAL_STACK_SIZE - 1
+			assertNull(_stack._array[i])
+		Next			
 	End Method
 	
 End Type

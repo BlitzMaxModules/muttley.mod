@@ -10,12 +10,21 @@ Type TStack
 	' to accomodate more objects
 	Field _growSize:Int
 	
-	' The current size of the stack
-	Field _size:Int
-	
 	' The index of the top entry on the stack
 	Field _top:Int
 
+	
+	
+	rem
+		bbdoc: Clears the stack
+	endrem
+	Method Clear()
+		For Local i:Int = 0 To _array.Length - 1
+			_array[i] = Null
+		Next
+		_top = -1
+	End Method
+	
 	
 	
 	rem
@@ -27,9 +36,9 @@ Type TStack
 		If size < 0 Or growSize < 0 Then Return Null
 		
 		Local stack:TStack = New TStack
-		stack._size = size
 		stack._array = New Object[size]
 		stack._growSize = growSize
+		
 		Return stack
 	End Function
 	
@@ -39,7 +48,7 @@ Type TStack
 		bbdoc: Returns the current size of the stack
 	endrem
 	Method GetSize:Int()
-		Return _size
+		Return _array.Length
 	End Method
 	
 	
@@ -48,8 +57,7 @@ Type TStack
 		bbdoc: Grows the stack by the amount specified when the stack was created
 	endrem
 	Method Grow()
-		_array = _array[.._size + _growSize]
-		_size:+_growSize
+		_array = _array[.._array.Length + _growSize]
 	End Method
 	
 	
@@ -59,7 +67,6 @@ Type TStack
 	endrem
 	Method New()
 		_growSize = 1
-		_size = 0
 		_top = -1
 	End Method
 
@@ -98,7 +105,7 @@ Type TStack
 	endrem
 	Method Push(o:Object)
 		_top:+1
-		If _top + 1 > _size
+		If _top + 1 > _array.Length
 			Grow()
 		End If
 		_array[_top] = o
