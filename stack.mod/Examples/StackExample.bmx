@@ -1,24 +1,12 @@
-'Version: 1.0.1
-'License: Artistic License 2.0
-'Author: Paul Maskelyne (Muttley)
-'Copyright: (c) 2009 Paul Maskelyne
-'E-Mail: muttley@muttleyville.org
-'Website: http://www.muttleyville.org
-'History: 1.0.2
-'History: Added example
-'History: 1.0.1
-'History: Missing README added
-'History: 1.0.0
-'History: Initial Release
 REM
 This file was created by the BLIde solution explorer and should not be modified from outside BLIde
 EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &HFF Program Info
-'Program: Array based Stack implementation
-'Version: 1
+'Program: StackExample
+'Version: 0
 'Subversion: 0
-'Revision: 2
+'Revision: 1
 '#EndRegion &HFF
 
 
@@ -26,28 +14,13 @@ EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H01 Compile Options
 SuperStrict
-Rem
-    bbdoc:muttley\stack
-End Rem
-Module muttley.stack
-ModuleInfo "Version: 1.0.1"
-ModuleInfo "License: Artistic License 2.0"
-ModuleInfo "Author: Paul Maskelyne (Muttley)"
-ModuleInfo "Copyright: (c) 2009 Paul Maskelyne"
-ModuleInfo "E-Mail: muttley@muttleyville.org"
-ModuleInfo "Website: http://www.muttleyville.org"
-ModuleInfo "History: 1.0.1"
-ModuleInfo "History: Missing README added"
-ModuleInfo "History: 1.0.0"
-ModuleInfo "History: Initial Release"
-ModuleInfo ""
 '#EndRegion &H01
 
 
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H0F Framework
- 
+Import muttley.stack
 '#EndRegion &H0F
 
 
@@ -61,18 +34,18 @@ ModuleInfo ""
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H04 MyNamespace
-'LIB
-'guid:f05c3637_a1cf_4380_b37b_2d623459e62a
+'CONSOLE
+'guid:5a89ed68_d7ae_4130_8616_6bd760bc137c
 Private
-TYPE z_f05c3637_a1cf_4380_b37b_2d623459e62a_3_0 abstract  'Resource folder
+TYPE z_5a89ed68_d7ae_4130_8616_6bd760bc137c_3_0 abstract  'Resource folder
 End Type
 
 
-TYPE z_blide_bgf05c3637_a1cf_4380_b37b_2d623459e62a Abstract
-    Const Name:string = "Array based Stack implementation" 'This string contains the name of the program
-    Const MajorVersion:Int = 1  'This Const contains the major version number of the program
+TYPE z_blide_bg5a89ed68_d7ae_4130_8616_6bd760bc137c Abstract
+    Const Name:string = "StackExample" 'This string contains the name of the program
+    Const MajorVersion:Int = 0  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  2  'This Const contains the revision number of the current program version
+    Const Revision:Int =  1  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32
@@ -99,20 +72,20 @@ TYPE z_blide_bgf05c3637_a1cf_4380_b37b_2d623459e62a Abstract
 EndType
 
 
-Type z_My_f05c3637_a1cf_4380_b37b_2d623459e62a Abstract 'This type has all the run-tima binary information of your assembly
-    Global Application:z_blide_bgf05c3637_a1cf_4380_b37b_2d623459e62a  'This item has all the currently available assembly version information.
-    Global Resources:z_f05c3637_a1cf_4380_b37b_2d623459e62a_3_0  'This item has all the currently available incbined files names and relative location.
+Type z_My_5a89ed68_d7ae_4130_8616_6bd760bc137c Abstract 'This type has all the run-tima binary information of your assembly
+    Global Application:z_blide_bg5a89ed68_d7ae_4130_8616_6bd760bc137c  'This item has all the currently available assembly version information.
+    Global Resources:z_5a89ed68_d7ae_4130_8616_6bd760bc137c_3_0  'This item has all the currently available incbined files names and relative location.
 End Type
 
 
-Global My:z_My_f05c3637_a1cf_4380_b37b_2d623459e62a 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
+Global My:z_My_5a89ed68_d7ae_4130_8616_6bd760bc137c 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
 Public
 '#EndRegion &H04 MyNamespace
 
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H03 Includes
-Include "Source\TStack.bmx"
+Include "Main.bmx"
  
 '#EndRegion &H03
 
