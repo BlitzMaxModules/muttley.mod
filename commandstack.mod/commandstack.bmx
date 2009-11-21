@@ -14,6 +14,10 @@ EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H01 Compile Options
 SuperStrict
+Rem
+    bbdoc:muttley\commandstack
+End Rem
+Module muttley.commandstack
 '#EndRegion &H01
 
 
@@ -21,6 +25,7 @@ SuperStrict
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H0F Framework
 Import muttley.stack
+Import brl.linkedlist
 '#EndRegion &H0F
 
 
@@ -85,7 +90,9 @@ Public
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H03 Includes
+Include "Source\TCommand.bmx"
 Include "Source\TCommandStack.bmx"
+Include "Source\TMacroCommand.bmx"
  
 '#EndRegion &H03
 
