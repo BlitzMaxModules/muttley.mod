@@ -26,6 +26,7 @@ Module muttley.commandstack
 '#Region &H0F Framework
 Import muttley.stack
 Import brl.linkedlist
+Import brl.reflection
 '#EndRegion &H0F
 
 

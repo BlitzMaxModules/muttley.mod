@@ -28,18 +28,31 @@ Type TMacroCommand Extends TCommand Final
 	End Method
 
 	
-		
+	
+	rem
+		bbdoc: Returns whether this macro can be undone
+		returns: True if the macro can be undone, otherwise False
+		about: A macro command can only be undone if all the individual commands
+		in the macro can also be undone
+	endrem	
 	Method CanBeUndone:Int()
 		For Local command:TCommand = EachIn _commands
+		
 			If Not command.CanBeUndone()
 				Return False
 			End If
+			
 		Next
+		
 		Return True
 	End Method
 	
 	
 		
+	rem
+		bbdoc: Creates a macro command from a provided TList of commands
+		returns: TMacroCommand
+	endrem
 	Function Create:TMacroCommand(commandList:TList)
 		Local macro:TMacroCommand = New TMacroCommand
 		
@@ -69,15 +82,16 @@ Type TMacroCommand Extends TCommand Final
 
 	
 
-
-	
-		
+	Rem
+		bbdoc: Attempts to merge two commands
+		about: Macro commands by their very nature cannot be merged so this just returns False
+	End Rem
 	Method Merge:Int(command:TCommand)
 		Return False
 	End Method
 
-	
 		
+	
 	rem
 		bbdoc: Default constructor
 	endrem	
@@ -86,16 +100,10 @@ Type TMacroCommand Extends TCommand Final
 	End Method
 
 	
-		
-	Method Unexecute:Int()
-		Local reversedCommands:TList = _commands.Reversed()
-		For Local command:TCommand = EachIn reversedCommands
-			command.Execute()
-		Next
-		Return reversedCommands.Count()
-	End Method
 	
-	
+	Rem
+		bbdoc: Returns a human readable description of the macro command
+	End Rem
 	Method ToString:String()
 		Local asString:String = "Macro Command:~n"
 		
@@ -104,6 +112,22 @@ Type TMacroCommand Extends TCommand Final
 		Next
 	
 		Return asString
+	End Method	
+	
+
+	
+	Rem
+		bbdoc: Undoes the command
+		about: Calls the unexecute method of each command in the macro in reverse order
+	End Rem
+	Method Unexecute:Int()
+		Local reversedCommands:TList = _commands.Reversed()
+		
+		For Local command:TCommand = EachIn reversedCommands
+			command.Execute()
+		Next
+		
+		Return reversedCommands.Count()
 	End Method
 	
 End Type

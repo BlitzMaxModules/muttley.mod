@@ -50,6 +50,20 @@ Type TCommand
 	
 	
 	rem
+		bbdoc: Determine whether the provided command is the same type as ourselves
+		returns: True if the same type, otherwise false
+	endrem
+	Method SameCommandType:Int(command:TCommand)
+		If TTypeId.ForObject(Self) = TTypeId.ForObject(command)
+			Return True
+		Else
+			Return False
+		End If
+	End Method
+	
+	
+	
+	rem
 		bbdoc: Returns a human readable description of the class
 	endrem
 	Method ToString:String()

@@ -3,10 +3,10 @@ This file was created by the BLIde solution explorer and should not be modified 
 EndRem
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &HFF Program Info
-'Program: muttley.commandstack Unit Tests
-'Version: 1
+'Program: muttley.commandstack Example
+'Version: 0
 'Subversion: 0
-'Revision: 0
+'Revision: 1
 '#EndRegion &HFF
 
 
@@ -20,8 +20,7 @@ SuperStrict
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H0F Framework
-Framework muttley.commandstack
-Import bah.maxunit
+Import muttley.commandstack
 '#EndRegion &H0F
 
 
@@ -36,17 +35,17 @@ Import bah.maxunit
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H04 MyNamespace
 'GUI
-'guid:3287dcb9_4174_4510_8679_43b80ed0e224
+'guid:44c9e9cc_f59b_43e7_8ec7_751f1fe58d49
 Private
-TYPE z_3287dcb9_4174_4510_8679_43b80ed0e224_3_0 abstract  'Resource folder
+TYPE z_44c9e9cc_f59b_43e7_8ec7_751f1fe58d49_3_0 abstract  'Resource folder
 End Type
 
 
-TYPE z_blide_bg3287dcb9_4174_4510_8679_43b80ed0e224 Abstract
-    Const Name:string = "muttley.commandstack Unit Tests" 'This string contains the name of the program
-    Const MajorVersion:Int = 1  'This Const contains the major version number of the program
+TYPE z_blide_bg44c9e9cc_f59b_43e7_8ec7_751f1fe58d49 Abstract
+    Const Name:string = "muttley.commandstack Example" 'This string contains the name of the program
+    Const MajorVersion:Int = 0  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  0  'This Const contains the revision number of the current program version
+    Const Revision:Int =  1  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32
@@ -73,23 +72,22 @@ TYPE z_blide_bg3287dcb9_4174_4510_8679_43b80ed0e224 Abstract
 EndType
 
 
-Type z_My_3287dcb9_4174_4510_8679_43b80ed0e224 Abstract 'This type has all the run-tima binary information of your assembly
-    Global Application:z_blide_bg3287dcb9_4174_4510_8679_43b80ed0e224  'This item has all the currently available assembly version information.
-    Global Resources:z_3287dcb9_4174_4510_8679_43b80ed0e224_3_0  'This item has all the currently available incbined files names and relative location.
+Type z_My_44c9e9cc_f59b_43e7_8ec7_751f1fe58d49 Abstract 'This type has all the run-tima binary information of your assembly
+    Global Application:z_blide_bg44c9e9cc_f59b_43e7_8ec7_751f1fe58d49  'This item has all the currently available assembly version information.
+    Global Resources:z_44c9e9cc_f59b_43e7_8ec7_751f1fe58d49_3_0  'This item has all the currently available incbined files names and relative location.
 End Type
 
 
-Global My:z_My_3287dcb9_4174_4510_8679_43b80ed0e224 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
+Global My:z_My_44c9e9cc_f59b_43e7_8ec7_751f1fe58d49 'This GLOBAL has all the run-time binary information of your assembly, and embeded resources shortcuts.
 Public
 '#EndRegion &H04 MyNamespace
 
 
 '------------------------------------------------------------------------------------------------------------------------------------------------------
 '#Region &H03 Includes
-Include "Source\Main.bmx"
-Include "Source\TUnitTestCommand.bmx"
-Include "Source\TUndoableUnitTestCommand.bmx"
-Include "Source\TMergeableUnitTestCommand.bmx"
+Include "Main.bmx"
+Include "TPlotColourCommand.bmx"
+Include "TClearGridCommand.bmx"
  
 '#EndRegion &H03
 

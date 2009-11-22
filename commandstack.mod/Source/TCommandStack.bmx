@@ -9,65 +9,139 @@ rem
 '
 endrem
 
+rem
+	bbdoc: Command Stack class
+	about: The command stack manages the running of application commands, where
+	possible adding completed commands to undo/redo stacks.  This allows you to
+	provide unlimited undo/redo level support to your applications.
+endrem
 Type TCommandStack
-	Field _undoCommands:TStack
+
+	Const INITIAL_STACK_SIZE:Int = 10
+	Const STACK_GROW_SIZE:Int = 10
+	
+	' Stack of commands that can be redone
 	Field _redoCommands:TStack
-	Field _undoCommandCountAtLastSave:Int = 0
+	
+	' Used to inform the application whether there are unsaved changes made
+	Field _undoCommandCountAtLastSave:Int
+	
+	' Stack of commands that can be undone
+	Field _undoCommands:TStack
+	
+	
 	
 	rem
-		bbdoc: Adds the command to the command stack (which may involve losing Redo or even
-		potentially Undo information) and issues the command.
-		returns:
+		bbdoc: Adds the command to the command stack and issues the command.
+		about: If the command runs successfully and can be undone, it will be added
+		to the undo list.  If it ran OK but can't be undone both the undo and redo
+		stacks are cleared and the command is not added to the undo stack.
 	endrem
 	Method AddCommand(command:TCommand)
 		If command.Execute()
-
-			If Not command.CanBeUndone()
-				'This command cannot be undone, so clear the stack  - we don't need it any more
-				_undoCommands.Clear()
-				_redoCommands.Clear()
-				_undoCommandCountAtLastSave = -1 ' We can't undo the get to the last saved state
-				' No point pushing the command on the stack - we can't undo it!
+			If command.CanBeUndone()
+				AppendCommand(command)
 			Else
-				' We can't redo anything having just done something
-				_redoCommands.Clear()
-				
-				If _undoCommandCountAtLastSave > _undoCommands.GetSize()
-					_undoCommandCountAtLastSave = -1 ' We can't undo to get to the last saved state
-				End If
-				
-				Rem
-				Attempts to merge the command on the tope of the stack.
-				EndRem
-				If _undoCommands.GetSize() = 0 Or Not TCommand(_undoCommands.Peek()).Merge(command)
-					_undoCommands.Push(command)
-				EndIf
+				'This command cannot be undone, so clear the stacks - we don't need them any more
+				ClearStacks()
 			End If
 		End If
 	End Method
 
+	
+	
+	rem
+		bbdoc: Appends the command to the stack, merging where possible
+	endrem
+	Method AppendCommand(command:TCommand)
+		' We can't redo anything having just done something so clear the redo stack
+		_redoCommands.Clear()
+				
+		If _undoCommandCountAtLastSave > UndoCount()
+			' We can't undo to get to the last saved state
+			_undoCommandCountAtLastSave = -1
+		End If
+				
+		' Attempts to merge eith the command on the top of the stack.
+		If UndoCount() = 0 Or Not TCommand(_undoCommands.Peek()).Merge(command)
+			' Commands can't be merged so we push it onto the top of the stack
+			_undoCommands.Push(command)
+		EndIf
+	End Method
+	
+	
+	
+	rem
+		bbdoc: Return whether there are commands available to redo or not
+		returns: True if redo is available, otherwise False
+	endrem
 	Method CanRedo:Int()
-		Return _redoCommands.GetSize() > 0
+		Return RedoCount() > 0
 	End Method
 	
+	
+	
+	rem
+		bbdoc: Return whether there are commands available to undo or not
+		returns: True if undo is available, otherwise False
+	endrem	
 	Method CanUndo:Int()
-		Return _undoCommands.GetSize() > 0
+		Return UndoCount() > 0
 	End Method
 	
+	
+
+	rem
+		bbdoc: Clears the undo and redo stacks
+	endrem
+	Method ClearStacks()
+		_undoCommands.Clear()
+		_redoCommands.Clear()
+		
+		' We can't undo to get to the last saved state
+		_undoCommandCountAtLastSave = -1
+	End Method
+	
+	
+	
+	rem
+		bbdoc: Return whether the application is dirty or not
+		returns: True if the application is dirty, otherwise False
+		about: The application is classed as dirty if they number of undo commands
+		in the stack is different to the number the last time we were notified of
+		a save.
+	endrem
 	Method IsDirty:Int()
-		Return _undoCommandCountAtLastSave <> _undoCommands.GetSize()
+		Return _undoCommandCountAtLastSave <> UndoCount()
 	End Method
 	
+	
+	
+	rem
+		bbdoc: Default constructor
+	endrem
 	Method New()
-		_undoCommands = TStack.Create(10, 10)
-		_redoCommands = TStack.Create(10, 10)
+		_undoCommands = TStack.Create(INITIAL_STACK_SIZE, STACK_GROW_SIZE)
+		_redoCommands = TStack.Create(INITIAL_STACK_SIZE, STACK_GROW_SIZE)
 		_undoCommandCountAtLastSave = 0
 	End Method
 	
+	
+	
+	rem
+		bbdoc: Notify the command stack that the application has saved
+		about: This updates the counter used to determine whether the application is
+		dirty or not.
+	endrem
 	Method ProgressSaved()
-		_undoCommandCountAtLastSave = _undoCommands.GetSize()
+		_undoCommandCountAtLastSave = UndoCount()
 	End Method
 
+	
+	
+	rem
+		bbdoc: Attempts to redo the top command on the redo stack
+	endrem
 	Method Redo()
 		If CanRedo()
 			Local command:TCommand = TCommand(_redoCommands.Pop())
@@ -75,7 +149,21 @@ Type TCommandStack
 			_undoCommands.Push(command)
 		End If
 	End Method
-			
+	
+	
+	
+	rem
+		bbdoc: Get the number of commands in the redo stack
+	endrem
+	Method RedoCount:Int()
+		Return _redoCommands.GetCount()
+	End Method
+	
+	
+	
+	rem
+		bbdoc: Attempts to undo the top command on the redo stack
+	endrem			
 	Method Undo()
 		If CanUndo()
 			Local command:TCommand = TCommand(_undoCommands.Pop())
@@ -84,4 +172,13 @@ Type TCommandStack
 		End If
 	End Method
 
+	
+	
+	rem
+		bbdoc: Get the number of commands in the undo stack
+	endrem
+	Method UndoCount:Int()
+		Return _undoCommands.GetCount()
+	End Method
+	
 End Type
