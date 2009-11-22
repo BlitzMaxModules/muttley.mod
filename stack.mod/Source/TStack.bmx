@@ -45,6 +45,15 @@ Type TStack
 	
 	
 	rem
+		bbdoc: Returns the number of objects on the stack
+	endrem
+	Method GetCount:Int()
+		Return _top + 1
+	End Method
+	
+	
+	
+	rem
 		bbdoc: Returns the current size of the stack
 	endrem
 	Method GetSize:Int()

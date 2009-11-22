@@ -165,4 +165,21 @@ Type TStackTests Extends TTest
 		Next			
 	End Method
 	
+	
+	
+	Method CanCountEntriesOnStack() {test}
+		_stack.GetCount()
+	End Method
+	
+	
+	Method CorrectEntriesCountOnStack() {test}
+		For Local i:Int = 1 To 23
+			_stack.Push(New TStack)
+		Next
+		For Local i:Int = 1 To 6
+			_stack.Pop()
+		Next
+		assertEqualsI(17, _stack.GetCount())
+	End Method
+	
 End Type

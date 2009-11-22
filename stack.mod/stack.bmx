@@ -4,6 +4,8 @@
 'Copyright: (c) 2009 Paul Maskelyne
 'E-Mail: muttley@muttleyville.org
 'Website: http://www.muttleyville.org
+'History: 1.0.3
+'History: Added GetCount() method
 'History: 1.0.2
 'History: Added example
 'History: 1.0.1
@@ -18,7 +20,7 @@ EndRem
 'Program: Array based Stack implementation
 'Version: 1
 'Subversion: 0
-'Revision: 2
+'Revision: 3
 '#EndRegion &HFF
 
 
@@ -36,6 +38,8 @@ ModuleInfo "Author: Paul Maskelyne (Muttley)"
 ModuleInfo "Copyright: (c) 2009 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
+ModuleInfo "History: 1.0.2"
+ModuleInfo "History: Added example"
 ModuleInfo "History: 1.0.1"
 ModuleInfo "History: Missing README added"
 ModuleInfo "History: 1.0.0"
@@ -72,7 +76,7 @@ TYPE z_blide_bgf05c3637_a1cf_4380_b37b_2d623459e62a Abstract
     Const Name:string = "Array based Stack implementation" 'This string contains the name of the program
     Const MajorVersion:Int = 1  'This Const contains the major version number of the program
     Const MinorVersion:Int = 0  'This Const contains the minor version number of the program
-    Const Revision:Int =  2  'This Const contains the revision number of the current program version
+    Const Revision:Int =  3  'This Const contains the revision number of the current program version
     Const VersionString:String = MajorVersion + "." + MinorVersion + "." + Revision   'This string contains the assembly version in format (MAJOR.MINOR.REVISION)
     Const AssemblyInfo:String = Name + " " + MajorVersion + "." + MinorVersion + "." + Revision   'This string represents the available assembly info.
     ?win32
