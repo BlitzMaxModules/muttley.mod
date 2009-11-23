@@ -4,7 +4,7 @@ Rem
 End Rem
 Type TClearGridCommand Extends TCommand
 
-	Field oldColours:Int[16, 16]
+	Field _oldColours:TColour[,]
 		
 	Rem
 		bbdoc:Returns whether the command can be undone or not
@@ -18,12 +18,8 @@ Type TClearGridCommand Extends TCommand
 		bbdoc:Executes the command
 	End Rem
 	Method Execute:Int()
-		For Local x:Int = 0 To 15
-			For Local y:Int = 0 To 15
-				oldColours[x, y] = colours[x, y]
-				colours[x, y] = 0
-			Next
-		Next
+		_oldColours = TEditor.GetInstance().CloneGrid()
+		TEditor.GetInstance().ClearGrid()
 		Return True
 	End Method
 
@@ -38,11 +34,7 @@ Type TClearGridCommand Extends TCommand
 		bbdoc:Undoes the command
 	End Rem
 	Method Unexecute()
-		For Local x:Int = 0 To 15
-			For Local y:Int = 0 To 15
-				colours[x, y] = oldColours[x, y]
-			Next
-		Next
+		TEditor.GetInstance().SetGrid(_oldColours)
 	End Method
 
 End Type

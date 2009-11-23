@@ -88,6 +88,8 @@ Public
 Include "Main.bmx"
 Include "TPlotColourCommand.bmx"
 Include "TClearGridCommand.bmx"
+Include "TEditor.bmx"
+Include "TColour.bmx"
  
 '#EndRegion &H03
 

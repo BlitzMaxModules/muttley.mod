@@ -4,8 +4,8 @@ Rem
 End Rem
 Type TPlotColourCommand Extends TCommand
 
-	Field colour:Int
-	Field lastColour:Int
+	Field colour:TColour
+	Field lastColour:TColour
 	Field x:Int
 	Field y:Int
 		
@@ -16,7 +16,7 @@ Type TPlotColourCommand Extends TCommand
 		Return True
 	End Method
 
-	Function Create:TCommand(plotX:Int, plotY:Int, colour:Int)
+	Function Create:TCommand(plotX:Int, plotY:Int, colour:TColour)
 		Local command:TPlotColourCommand = New TPlotColourCommand
 		command.x = plotX
 		command.y = plotY
@@ -28,18 +28,21 @@ Type TPlotColourCommand Extends TCommand
 		bbdoc:Executes the command
 	End Rem
 	Method Execute:Int()
-		Local xCell:Int = (x - 200) / 25
-		Local yCell:Int = (y - 100) / 25
+		
+		If Not TEditor.GetInstance().MouseInCell(x, y) Then Return False
+		
+		Local xCell:Int = TEditor.GetInstance().GetMouseCellX(x)
+		Local yCell:Int = TEditor.GetInstance().GetMouseCellY(y)
 	
-		If colours[xCell, yCell] = colour
-			' Nothing to do, cell is already the correct colour
+		lastColour = TEditor.GetInstance().GetCell(xCell, yCell)
+
+		If lastColour.Equals(colour)
 			Return False
 		Else
-			' Save the current value so we can undo
-			lastColour = colours[xCell, yCell]
-			colours[xCell, yCell] = colour
+			TEditor.GetInstance().SetCell(xCell, yCell, colour)
 			Return True
 		End If
+		
 	End Method
 
 	Rem
@@ -53,10 +56,11 @@ Type TPlotColourCommand Extends TCommand
 		bbdoc:Undoes the command
 	End Rem
 	Method Unexecute()
-		Local xCell:Int = (x - 200) / 25
-		Local yCell:Int = (y - 100) / 25
-		
-		colours[xCell, yCell] = lastColour
+		Local xCell:Int = TEditor.GetInstance().GetMouseCellX(x)
+		Local yCell:Int = TEditor.GetInstance().GetMouseCellY(y)
+
+		TEditor.GetInstance().SetCell(xCell, yCell, lastColour)
+
 	End Method
 
 End Type
