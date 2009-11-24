@@ -18,12 +18,9 @@ Type TEditor
 	Global _instance:TEditor
 
 	Field _colours:TColour[,]
-	
-	
 
 	
-	
-	
+	' Clears the grid by setting all cells to black	
 	Method ClearGrid()
 		For Local x:Int = 0 To GRID_SIZE_X - 1
 			For Local y:Int = 0 To GRID_SIZE_Y - 1
@@ -34,6 +31,7 @@ Type TEditor
 	
 	
 	
+	' Return a clone of the current grid values
 	Method CloneGrid:TColour[,] ()
 		Local copy:TColour[,] = New TColour[GRID_SIZE_X, GRID_SIZE_X]
 		
@@ -48,36 +46,38 @@ Type TEditor
 	
 	
 	
+	' Draw blocks for each cell in its specified colour
 	Method DrawCells()
 		For Local x:Int = 0 To GRID_SIZE_X - 1
 			For Local y:Int = 0 To GRID_SIZE_Y - 1
 				_colours[x, y].Set()
-				DrawRect(200 + (x * 25), 100 + (y * 25), 25, 25)
+				DrawRect(GRID_LEFT + (x * CELL_SIZE_X), GRID_TOP + (y * CELL_SIZE_Y), CELL_SIZE_X, CELL_SIZE_Y)
 			Next
 		Next	
 	End Method
 
 	
+	
+	' Draws a nice grid
 	Method DrawGrid()
 		SetColor(255, 255, 255)
 		
 		' Draw horizontal grid lines
 		For Local i:Int = 0 To GRID_SIZE_X
-			DrawLine(GRID_LEFT, GRID_TOP + (i * 25),  ..
-				GRID_RIGHT, GRID_TOP + (i * 25) ..
-			)
+			Local y:Int = GRID_TOP + (i * CELL_SIZE_Y)
+			DrawLine(GRID_LEFT, y, GRID_RIGHT, y)
 		Next
 		
 		' Draw vertical grid lines
 		For Local i:Int = 0 To GRID_SIZE_Y
-			DrawLine(GRID_LEFT + (i * 25), GRID_TOP,  ..
-				GRID_LEFT + (i * 25), GRID_BOTTOM ..
-			)
+			Local x:Int = GRID_LEFT + (i * CELL_SIZE_X)
+			DrawLine(x, GRID_TOP, x, GRID_BOTTOM)
 		Next
 	End Method
 
 	
 	
+	' Get the colour in the specified cell
 	Method GetCell:TColour(x:Int, y:Int)
 		If x < GRID_SIZE_X And y < GRID_SIZE_Y
 			Return _colours[x, y]
@@ -97,28 +97,35 @@ Type TEditor
 	EndFunction
 		
 		
-		
+	
+	' Translate a MouseX position into a cell X position
 	Method GetMouseCellX:Int(x:Int)
 		Return (x - GRID_LEFT) / CELL_SIZE_X
 	End Method
 	
+	
+	
+	' Translate a MouseY position into a cell Y position
 	Method GetMouseCellY:Int(y:Int)
 		Return (y - GRID_TOP) / CELL_SIZE_Y
 	End Method
 	
-	Method Initialise()
-		_colours = New TColour[GRID_SIZE_X, GRID_SIZE_Y]
-		ClearGrid()
-	End Method
 	
 	
-	
-	Method MouseInCell:Int(x:Int, y:Int)
+	' Work out whether the provided X & Y positions are in a cell or not
+	Method InCell:Int(x:Int, y:Int)
 		If x < GRID_LEFT Or x > GRID_RIGHT Or y < GRID_TOP Or y > GRID_BOTTOM
 			Return False
 		Else
 			Return True
 		EndIf
+	End Method
+	
+	
+		
+	Method Initialise()
+		_colours = New TColour[GRID_SIZE_X, GRID_SIZE_Y]
+		ClearGrid()
 	End Method
 	
 	
@@ -137,6 +144,8 @@ Type TEditor
 	End Method
 	
 	
+	
+	' Set the specified cell to a colour
 	Method SetCell(x:Int, y:Int, colour:TColour)
 		If x < GRID_SIZE_X And y < GRID_SIZE_Y
 			_colours[x, y] = colour
@@ -144,6 +153,8 @@ Type TEditor
 	End Method
 	
 	
+	
+	' Set the entire grid to the grid specified
 	Method SetGrid(grid:TColour[,])
 		For Local x:Int = 0 To GRID_SIZE_X - 1
 			For Local y:Int = 0 To GRID_SIZE_Y - 1
