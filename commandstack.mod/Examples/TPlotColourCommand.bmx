@@ -1,6 +1,5 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
 Rem
-	bbdoc:Undocumented type
+	bbdoc: Plots a colour into the grid
 End Rem
 Type TPlotColourCommand Extends TCommand
 
@@ -72,7 +71,7 @@ Type TPlotColourCommand Extends TCommand
 		bbdoc:Attempts to merge two commands
 	End Rem
 	Method Merge:Int(command:TCommand)
-		' We can't merge this command
+		' We don't need to merge this command as we de-duplicate in the execute method
 		Return False
 	End Method
 

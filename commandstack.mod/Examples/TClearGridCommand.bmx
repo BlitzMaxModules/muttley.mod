@@ -1,6 +1,5 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
 Rem
-	bbdoc:Undocumented type
+	bbdoc:Command that clears all cells in the grid
 End Rem
 Type TClearGridCommand Extends TCommand
 
@@ -21,8 +20,7 @@ Type TClearGridCommand Extends TCommand
 		bbdoc: Create a copy of the command
 	endrem
 	Method Copy:TClearGridCommand()
-		Local command:TClearGridCommand = New TClearGridCommand
-		Return command
+		Return New TClearGridCommand
 	End Method
 
 	
@@ -44,8 +42,9 @@ Type TClearGridCommand Extends TCommand
 		bbdoc:Attempts to merge two commands
 	End Rem
 	Method Merge:Int(command:TCommand)
-		' We can't merge this
-		Return False
+		' We can merge with other clear grid commands, and
+		' we don't actually have to do anything fancy to do so.
+		Return SameCommandType(command)
 	End Method
 
 	

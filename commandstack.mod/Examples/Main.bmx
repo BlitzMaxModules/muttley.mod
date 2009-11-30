@@ -44,6 +44,9 @@ While Not KeyHit(KEY_ESCAPE) And Not AppTerminate()
 	
 	If KeyHit(KEY_P)
 		If Not recordingMacro And macroCommand
+			' Always use a copy of the macro so that new instances of the commands
+			' are used, otherwise the undo states for previously run macro commands
+			' will be modified which is not desired.
 			commandStack.AddCommand(macroCommand.Copy())
 		End If
 	End If
