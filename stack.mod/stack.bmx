@@ -1,4 +1,4 @@
-'Version: 1.0.1
+'Version: 1.0.3
 'License: Artistic License 2.0
 'Author: Paul Maskelyne (Muttley)
 'Copyright: (c) 2009 Paul Maskelyne
@@ -38,6 +38,8 @@ ModuleInfo "Author: Paul Maskelyne (Muttley)"
 ModuleInfo "Copyright: (c) 2009 Paul Maskelyne"
 ModuleInfo "E-Mail: muttley@muttleyville.org"
 ModuleInfo "Website: http://www.muttleyville.org"
+ModuleInfo "History: 1.0.3"
+ModuleInfo "History: Added GetCount() method"
 ModuleInfo "History: 1.0.2"
 ModuleInfo "History: Added example"
 ModuleInfo "History: 1.0.1"
