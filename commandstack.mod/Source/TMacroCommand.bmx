@@ -141,7 +141,7 @@ Type TMacroCommand Extends TCommand Final
 		Local reversedCommands:TList = _commands.Reversed()
 		
 		For Local command:TCommand = EachIn reversedCommands
-			command.Execute()
+			command.Unexecute()
 		Next
 		
 		Return reversedCommands.Count()
