@@ -17,6 +17,16 @@ Type TClearGridCommand Extends TCommand
 
 
 	
+	rem
+		bbdoc: Create a copy of the command
+	endrem
+	Method Copy:TClearGridCommand()
+		Local command:TClearGridCommand = New TClearGridCommand
+		Return command
+	End Method
+
+	
+	
 	Rem
 		bbdoc:Executes the command
 	End Rem

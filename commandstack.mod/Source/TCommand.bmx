@@ -37,6 +37,15 @@ Type TCommand
 	
 	
 	rem
+		bbdoc: Returns a copy of the command
+		returns: TCommand
+		about: Must return an exact copy of the TCommand pre-execution
+	endrem
+	Method Copy:TCommand() Abstract
+	
+	
+	
+	rem
 		bbdoc: Attempts to merge two commands
 		returns: True if the commands have been merged, otherwise False
 		about: If two identical commands are performed in quick succession it is

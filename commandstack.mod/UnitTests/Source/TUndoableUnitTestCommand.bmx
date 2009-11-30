@@ -24,6 +24,14 @@ Type TUndoableUnitTestCommand Extends TCommand
 	End Method
 
 	Rem
+		bbdoc:Returns a copy of the command
+	End Rem
+	Method Copy:TUndoableUnitTestCommand()
+		' Can't copy this one
+		Return Null
+	End Method
+
+	Rem
 		bbdoc:Attempts to merge two commands
 	End Rem
 	Method Merge:Int(command:TCommand)

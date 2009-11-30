@@ -20,6 +20,12 @@ Type TCommandStack
 	Const INITIAL_STACK_SIZE:Int = 10
 	Const STACK_GROW_SIZE:Int = 10
 	
+	' A macro command that can be recorded to
+	Field _macroToRecordTo:TMacroCommand
+	
+	' Whether a macro is being recorded or not
+	Field _macroRecording:Int
+	
 	' Stack of commands that can be redone
 	Field _redoCommands:TStack
 	
@@ -38,6 +44,11 @@ Type TCommandStack
 		stacks are cleared and the command is not added to the undo stack.
 	endrem
 	Method AddCommand(command:TCommand)
+		If _macroRecording
+			If Not _macroToRecordTo Then _macroToRecordTo = New TMacroCommand
+			_macroToRecordTo.AddCommand(command.Copy())
+		End If
+		
 		If command.Execute()
 			If command.CanBeUndone()
 				AppendCommand(command)
@@ -124,6 +135,7 @@ Type TCommandStack
 		_undoCommands = TStack.Create(INITIAL_STACK_SIZE, STACK_GROW_SIZE)
 		_redoCommands = TStack.Create(INITIAL_STACK_SIZE, STACK_GROW_SIZE)
 		_undoCommandCountAtLastSave = 0
+		_macroRecording = False
 	End Method
 	
 	
@@ -138,7 +150,8 @@ Type TCommandStack
 	End Method
 
 	
-	
+
+		
 	rem
 		bbdoc: Attempts to redo the top command on the redo stack
 	endrem
@@ -157,6 +170,35 @@ Type TCommandStack
 	endrem
 	Method RedoCount:Int()
 		Return _redoCommands.GetCount()
+	End Method
+	
+	
+	
+	rem
+		bbdoc: Tells the command stack to start recording executed commands into
+		a macro command
+	endrem
+	Method StartRecordingMacro()
+		If Not _macroRecording
+			_macroRecording = True
+			_macroToRecordTo = New TMacroCommand
+		End If
+	End Method
+	
+	
+	
+	rem
+		bbdoc: Tells the command stack top stop recording executed commnds into
+		a macro command
+		returns: A TMacroCommand instance holding all the commands executed during recording
+	endrem
+	Method StopRecordingMacro:TMacroCommand()
+		Local macroCommand:TMacroCommand = Null
+		If _macroRecording
+			_macroRecording = False
+			macroCommand = _macroToRecordTo
+		End If
+		Return macroCommand
 	End Method
 	
 	

@@ -48,7 +48,24 @@ Type TMacroCommand Extends TCommand Final
 	End Method
 	
 	
+	
+	rem
+		bbdoc: Returns a copy of the macro
+	endrem
+	Method Copy:TCommand()
+		Local macro:TMacroCommand = New TMacroCommand
 		
+		For Local command:TCommand = EachIn _commands
+		
+			macro.AddCommand(command.Copy())
+		
+		Next
+		
+		Return macro
+	End Method
+	
+	
+	
 	rem
 		bbdoc: Creates a macro command from a provided TList of commands
 		returns: TMacroCommand

@@ -36,7 +36,9 @@ While Not KeyHit(KEY_ESCAPE) And Not AppTerminate()
 	If KeyHit(KEY_R) And Not (KeyDown(KEY_LCONTROL) Or KeyDown(KEY_RCONTROL))
 		recordingMacro:~True
 		If recordingMacro
-			macroCommand = New TMacroCommand
+			commandStack.StartRecordingMacro()
+		Else
+			macroCommand = commandStack.StopRecordingMacro()
 		End If
 	End If
 	
@@ -106,8 +108,5 @@ End Function
 
 
 Function SubmitCommand(command:TCommand, recording:Int, macroCommand:TMacroCommand = Null)
-	If recording And macroCommand
-		macroCommand.AddCommand(command)
-	End If
 	commandStack.AddCommand(command)
 End Function

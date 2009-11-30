@@ -19,6 +19,16 @@ Type TPlotColourCommand Extends TCommand
 	End Method
 
 	
+	
+	rem
+		bbdoc: Create a copy of the command
+	endrem
+	Method Copy:TCommand()
+		Return TPlotColourCommand.Create(x, y, colour)
+	End Method
+	
+	
+		
 	' Create a new instance of the command
 	Function Create:TCommand(plotX:Int, plotY:Int, colour:TColour)
 		Local command:TPlotColourCommand = New TPlotColourCommand
