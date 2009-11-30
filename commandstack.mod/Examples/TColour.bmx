@@ -1,6 +1,5 @@
-'This BMX file was edited with BLIde ( http://www.blide.org )
 Rem
-	bbdoc:Undocumented type
+	bbdoc: Simple colour class
 End Rem
 Type TColour
 	Field _r:Int
@@ -24,7 +23,11 @@ Type TColour
 	End Function
 		
 	Method Equals:Int(colour:TColour)
-		Return (colour._b And _b) And (colour._g And _g) And (colour._r And _r)
+		Local same:Int = True
+		If colour._r <> _r Then same = False
+		If colour._g <> _g Then same = False
+		If colour._b <> _b Then same = False
+		Return same
 	End Method
 	
 	Function Green:TColour()
