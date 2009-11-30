@@ -66,4 +66,33 @@ Type TCommandsStackTests Extends TTest
 		AssertEqualsI(10, TUndoableUnitTestCommand.g_unexecuteCount)
 	End Method
 	
+	Method CanRecordMacroCommand() {test}
+		_commandStack.StartRecordingMacro()
+		For Local i:Int = 1 To 10
+			_commandStack.AddCommand(New TUndoableUnitTestCommand)
+		Next
+		Local macro:TMacroCommand = _commandStack.StopRecordingMacro()
+		AssertNotNull(macro)
+	End Method
+
+	Method MacroMadeFromCopyOfCommands() {test}
+		Local commands:TUndoableUnitTestCommand[10]
+		
+		_commandStack.StartRecordingMacro()
+		
+		For Local i:Int = 0 To 9
+			commands[i] = New TUndoableUnitTestCommand
+			_commandStack.AddCommand(commands[i])
+		Next
+		
+		Local macro:TMacroCommand = _commandStack.StopRecordingMacro()
+		
+		Local i:Int = 0
+		For Local macroCommand:TUndoableUnitTestCommand = EachIn macro._commands
+			AssertNotSame(macroCommand, commands[i])
+			AssertEqualsI(commands[i]._id, macroCommand._id)
+			i:+1
+		Next
+	End Method
+	
 End Type

@@ -29,11 +29,11 @@ While Not KeyHit(KEY_ESCAPE) And Not AppTerminate()
 		commandStack.Redo()
 	EndIf
 	
-	If KeyHit(KEY_C) Then SubmitCommand(New TClearGridCommand, recordingMacro, macroCommand)
+	If KeyHit(KEY_C) Then commandStack.AddCommand(New TClearGridCommand)
 	
 	If KeyHit(KEY_S) Then commandStack.ProgressSaved()
 	
-	If KeyHit(KEY_R) And Not (KeyDown(KEY_LCONTROL) Or KeyDown(KEY_RCONTROL))
+	If KeyHit(KEY_R)
 		recordingMacro:~True
 		If recordingMacro
 			commandStack.StartRecordingMacro()
@@ -44,12 +44,12 @@ While Not KeyHit(KEY_ESCAPE) And Not AppTerminate()
 	
 	If KeyHit(KEY_P)
 		If Not recordingMacro And macroCommand
-			SubmitCommand(macroCommand, recordingMacro, macroCommand)
+			commandStack.AddCommand(macroCommand.Copy())
 		End If
 	End If
 	
-	If MouseHit(1) Then SubmitCommand(TPlotColourCommand.Create(MouseX(), MouseY(), currentColour), recordingMacro, macroCommand)
-	If MouseHit(2) Then SubmitCommand(TPlotColourCommand.Create(MouseX(), MouseY(), colourBlack), recordingMacro, macroCommand)
+	If MouseHit(1) Then commandStack.AddCommand(TPlotColourCommand.Create(MouseX(), MouseY(), currentColour))
+	If MouseHit(2) Then commandStack.AddCommand(TPlotColourCommand.Create(MouseX(), MouseY(), colourBlack))
 	
 	TEditor.GetInstance().Render()
 
@@ -103,10 +103,4 @@ Function DrawInfo(currentColour:TColour, undoCount:Int, redoCount:Int, dirty:Int
 	DrawText("Need to Save: " + dirtyStatus, 0, 555)
 	DrawText("Commands on Undo Stack: " + undoCount, 0, 570)
 	DrawText("Commands on Redo Stack: " + redoCount, 0, 585)
-End Function
-
-
-
-Function SubmitCommand(command:TCommand, recording:Int, macroCommand:TMacroCommand = Null)
-	commandStack.AddCommand(command)
 End Function

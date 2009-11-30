@@ -5,8 +5,11 @@ endrem
 Type TUndoableUnitTestCommand Extends TCommand
 
 	Global g_executeCount:Int = 0
+	Global g_idCounter:Int = 0
 	Global g_unexecuteCount:Int = 0
 	Global g_mergeCount:Int = 0
+	
+	Field _id:Int
 	
 	Rem
 		bbdoc:Executes the command
@@ -26,9 +29,10 @@ Type TUndoableUnitTestCommand Extends TCommand
 	Rem
 		bbdoc:Returns a copy of the command
 	End Rem
-	Method Copy:TUndoableUnitTestCommand()
-		' Can't copy this one
-		Return Null
+	Method Copy:TCommand()
+		Local command:TUndoableUnitTestCommand = New TUndoableUnitTestCommand
+		command._id = _id
+		Return command
 	End Method
 
 	Rem
@@ -38,6 +42,14 @@ Type TUndoableUnitTestCommand Extends TCommand
 		Return False
 	End Method
 
+	rem
+		bbdoc:Default constructor
+	endrem
+	Method New()
+		_id = g_idCounter
+		g_idCounter:+1
+	End Method
+	
 	Rem
 		bbdoc:Undoes the command
 	End Rem
