@@ -1,3 +1,11 @@
+'Version: 1.0.0
+'License: Artistic License 2.0
+'Author: Paul Maskelyne (Muttley)
+'Copyright: (c) 2009 Paul Maskelyne
+'E-Mail: muttley@muttleyville.org
+'Website: http://www.muttleyville.org
+'History: 1.0.0
+'History: Initial Release
 REM
 This file was created by the BLIde solution explorer and should not be modified from outside BLIde
 EndRem
