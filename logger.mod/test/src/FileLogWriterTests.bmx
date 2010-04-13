@@ -4,16 +4,23 @@ Rem
 End Rem
 Type FileLogWriterTests Extends TTest
 
-	Field logger:TLogger
+	Field logger:TLoggerMock
 	Field logWriter:TFileLogWriter
 
-
+	
+	Method setup() {before}
+		logger = TLoggerMock.getInstance()
+		
+		logWriter = New TFileLogWriter
+		logger.addWriter(logWriter)
+	End Method
+	
+		
 	Method breakDown() {after}
 		logger.close()
 		logger = Null
 	End Method
 	
-
 
 	' Test that the specified files are identical
 	Method filesIdentical:Int(file1:String, file2:String)
@@ -43,8 +50,7 @@ Type FileLogWriterTests Extends TTest
 				
 		Return True
 	End Method
-	
-	
+		
 	
 	' Send test messages at all possible severity levels
 	Method sendTestMessages()
@@ -56,30 +62,17 @@ Type FileLogWriterTests Extends TTest
 	End Method
 	
 	
-	
-	Method setup() {before}
-		logger = TLogger.getInstance()
-		logger.runningUnitTests = True
-		
-		logWriter = New TFileLogWriter
-		logger.addWriter(logWriter)
-	End Method
-
-	
-	
 	' Check that two known different files test correctly as non-identical
 	Method testFilesIdenticalFalse() {test}
-		AssertFalse(filesIdentical("data/test-log0.log", "data/test-log1.log"))
+		assertFalse(filesIdentical("data/test-log0.log", "data/test-log1.log"))
 	End Method
-	
-	
+		
 
 	' Check that two know identical test correctly as identical
 	Method testFilesIdenticalTrue() {test}
 		AssertTrue(filesIdentical("data/test-log7.log", "data/test-log7.log"))
 	End Method
-	
-	
+		
 	
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel0() {test}
@@ -94,8 +87,7 @@ Type FileLogWriterTests Extends TTest
 		
 		AssertTrue(filesIdentical(filename, "data/test-log0.log"))
 	End Method
-	
-	
+		
 	
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel1() {test}
@@ -111,8 +103,7 @@ Type FileLogWriterTests Extends TTest
 		AssertTrue(filesIdentical(filename, "data/test-log1.log"))
 	End Method
 	
-	
-	
+		
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel2() {test}
 		Local filename:String = "data/test-log2-results.log"
@@ -126,8 +117,7 @@ Type FileLogWriterTests Extends TTest
 		
 		AssertTrue(filesIdentical(filename, "data/test-log2.log"))
 	End Method
-	
-	
+		
 	
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel3() {test}
@@ -142,9 +132,7 @@ Type FileLogWriterTests Extends TTest
 		
 		AssertTrue(filesIdentical(filename, "data/test-log3.log"))
 	End Method
-	
-	
-	
+		
 	
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel4() {test}
@@ -160,8 +148,7 @@ Type FileLogWriterTests Extends TTest
 		AssertTrue(filesIdentical(filename, "data/test-log4.log"))
 	End Method
 	
-	
-	
+		
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel5() {test}
 		Local filename:String = "data/test-log5-results.log"
@@ -177,7 +164,6 @@ Type FileLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Test that a written log file contains the expected data
 	Method testLogWriterLevel6() {test}
 		Local filename:String = "data/test-log6-results.log"
@@ -191,8 +177,6 @@ Type FileLogWriterTests Extends TTest
 		
 		AssertTrue(filesIdentical(filename, "data/test-log6.log"))
 	End Method
-	
-	
 	
 	
 	' Test that a written log file contains the expected data

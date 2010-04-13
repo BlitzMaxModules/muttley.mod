@@ -3,26 +3,23 @@
 '
 Type UnitTestLogWriterTests Extends TTest
 
-	Field logger:TLogger
+	Field logger:TLoggerMock
 	Field logWriter:TUnitTestLogWriter
 
-
+	
 	Method breakDown() {after}
 		logger.close()
 		logger = Null
 	End Method
-	
-	
-			
-	Method setup() {before}
-		logger = TLogger.getInstance()
-		logger.runningUnitTests = True
 		
+		
+	Method setup() {before}
+		logger = TLoggerMock.getInstance()
+
 		logWriter = new TUnitTestLogWriter
 		logger.addWriter(logWriter)
 	End Method
-
-
+	
 	
 	' Send test messages at all possible severity levels
 	Method sendTestMessages()
@@ -43,7 +40,6 @@ Type UnitTestLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Check we can't set invalid log levels
 	Method testInvalidSetLevel() {test}
 		local currentLevel:Int = logWriter.getLevel()
@@ -56,7 +52,6 @@ Type UnitTestLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Check the writer receives the correct amount of messages at
 	' this log level
 	Method testReceivedMessagesLevel0() {test}
@@ -64,7 +59,6 @@ Type UnitTestLogWriterTests Extends TTest
 		sendTestMessages()
 		assertEqualsI(10, logWriter.nMessagesReceived)
 	End Method
-	
 
 		
 	' Check the writer receives the correct amount of messages at
@@ -76,7 +70,6 @@ Type UnitTestLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Check the writer receives the correct amount of messages at
 	' this log level
 	Method testReceivedMessagesLevel2() {test}
@@ -84,7 +77,6 @@ Type UnitTestLogWriterTests Extends TTest
 		sendTestMessages()
 		assertEqualsI(30, logWriter.nMessagesReceived)
 	End Method
-	
 	
 	
 	' Check the writer receives the correct amount of messages at
@@ -96,7 +88,6 @@ Type UnitTestLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Check the writer receives the correct amount of messages at
 	' this log level
 	Method testReceivedMessagesLevel4() {test}
@@ -104,7 +95,6 @@ Type UnitTestLogWriterTests Extends TTest
 		sendTestMessages()
 		assertEqualsI(50, logWriter.nMessagesReceived)
 	End Method
-	
 	
 	
 	' Check the writer receives the correct amount of messages at
@@ -116,7 +106,6 @@ Type UnitTestLogWriterTests Extends TTest
 	End Method
 	
 	
-	
 	' Check the writer receives the correct amount of messages at
 	' this log level
 	Method testReceivedMessagesLevel6() {test}
@@ -124,7 +113,6 @@ Type UnitTestLogWriterTests Extends TTest
 		sendTestMessages()
 		assertEqualsI(70, logWriter.nMessagesReceived)
 	End Method
-	
 	
 	
 	' Check the writer receives the correct amount of messages at

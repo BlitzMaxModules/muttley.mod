@@ -59,13 +59,13 @@ Type TLogger
 	Field host:String
 	Field logWriters:TList
 	Field messageCounts:Int[] = [0, 0, 0, 0, 0, 0, 0, 0]
-	Field runningUnitTests:Int = False
 	
 	
+	
+	' Constructor
 	Method New()
 		If instance Throw "Cannot create multiple instances of Singleton Type"
-		logWriters = New TList
-		host = HostName(0)
+		initialise()
 	EndMethod
 
 	
@@ -142,6 +142,14 @@ Type TLogger
 
 	
 	
+	' Do any initialisation required
+	Method initialise()
+		logWriters = New TList
+		host = HostName(0)		
+	End Method
+	
+	
+	
 	Rem
 	bbdoc: Log a message at the specified severity level
 	about: Severity levels are based on those defined in RFC 5424 for the BSD Syslog protocol.
@@ -166,14 +174,7 @@ Type TLogger
 			newMessage.timestamp = createTimestamp()
 			newMessage.severity = severity
 			newMessage.message = message
-			newMessage.host = host
-			
-			' Just to ensure when running unit tests that we always 
-			' get the same timestamps and host name.
-			If runningUnitTests
-				newMessage.timestamp = "1970-01-01T12:00:00+00:00"
-				newMessage.host = "unitTest"
-			End If
+			newMessage.host = getHost()
 			
 			For Local writer:TLogWriter = EachIn logWriters
 				writer.write(newMessage)

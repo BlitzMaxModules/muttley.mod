@@ -3,16 +3,14 @@
 '
 Type LoggerTests Extends TTest
 
-	Field logger:TLogger
+	Field logger:TLoggerMock
 
 	
 	Method setup() {before}
-		logger = TLogger.getInstance()
-		logger.runningUnitTests = True
+		logger = TLoggerMock.getInstance()
 	End Method
 	
-	
-	
+		
 	Method breakDown() {after}
 		logger.close()
 		logger = Null

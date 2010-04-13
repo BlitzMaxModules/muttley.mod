@@ -91,6 +91,7 @@ Include "src\LoggerTests.bmx"
 Include "src\UnitTestLogWriterTests.bmx"
 Include "src\TUnitTestLogWriter.bmx"
 Include "src\FileLogWriterTests.bmx"
+Include "src\TLoggerMock.bmx"
  
 '#EndRegion &H03
 
