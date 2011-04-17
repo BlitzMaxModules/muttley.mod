@@ -48,10 +48,11 @@ Type TRegistry
 	endrem
 	Function GetInstance:TRegistry()
 		If Not _instance
-			_instance = New TRegistry
+			Return New TRegistry
+		Else
+			Return _instance
 		EndIf
 
-		Return _instance
 	End Function
 	
 		
@@ -70,6 +71,7 @@ Type TRegistry
 	endrem		
 	Method New()
 		If _instance Throw "Cannot create multiple instances of Singleton Type"
+		_instance = Self
 		_registry = New TMap
 	End Method
 
