@@ -1,6 +1,6 @@
 Module: muttley.stack
 Author: Paul Maskelyne (Muttley)
-Copyright: (C) 2009 Paul Maskelyne
+Copyright: (C) 2009-2011 Paul Maskelyne
 License: Artistic License 2.0
 
 -oOo-

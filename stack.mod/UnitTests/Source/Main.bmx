@@ -135,10 +135,12 @@ Type TStackTests Extends TTest
 	
 	Method ObjectsAreCorrectlyPopped() {test}
 		Local objects:TStack[] = New TStack[INITIAL_STACK_SIZE]
+		
 		For Local i:Int = 0 To INITIAL_STACK_SIZE - 1
 			objects[i] = New TStack
 			_stack.Push(objects[i])
 		Next
+		
 		For Local i:Int = INITIAL_STACK_SIZE - 1 To 0 Step - 1
 			assertEquals(objects[i], _stack.Pop())
 		Next
@@ -161,8 +163,38 @@ Type TStackTests Extends TTest
 		Next
 		_stack.Clear()
 		For Local i:Int = 0 To INITIAL_STACK_SIZE - 1
-			assertNull(_stack._array[i])
+			assertNull(_stack._stackArray[i])
 		Next			
+	End Method
+	
+	
+	
+	Method CanShrinkStack() {test}
+		For Local i:Int = 0 To INITIAL_STACK_SIZE + 10
+			_stack.Push(New TStack)
+		Next
+
+		_stack.Clear()
+
+		_stack.Shrink()
+		
+		assertEqualsI(INITIAL_STACK_SIZE, _stack.GetSize())
+	End Method
+	
+	
+	
+	Method CanShrinkEmptyStack() {test}
+		Local stack:TStack = New TStack
+		stack.Shrink()
+	End Method
+	
+	
+	
+	Method CanPushObjectsToAnEmptyStackThatHasBeenShrunk() {test}
+		Local stack:TStack = New TStack
+		stack.Shrink()
+		stack.Push(New TStack)
+		assertNotNull(stack.Pop())
 	End Method
 	
 	
@@ -170,6 +202,7 @@ Type TStackTests Extends TTest
 	Method CanCountEntriesOnStack() {test}
 		_stack.GetCount()
 	End Method
+	
 	
 	
 	Method CorrectEntriesCountOnStack() {test}
