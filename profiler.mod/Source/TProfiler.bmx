@@ -42,7 +42,7 @@ Type TProfiler
 		EndIf
 		
 		_instance = Self
-		_samples = New TMap
+		_sampleMap = New TMap
 	EndMethod
 
 	Method SetEnabled(value:Int)
